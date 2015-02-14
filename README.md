@@ -14,7 +14,7 @@ Screenshots
 -----------
 _Status Report Webpage_
 ![Status Report Webpage](./images/emerson_status_report_webpage.png)
-
+<br>
 _Emerson Webpage Tree_
 ![Emerson Webpage Tree](./images/emerson_webpage_tree.png)
 
