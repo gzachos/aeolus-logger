@@ -12,8 +12,11 @@ Emerson units and __alarm__ the faculty if any __abnormal__ conditions are obser
 
 Screenshots
 -----------
-<br>_Status Report Webpage_<br>
-![Status Report Webpage](./images/emerson_status_report_webpage.png)
+<br>_Status Report Webpage Example_<br>
+![Status Report Webpage Example](./images/emerson_status_report_webpage_example.png)
+
+<br>_Status Report Webpage Template_<br>
+![Status Report Webpage Template](./images/emerson_status_report_webpage.png)
 
 <br>_Emerson Webpage Tree_<br>
 ![Emerson Webpage Tree](./images/emerson_webpage_tree.png)
