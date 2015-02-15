@@ -18,6 +18,10 @@ Screenshots
 <br>_Emerson Webpage Tree_<br>
 ![Emerson Webpage Tree](./images/emerson_webpage_tree.png)
 
+Licence
+-------
+[GNU GENERAL PUBLIC LICENSE // Version 2, June 1991](LICENSE)
+
 Assignee
 --------
 George Zachos
