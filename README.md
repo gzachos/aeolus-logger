@@ -12,14 +12,22 @@ Emerson units and __alarm__ the faculty if any __abnormal__ conditions are obser
 
 Screenshots
 -----------
-<br>_Status Report Webpage Example_<br>
-![Status Report Webpage Example](./images/emerson_status_report_webpage_example.png)
 
-<br>_Status Report Webpage Template_<br>
-![Status Report Webpage Template](./images/emerson_status_report_webpage.png)
+<br>_Main Page_<br>
+![Main Page](./images/emerson_main_page.png)
 
-<br>_Emerson Webpage Tree_<br>
-![Emerson Webpage Tree](./images/emerson_webpage_tree.png)
+<br>_Status Report_<br>
+![Status Report](./images/emerson_status_report.png)
+
+<br>_Measurement Report_<br>
+![Measurement Report](./images/emerson_measurement_report.png)
+
+<br>_Emerson Website Tree_<br>
+![Emerson Webpage Tree](./images/emerson_website_tree.png)
+
+Demo
+----
+[Demo Website](http://cs.uoi.gr/~cse32439) (hosted in cs.uoi.gr)<br>[Static - Obsolete data]
 
 Licence
 -------

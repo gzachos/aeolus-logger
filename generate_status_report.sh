@@ -24,18 +24,24 @@
 # Writes the <head> section to the output .html file
 # (Parameter: Emerson unit No.)
 function append_head () {
-	echo -e "<!DOCTYPE html>\n<html>\n\t<!-- HEAD SECTION (includes the two lines above) -->\n\t<head>\n\t\t<title>Emerson Status Report</title>\n\t\t<meta charset=\"utf-8\">\n\t\t<link rel=\"icon\" href=\"./photos/cse-uoi.ico\" type=\"image/x-icon\"/>\n\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"emerson_status_report.css\">\n\t</head>" > status_report_$1.html
+	echo -e "<!DOCTYPE html>\n<html>\n\t<!-- HEAD SECTION (includes the two lines above) -->\n\t<head>\n\t\t<title>Emerson #$1 Status Report</title>\n\t\t<meta charset=\"utf-8\">\n\t\t<link rel=\"icon\" href=\"../photos/cse-uoi.ico\" type=\"image/x-icon\"/>\n\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/emerson_logger.css\">\n\t</head>" > status_report_$1.html
 }
 
 
 # Appends the first stable part of the <body> section to the output .html file
 # (Parameter: Emerson unit No.)
 function append_body_stable_0 () {
-	echo -e "\n\t<!-- FIRST STABLE PART OF BODY SECTION -->\n\t<body>\n\t\t<img height=90px align=\"left\" src=\"./photos/uoi-cse.png\">\n\t\t<img id=\"head\" height=90px align=\"right\" src=\"./photos/cse_banner_logo.jpg\">\n\t\t<br><br><br><br><br>\n\t\t<h5><a href=\".\">Unit Air Temperature</a> | <a href=\".\">System Average Air Temperature</a> | <a href=\".\">Unit Air Humidity</a> | <a href=\".\">System Average Air Humidity</a></h5>\n\t\t<h5><a href=\".\">Main Page</a> | <a href=\".\">Status Report</a></h5><br>\n\t\t<h2><u>Emerson #$1 Status Report</u></h2><br>" >> status_report_$1.html
+	if [ $1 -eq 3 ]
+	then
+		OTHER_EMERSON=4
+	else
+		OTHER_EMERSON=3
+	fi
+	echo -e "\n\t<!-- FIRST STABLE PART OF BODY SECTION -->\n\t<body>\n\t\t<img height=90px align=\"left\" src=\"../photos/uoi-cse.png\">\n\t\t<img id=\"head\" height=90px align=\"right\" src=\"../photos/cse_banner_logo.jpg\">\n\t\t<br><br><br><br><br>\n\t\t<h5><a href=\"../emerson_main_page.html\">Main Page</a> | <a href=\"./status_report_$1.html\">Emerson #$1 Status Report</a> | <a href=\"./measurement_report_$1.html\">Emerson #$1 Measurement Report</a> | <a href=\"../emerson_$OTHER_EMERSON/status_report_$OTHER_EMERSON.html\">Emerson #${OTHER_EMERSON}</a></h5><br>\n\t\t<h2><u>Emerson #$1 Status Report</u></h2><br>" >> status_report_$1.html
 }
 
 
-# Appends the first stable part of the <table> section to the output .html file 
+# Appends the first stable part of the <table> section to the output .html file
 # (Parameter: Emerson unit No.)
 function append_table_stable_0 () {
 	echo -e "\n\t\t<!-- FIRST STABLE PART OF TABLE SECTION -->\n\t\t<!-- MAIN CONTENT -->\n\t\t<table style=\"width:80%\">\n\t\t\t<tr>\n\t\t\t\t<th>Label</th>\n\t\t\t\t<th>Value</th>\n\t\t\t\t<th>Unit</th>\n\t\t\t</tr>" >> status_report_$1.html
@@ -44,9 +50,9 @@ function append_table_stable_0 () {
 
 # Creates an array that contains the content of each <Label> element
 function init_labels () {
-	# $LABELS holds a string that contains all the <Label> elements of the main.txt 
-	# file, with the tags included (e.g. "<Label>Unit Status</Label>"), each one on a 
-	# different line. Moreover, the white spaces in the text between the <Label> tags 
+	# $LABELS holds a string that contains all the <Label> elements of the main.txt
+	# file, with the tags included (e.g. "<Label>Unit Status</Label>"), each one on a
+	# different line. Moreover, the white spaces in the text between the <Label> tags
 	# are replaced by underscores "_"
         LABELS=$(grep -i Label main.txt | tr " " "_")
         unset LABELS_ARRAY
@@ -71,9 +77,9 @@ function init_labels () {
 
 # Creates an array that contains the content of each <Value> element
 function init_values () {
-        # $VALUES holds a string that contains all the <Value> elements of the main.txt 
-        # file, with the tags included (e.g. "<Value>Warning On</Value>"), each one on a 
-        # different line. Moreover, the white spaces in the text between the <Value> tags 
+        # $VALUES holds a string that contains all the <Value> elements of the main.txt
+        # file, with the tags included (e.g. "<Value>Warning On</Value>"), each one on a
+        # different line. Moreover, the white spaces in the text between the <Value> tags
         # are replaced by underscores "_"
 	VALUES=$(grep -i Value main.txt | tr " " "_")
         unset VALUES_ARRAY
@@ -99,10 +105,10 @@ function init_values () {
 
 # Creates an array that contains the content of each <Unit> element
 function init_units () {
-	# $UNITS holds a string that contains all the <Unit> elements of the main.txt 
-        # file, with the tags included (e.g. "<Unit></Unit>", "<Unit>%rH</Unit>" etc.), 
-	# each one on a different line. Moreover, the white spaces in the text between 
-	# the <Unit> tags are replaced by underscores "_"	
+	# $UNITS holds a string that contains all the <Unit> elements of the main.txt
+        # file, with the tags included (e.g. "<Unit></Unit>", "<Unit>%rH</Unit>" etc.),
+	# each one on a different line. Moreover, the white spaces in the text between
+	# the <Unit> tags are replaced by underscores "_"
 	UNITS=$(grep -i Unit main.txt | grep -v Status | tr " " "_")
         unset UNITS_ARRAY
 	# The value of $INDEX is initialized to zero '0'
@@ -169,7 +175,7 @@ function append_body_stable_1 () {
 }
 
 
-# Creates the status report .html file 
+# Creates the status report .html file
 # (Parameter: Emerson unit No.)
 function create_status_report () {
 	init_labels
@@ -184,6 +190,6 @@ function create_status_report () {
 }
 
 
-# Calling create_status_report 
+# Calling create_status_report
 # (Parameter: Emerson unit No.)
 create_status_report $1

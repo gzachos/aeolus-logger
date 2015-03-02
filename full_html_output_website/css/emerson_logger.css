@@ -1,0 +1,47 @@
+html {
+	text-align: center;
+	background-color: #C2C2C2;
+	margin-top: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+#head {
+	margin-left: 40px;
+	margin-right: 40px;
+}
+
+#contact {
+	text-align: left;
+	padding: 15px;
+}
+
+#emersons {
+	text-align: center;
+}
+
+p {
+	text-align: justify;
+	text-justify: inter-word;
+	margin-left: 40px;
+	margin-right: 40px;
+}
+
+h2,h3,h4,h5 {
+	text-align: center;
+}
+
+body {
+	text-align: auto;
+	vertical-align: auto;
+	text-align: left;
+	border: 2px solid;
+	width: 910px; margin: 0 auto;
+}
+
+table, th, td {
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid black;
+	text-align: center;
+}

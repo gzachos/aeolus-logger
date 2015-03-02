@@ -1,0 +1,20 @@
+Emerson website tree
+====================
+
+             public_html
+                 *
+                 |
+    +------------+-----------+-----------------------------+----------------------------+---------------------------+
+    |                        |                             |                            |                           |
+   css                    photos                       emerson_3                    emerson_4            emerson_main_page.html
+    *                        *                             *                            *
+    |                        |                             |                            |
+emerson_logger.css      +----+----+---------+         +----+------+                +----+-----+
+                        |         |         |         |           |                |          |
+                        |         |    cse-uoi.ico    |    status_report_3.html    |    status_report_4.html
+                        |     uoi-cse.png             |                            |
+               cse_banner_logo.jpg                    measurement_report_3.html    measurement_report_4.html
+
+
+
+* stands for directory
