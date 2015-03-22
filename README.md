@@ -27,7 +27,7 @@ Screenshots
 
 Demo
 ----
-[Demo Website](http://cs.uoi.gr/~cse32439) (hosted in cs.uoi.gr)<br>[Static - Obsolete data]
+[Demo Website](http://cs.uoi.gr/~gzachos/projects/emerson/) (hosted in cs.uoi.gr)<br>[Static - Obsolete data]
 
 Licence
 -------
