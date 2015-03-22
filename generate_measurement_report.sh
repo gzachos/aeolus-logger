@@ -96,6 +96,7 @@ function init_temp_unit_value () {
         INDEX=0
         for x in $VALUES_U
         do
+		x=$(awk "BEGIN{print $x/10}")
                 VALUES_U_ARRAY[$INDEX]=${x}
                 INDEX=$((INDEX+1))
         done
@@ -107,6 +108,7 @@ function init_temp_sys_value () {
         INDEX=0
         for x in $VALUES_S
         do
+		x=$(awk "BEGIN{print $x/10}")
                 VALUES_S_ARRAY[$INDEX]=${x}
                 INDEX=$((INDEX+1))
         done
@@ -145,6 +147,7 @@ function init_hum_unit_value () {
         INDEX=0
         for x in $VALUES_HU
         do
+		x=$(awk "BEGIN{print $x/10}")
                 VALUES_HU_ARRAY[$INDEX]=${x}
                 INDEX=$((INDEX+1))
         done
@@ -156,6 +159,7 @@ function init_hum_sys_value () {
         INDEX=0
         for x in $VALUES_HS
         do
+		x=$(awk "BEGIN{print $x/10}")
                 VALUES_HS_ARRAY[$INDEX]=${x}
                 INDEX=$((INDEX+1))
         done
