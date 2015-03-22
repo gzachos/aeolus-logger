@@ -37,7 +37,7 @@ function append_body_stable_0 () {
 	else
 		OTHER_EMERSON=3
 	fi
-	echo -e "\n\t<!-- FIRST STABLE PART OF BODY SECTION -->\n\t<body>\n\t\t<img height=90px align=\"left\" src=\"../photos/uoi-cse.png\">\n\t\t<img id=\"head\" height=90px align=\"right\" src=\"../photos/cse_banner_logo.jpg\">\n\t\t<br><br><br><br><br>\n\t\t<h5><a href=\"../emerson_main_page.html\">Main Page</a> | <a href=\"./status_report_$1.html\">Emerson #$1 Status Report</a> | <a href=\"./measurement_report_$1.html\">Emerson #$1 Measurement Report</a> | <a href=\"../emerson_$OTHER_EMERSON/status_report_$OTHER_EMERSON.html\">Emerson #${OTHER_EMERSON}</a></h5><br>\n\t\t<h2><u>Emerson #$1 Status Report</u></h2><br>" >> /var/www/html/emerson_$1/status_report_$1.html
+	echo -e "\n\t<!-- FIRST STABLE PART OF BODY SECTION -->\n\t<body>\n\t\t<img height=90px align=\"left\" src=\"../photos/uoi-cse.png\">\n\t\t<img id=\"head\" height=90px align=\"right\" src=\"../photos/cse_banner_logo.jpg\">\n\t\t<br><br><br><br><br>\n\t\t<h4><a href=\"../emerson_main_page.html\">Main Page</a> | <a href=\"./status_report_$1.html\">Emerson #$1 Status Report</a> | <a href=\"./measurement_report_$1.html\">Emerson #$1 Measurement Report</a> | <a href=\"../emerson_$OTHER_EMERSON/status_report_$OTHER_EMERSON.html\">Emerson #${OTHER_EMERSON}</a></h4><br>\n\t\t<h2><u>Emerson #$1 Status Report</u></h2><br>" >> /var/www/html/emerson_$1/status_report_$1.html
 }
 
 
