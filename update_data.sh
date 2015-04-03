@@ -20,16 +20,19 @@
 # Email: gzzachos_at_gmail.com
 
 
-
-function updt_data () {
-	/var/www/html/scripts/generate_status_report.sh $1
-	/var/www/html/scripts/generate_measurement_report.sh $1
+updt_data () {
+	${WEBSITEPATH}/scripts/generate_status_report.sh ${1} >> /dev/null 2>&1
+	${WEBSITEPATH}/scripts/generate_measurement_report.sh ${1} >> /dev/null 2>&1
 }
 
-function main () {
-	/var/www/html/scripts/generate_input_data.sh >> /dev/null 2&>1
+
+main () {
+	WEBSITEPATH="/var/www/html"
+	${WEBSITEPATH}/scripts/generate_input_data.sh >> /dev/null 2>&1
 	updt_data 3
 	updt_data 4
+	${WEBSITEPATH}/scripts/generate_graph_report.sh >> /dev/null 2>&1	
 }
+
 
 main

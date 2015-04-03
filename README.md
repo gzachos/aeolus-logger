@@ -22,8 +22,14 @@ Screenshots
 <br>_Measurement Report_<br>
 ![Measurement Report](./images/emerson_measurement_report.png)
 
+<br>_Sample graph (1 Hour Log)_<br>
+![Sample Graph](./images/demo_temp_1hour.png)
+
 <br>_Emerson Website Tree_<br>
 ![Emerson Webpage Tree](./images/emerson_website_tree.png)
+
+<br>_Emerson Website Tree - RRDB directory_<br>
+![Emerson Webpage Tree](./images/emerson_website_tree_rrdb_dir.png)
 
 Demo
 ----
@@ -35,4 +41,4 @@ Licence
 
 Assignee
 --------
-George Zachos
+[George Z. Zachos](http://cs.uoi.gr/~gzachos)

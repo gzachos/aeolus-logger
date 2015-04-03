@@ -20,25 +20,16 @@
 # Email: gzzachos_at_gmail.com
 
 
-create_website_structure () {
-	cd ${WEBSITEPATH}
-        mkdir css photos emerson_3 emerson_4 scripts setup_scripts
-	cd emerson_3
-	mkdir -p data/temp data/hum
-	mkdir -p rrdb/graphs/temp/curr rrdb/graphs/hum/curr
-#	mkdir -p rrdb/graphs/temp/unit rrdb/graphs/hum/unit
-#	mkdir -p rrdb/graphs/temp/sys rrdb/graphs/hum/sys
-	cd ../emerson_4
-	mkdir -p data/temp data/hum
-	mkdir -p rrdb/graphs/temp/curr rrdb/graphs/hum/curr
-#	mkdir -p rrdb/graphs/temp/unit rrdb/graphs/hum/unit
-#	mkdir -p rrdb/graphs/temp/sys rrdb/graphs/hum/sys
+retrieve_photos () {
+	wget https://raw.githubusercontent.com/support-uoi/emerson-logger/master/full_html_output_website/photos/cse-uoi.ico -O ${WEBSITEPATH}/photos/cse-uoi.ico
+	wget https://raw.githubusercontent.com/support-uoi/emerson-logger/master/full_html_output_website/photos/cse_banner_logo.jpg -O ${WEBSITEPATH}/photos/cse_banner_logo.jpg
+	wget https://raw.githubusercontent.com/support-uoi/emerson-logger/master/full_html_output_website/photos/uoi-cse.png -O ${WEBSITEPATH}/photos/uoi-cse.png
 }
 
 
 main () {
-	WEBSITEPATH="/var/www/html/"
-        create_website_structure
+	WEBSITEPATH="/var/www/html"
+	retrieve_photos
 }
 
 

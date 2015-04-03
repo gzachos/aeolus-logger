@@ -20,25 +20,15 @@
 # Email: gzzachos_at_gmail.com
 
 
-create_website_structure () {
-	cd ${WEBSITEPATH}
-        mkdir css photos emerson_3 emerson_4 scripts setup_scripts
-	cd emerson_3
-	mkdir -p data/temp data/hum
-	mkdir -p rrdb/graphs/temp/curr rrdb/graphs/hum/curr
-#	mkdir -p rrdb/graphs/temp/unit rrdb/graphs/hum/unit
-#	mkdir -p rrdb/graphs/temp/sys rrdb/graphs/hum/sys
-	cd ../emerson_4
-	mkdir -p data/temp data/hum
-	mkdir -p rrdb/graphs/temp/curr rrdb/graphs/hum/curr
-#	mkdir -p rrdb/graphs/temp/unit rrdb/graphs/hum/unit
-#	mkdir -p rrdb/graphs/temp/sys rrdb/graphs/hum/sys
+create_stylesheet_file () {
+	
+        echo -e "html {\n\ttext-align: center;\n\tbackground-color: #C2C2C2;\n\tmargin-top: 5px;\n\tmargin-left: 5px;\n\tmargin-right: 5px;\n}\n\n\n#head {\n\tmargin-left: 40px;\n\tmargin-right: 40px;\n}\n\n\n#contact {\n\ttext-align: left;\n\tpadding: 15px;\n}\n\n\n#emersons {\n\ttext-align: center;\n}\n\n\np {\n\ttext-align: justify;\n\ttext-justify: inter-word;\n\tmargin-left: 40px;\n\tmargin-right: 40px;\n}\n\n\nh2,h3,h4,h5 {\n\ttext-align: center;\n}\n\n\nbody {\n\ttext-align: center;\n\tvertical-align: auto;\n\tborder: 2px solid;\n\twidth: 910px;\n\t margin: auto;\n}\n\n\ntable, th, td {\n\tmargin-left: auto;\n\tmargin-right: auto;\n\tborder: 1px solid black;\n\ttext-align: center;\n}\n\n\nimg.banner {\n\tmargin-left: 40px;\n\tmargin-right: 40px;\n}\n" > ${WEBSITEPATH}/css/emerson_logger.css
 }
 
 
 main () {
-	WEBSITEPATH="/var/www/html/"
-        create_website_structure
+	WEBSITEPATH="/var/www/html"
+        create_stylesheet_file
 }
 
 

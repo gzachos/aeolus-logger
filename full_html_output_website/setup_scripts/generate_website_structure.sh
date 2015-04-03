@@ -20,20 +20,26 @@
 # Email: gzzachos_at_gmail.com
 
 
-function create_website_structure () {
+create_website_structure () {
+	cd ${WEBSITEPATH}
         mkdir css photos emerson_3 emerson_4
 	cd emerson_3
-	mkdir data
-	cd data
-	mkdir temp hum
-	cd ../../emerson_4
-	mkdir data
-	cd data
-	mkdir temp hum	
+	mkdir -p data/temp data/hum
+	mkdir -p rrdb/graphs/temp/curr rrdb/graphs/hum/curr
+#	mkdir -p rrdb/graphs/temp/unit rrdb/graphs/hum/unit
+#	mkdir -p rrdb/graphs/temp/sys rrdb/graphs/hum/sys
+	cd ../emerson_4
+	mkdir -p data/temp data/hum
+	mkdir -p rrdb/graphs/temp/curr rrdb/graphs/hum/curr
+#	mkdir -p rrdb/graphs/temp/unit rrdb/graphs/hum/unit
+#	mkdir -p rrdb/graphs/temp/sys rrdb/graphs/hum/sys
 }
 
-function main () {
+
+main () {
+	WEBSITEPATH="/var/www/html/"
         create_website_structure
 }
+
 
 main

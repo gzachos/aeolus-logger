@@ -20,25 +20,28 @@
 # Email: gzzachos_at_gmail.com
 
 
-create_website_structure () {
-	cd ${WEBSITEPATH}
-        mkdir css photos emerson_3 emerson_4 scripts setup_scripts
-	cd emerson_3
-	mkdir -p data/temp data/hum
-	mkdir -p rrdb/graphs/temp/curr rrdb/graphs/hum/curr
-#	mkdir -p rrdb/graphs/temp/unit rrdb/graphs/hum/unit
-#	mkdir -p rrdb/graphs/temp/sys rrdb/graphs/hum/sys
-	cd ../emerson_4
-	mkdir -p data/temp data/hum
-	mkdir -p rrdb/graphs/temp/curr rrdb/graphs/hum/curr
-#	mkdir -p rrdb/graphs/temp/unit rrdb/graphs/hum/unit
-#	mkdir -p rrdb/graphs/temp/sys rrdb/graphs/hum/sys
+create_website () {
+	./generate_website_structure.sh >> /dev/null 2>&1
+	./generate_website_photos.sh >> /dev/null 2>&1
+	./generate_css_file.sh >> /dev/null 2>&1
+	./generate_main_page.sh >> /dev/null 2>&1
+	./generate_rrdatabases.sh >> /dev/null 2>&1
+	cp -rf ./generate_status_report.sh ${WEBSITEPATH}/scripts
+	cp -rf ./generate_rrd_graphs.sh ${WEBSITEPATH}/scripts
+	cp -rf ./generate_measurement_report.sh ${WEBSITEPATH}/scripts
+	cp -rf ./generate_input_data.sh ${WEBSITEPATH}/scripts
+	cp -rf ./update_data.sh ${WEBSITEPATH}/scripts
+	cp -rf ./generate_css_file.sh ${WEBSITEPATH}/setup_scripts
+	cp -rf ./generate_main_page.sh ${WEBSITEPATH}/setup_scripts
+	cp -rf ./generate_rrdatabases.sh ${WEBSITEPATH}/setup_scripts
+	cp -rf ./generate_website_photos.sh ${WEBSITEPATH}/setup_scripts
+	cp -rf ./generate_website_structure.sh ${WEBSITEPATH}/setup_scripts
 }
 
 
 main () {
 	WEBSITEPATH="/var/www/html/"
-        create_website_structure
+        create_website
 }
 
 

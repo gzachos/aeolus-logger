@@ -20,12 +20,17 @@
 # Email: gzzachos_at_gmail.com
 
 
-function create_stylesheet_file () {
-        echo -e "html {\n\ttext-align: center;\n\tbackground-color: #C2C2C2;\n\tmargin-top: 5px;\n\tmargin-left: 5px;\n\tmargin-right: 5px;\n}\n\n#head {\n\tmargin-left: 40px;\n\tmargin-right: 40px;\n}\n\n#contact {\n\ttext-align: left;\n\tpadding: 15px;\n}\n\n#emersons {\n\ttext-align: center;\n}\n\np {\n\ttext-align: justify;\n\ttext-justify: inter-word;\n\tmargin-left: 40px;\n\tmargin-right: 40px;\n}\n\nh2,h3,h4,h5 {\n\ttext-align: center;\n}\n\nbody {\n\ttext-align: auto;\n\tvertical-align: auto;\n\ttext-align: left;\n\tborder: 2px solid;\n\twidth: 910px; margin: 0 auto;\n}\n\ntable, th, td {\n\tmargin-left: auto;\n\tmargin-right: auto;\n\tborder: 1px solid black;\n\ttext-align: center;\n}" > /var/www/html/css/emerson_logger.css
+retrieve_photos () {
+	wget https://raw.githubusercontent.com/support-uoi/emerson-logger/master/full_html_output_website/photos/cse-uoi.ico -O ${WEBSITEPATH}/photos/cse-uoi.ico
+	wget https://raw.githubusercontent.com/support-uoi/emerson-logger/master/full_html_output_website/photos/cse_banner_logo.jpg -O ${WEBSITEPATH}/photos/cse_banner_logo.jpg
+	wget https://raw.githubusercontent.com/support-uoi/emerson-logger/master/full_html_output_website/photos/uoi-cse.png -O ${WEBSITEPATH}/photos/uoi-cse.png
 }
 
-function main () {
-        create_stylesheet_file
+
+main () {
+	WEBSITEPATH="/var/www/html"
+	retrieve_photos
 }
+
 
 main

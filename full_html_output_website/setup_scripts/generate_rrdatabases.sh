@@ -20,25 +20,30 @@
 # Email: gzzachos_at_gmail.com
 
 
-create_website_structure () {
-	cd ${WEBSITEPATH}
-        mkdir css photos emerson_3 emerson_4 scripts setup_scripts
-	cd emerson_3
-	mkdir -p data/temp data/hum
-	mkdir -p rrdb/graphs/temp/curr rrdb/graphs/hum/curr
-#	mkdir -p rrdb/graphs/temp/unit rrdb/graphs/hum/unit
-#	mkdir -p rrdb/graphs/temp/sys rrdb/graphs/hum/sys
-	cd ../emerson_4
-	mkdir -p data/temp data/hum
-	mkdir -p rrdb/graphs/temp/curr rrdb/graphs/hum/curr
-#	mkdir -p rrdb/graphs/temp/unit rrdb/graphs/hum/unit
-#	mkdir -p rrdb/graphs/temp/sys rrdb/graphs/hum/sys
+create_rrdb () {
+
+	rrdtool create 	${WEBSITEPATH}/emerson_${3}/rrdb/${1}_${2}_${3}.rrd \
+	--start 1428044400 \
+	--step 60 \
+	DS:${1}_${4}_${3}:GAUGE:120:U:U \
+	RRA:AVERAGE:0.5:1:31556926	# 365 day log (1 graph value every 1 DB update)
+}
+
+
+create_emerson_rrdb () {
+        create_rrdb curr temperature ${1} temp
+        create_rrdb curr humidity ${1} hum
+#       create_rrdb unit temperature ${1} temp
+#       create_rrdb unit humidity ${1} hum
+#       create_rrdb sys temperature ${1} temp
+#       create_rrdb sys humidity ${1} hum
 }
 
 
 main () {
-	WEBSITEPATH="/var/www/html/"
-        create_website_structure
+	WEBSITEPATH="/var/www/html"
+        create_emerson_rrdb 3
+        create_emerson_rrdb 4
 }
 
 

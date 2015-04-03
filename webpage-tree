@@ -4,36 +4,59 @@ Emerson website tree
            /var/www/html/
                  *
                  |
-    +------------+-------+-----------------------------+----------------------------+---------------------+-----------------+----------------------------+-------------------------+
-    |                    |                             |                            |                     |                 |                            |                         |
-   css                photos                       emerson_3                    emerson_4      emerson_main_page.html    scripts                   setup_scripts               index.html
-    *                    *                             *                            *                                       *                            *                 (rdr to main page) 
-    |                    |                             |                            |                                       |                            |
-emerson_logger.css    +--+--+-------+         +---+----+------+              +---+--+-------+                  +------+-----+------+               +--+--+-----+   
-                      |     |       |         |   |           |              |   |          |                  |      |     |      |               |  |        |
-                      |     |  cse-uoi.ico    |   |    status_report_3.html  |   |    status_report_4.html     |      |     |  update_data.sh      |  |  generate_main_page.sh
-                      |     uoi-cse.png       |   |                          |   |                             |      |   generate_input_data.sh   |  generate_emerson_css.sh
-                      cse_banner_logo.jpg     |   measurement_report_3.html  |   measurement_report_4.html     |   generate_status_report.sh       generate_website_structure.sh
-                                             data                           data                              generate_measurement_report.sh
-                                              *                              *
-                                              |                              |
-* stands for directory                  +-----+------+------+--------+     +-+--------+------+-----------+
-                                        |            |      |        |     |          |      |           |
-                                       hum          temp  main.txt   |     main.txt   |     temp        hum
-                                        *            *      event_log.txt    event_log.txt   *           *
-                                        |            |                                       |           |
-                                    +---+---+    +---+---+                               +---+---+   +---+---+
-                                    |       |    |       |                               |       |   |       |
-                              hum_sys.txt   |    |   temp_sys.txt                 temp_sys.txt   |   |   hum_sys.txt
-                                  hum_unit.txt  temp_unit.txt                         temp_unit.txt  hum_unit.txt
+    +------------+-------+-----------------------------+------------------------------+---------------------+-----------------+-----------------------------+------------------------+
+    |                    |                             |                              |                     |                 |                             |                        |
+   css                photos                       emerson_3                      emerson_4      emerson_main_page.html    scripts                    setup_scripts              index.html
+    *                    *                             *                              *                                       *                             *                (rdr to main page) 
+    |                    |                             |                              |                                       |                             |
+emerson_logger.css    +--+--+-------+         +---+----+-+----+                +---+--+-+-----+                  +--+----+----+------+                +-+-+-+-+-+-+-+   
+                      |     |       |         |   |      |    |                |   |    |     |                  |  |    |    |      |                | | |   | | | |
+                      |     |  cse-uoi.ico    |   |      |  rrdb*              |   |    |   rrdb*                |  |    |    |     update_data.sh    | | |   | | | generate_css_file.sh
+                      |     uoi-cse.png       |   |      status_report_3.html  |   |    status_report_4.html     |  |    |  generate_input_data.sh    | | |   | | generate_main_page.sh
+                      cse_banner_logo.jpg     |   measurement_report_3.html    |   measurement_report_4.html     |  |    generate_status_report.sh    | | |   | generate_rrdatabases.sh
+                                             data                             data                               |  generate_measurement_report.sh    | | |   generate_website_photos.sh
+                                              *                                *                                 generate_rrd_graphs.sh               | | generate_graph_report_pages.sh
+                                              |                                |                                                                      | generate_website_structure.sh
+* stands for directory                  +-----+------+------+--------+       +-+--------+------+-----------+                                          generate_graph_report_main_page.sh
+                                        |            |      |        |       |          |      |           |
+                                       hum          temp  main.txt   |       main.txt   |     temp        hum
+                                        *            *      event_log.txt      event_log.txt   *           *
+                                        |            |                                         |           |
+                                    +---+---+    +---+---+                                 +---+---+   +---+---+
+                                    |       |    |       |                                 |       |   |       |
+                              hum_sys.txt   |    |   temp_sys.txt                   temp_sys.txt   |   |   hum_sys.txt
+                                  hum_unit.txt  temp_unit.txt                           temp_unit.txt  hum_unit.txt
 
 
 
 
 
-
-
-
+              rrdb
+               *
+               |
+        +------+-------------+--+
+        |                    |  |
+      graphs                 |  curr_temperature_3.rrd   (or curr_temperature_4.rrd for Emerson #4)
+        *                    curr_humidity_3.rrd         (or curr_humidity_4.rrd for Emerson #4)
+        |
+    +---+-------------------------------+
+    |                                   |
+  temp                                 hum
+    *                                   *
+    |                                   |
+   curr                                curr
+    *                                   *
+    |                                   |
+  +-+-+-+-+-+-+-+-+                   +-+-+-+-+-+-+-+-+
+  |   | | | | | | |                   |   | | | | | | |
+  |   | | | | | | temp_1hour.png      |   | | | | | | hum_1hour.png
+  |   | | | | | temp_12hour.png       |   | | | | | hum_12hour.png
+  |   | | | | temp_1day.png           |   | | | | hum_1day.png
+  |   | | | temp_1week.png            |   | | | hum_1week.png
+  |   | | temp_4week.png              |   | | hum_4week.png
+  |   | temp_8week.png                |   | hum_8week.png
+  |   temp_24week.png                 |   hum_24week.png
+  temp_1year.png                      hum_1year.png
 
 
 
