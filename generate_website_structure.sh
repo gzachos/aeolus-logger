@@ -37,7 +37,7 @@ create_website_structure () {
 
 
 main () {
-	WEBSITEPATH="/var/www/html/"
+	WEBSITEPATH="/var/www/html"
         create_website_structure
 }
 

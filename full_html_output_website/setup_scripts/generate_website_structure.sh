@@ -22,7 +22,7 @@
 
 create_website_structure () {
 	cd ${WEBSITEPATH}
-        mkdir css photos emerson_3 emerson_4
+        mkdir css photos emerson_3 emerson_4 scripts setup_scripts
 	cd emerson_3
 	mkdir -p data/temp data/hum
 	mkdir -p rrdb/graphs/temp/curr rrdb/graphs/hum/curr
@@ -37,7 +37,7 @@ create_website_structure () {
 
 
 main () {
-	WEBSITEPATH="/var/www/html/"
+	WEBSITEPATH="/var/www/html"
         create_website_structure
 }
 

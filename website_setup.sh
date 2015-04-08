@@ -40,7 +40,7 @@ create_website () {
 
 
 main () {
-	WEBSITEPATH="/var/www/html/"
+	WEBSITEPATH="/var/www/html"
         create_website
 }
 
