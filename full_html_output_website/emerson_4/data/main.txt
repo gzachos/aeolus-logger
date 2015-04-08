@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet type="text/xsl" href="/simon.xsl" ?>
+<icom:SimpleMonitoring schemaVersion="1.00" appVersion="PA 104029" xmlns:icom="http://www.emersonnetworkpower.com/icom" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.emersonnetworkpower.com/icom icom-1-02.xsd">
+<Item id="354" name="SinglState">
+<Label>Unit Status</Label>
+<Value valueType="262144" offset="0.000" gain="1.000" precision="0">Unit On</Value>
+<Unit></Unit>
+</Item>
+<Item id="361" name="LocTemp">
+<Label>Return Air Temperature</Label>
+<Value valueType="393216" offset="0.000" gain="1.000" precision="1">21.7</Value>
+<Unit>&#176;C</Unit>
+</Item>
+<Item id="379" name="Std. Sensor Humidity">
+<Label>Return Air Humidity</Label>
+<Value valueType="393216" offset="0.000" gain="1.000" precision="1">24.9</Value>
+<Unit>%rH</Unit>
+</Item>
+<Item id="380" name="Supply Air Temperature">
+<Label>Supply Air Temperature</Label>
+<Value valueType="393216" offset="0.000" gain="1.000" precision="1">---</Value>
+<Unit></Unit>
+</Item>
+<Item id="356" name="Actual Temperature Setpoint">
+<Label>Return Air Temperature Setpoint</Label>
+<Value valueType="393216" offset="0.000" gain="1.000" precision="1">21.0</Value>
+<Unit>&#176;C</Unit>
+</Item>
+<Item id="547" name="HuSetActDi">
+<Label>Return Air Humidity Setpoint</Label>
+<Value valueType="393216" offset="0.000" gain="1.000" precision="0">No</Value>
+<Unit></Unit>
+</Item>
+<Item id="401" name="Supply Setpoint">
+<Label>Supply Air Temperature Setpoint</Label>
+<Value valueType="393216" offset="0.000" gain="1.000" precision="1">5.0</Value>
+<Unit>&#176;C</Unit>
+</Item>
+<Item id="1110" name="Show_Fan">
+<Label>Fan Status</Label>
+<Value valueType="0" offset="0.000" gain="1.000" precision="0">On</Value>
+<Unit></Unit>
+</Item>
+<Item id="1111" name="Show_Cool">
+<Label>Cooling Status</Label>
+<Value valueType="0" offset="0.000" gain="1.000" precision="0">On</Value>
+<Unit></Unit>
+</Item>
+<Item id="1112" name="Show_FC">
+<Label>Freecooling Status</Label>
+<Value valueType="0" offset="0.000" gain="1.000" precision="0">Off</Value>
+<Unit></Unit>
+</Item>
+<Item id="1114" name="Show_EHeat">
+<Label>Electrical Heater Status</Label>
+<Value valueType="0" offset="0.000" gain="1.000" precision="0">Off</Value>
+<Unit></Unit>
+</Item>
+<Item id="1113" name="Show_HotW">
+<Label>Hot Water Status</Label>
+<Value valueType="0" offset="0.000" gain="1.000" precision="0">Off</Value>
+<Unit></Unit>
+</Item>
+<Item id="1116" name="Show_Dehum">
+<Label>Dehumdification Status</Label>
+<Value valueType="0" offset="0.000" gain="1.000" precision="0">Off</Value>
+<Unit></Unit>
+</Item>
+<Item id="1115" name="Show_Hum">
+<Label>Humidifier Status</Label>
+<Value valueType="0" offset="0.000" gain="1.000" precision="0">Off</Value>
+<Unit></Unit>
+</Item>
+<Item id="1118" name="Show_Maint">
+<Label>Maintenance Status</Label>
+<Value valueType="0" offset="0.000" gain="1.000" precision="0">On</Value>
+<Unit></Unit>
+</Item>
+</icom:SimpleMonitoring>
