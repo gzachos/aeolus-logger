@@ -20,19 +20,30 @@
 # Email: gzzachos_at_gmail.com
 
 
+create_emerson_dir_structure () {
+	mkdir -p emerson_${1}/data/temp 
+	mkdir -p emerson_${1}/data/hum
+	mkdir -p emerson_${1}/rrdb/graph_reports 
+	mkdir -p emerson_${1}/rrdb/graphs/temp/curr 
+	mkdir -p emerson_${1}/rrdb/graphs/temp/curr_dual
+	mkdir -p emerson_${1}/rrdb/graphs/hum/curr 
+	mkdir -p emerson_${1}/rrdb/graphs/hum/curr_dual
+#	mkdir -p emerson_${1}/rrdb/graphs/temp/unit 
+#	mkdir -p emerson_${1}/rrdb/graphs/temp/unit_dual
+#	mkdir -p emerson_${1}/rrdb/graphs/temp/sys
+#	mkdir -p emerson_${1}/rrdb/graphs/temp/sys_dual
+#	mkdir -p emerson_${1}/rrdb/graphs/hum/unit 
+#	mkdir -p emerson_${1}/rrdb/graphs/hum/unit_dual 
+#	mkdir -p emerson_${1}/rrdb/graphs/hum/sys
+#	mkdir -p emerson_${1}/rrdb/graphs/hum/sys_dual
+}
+
+
 create_website_structure () {
 	cd ${WEBSITEPATH}
         mkdir css photos emerson_3 emerson_4 scripts setup_scripts
-	cd emerson_3
-	mkdir -p data/temp data/hum
-	mkdir -p rrdb/graphs/temp/curr rrdb/graphs/hum/curr
-#	mkdir -p rrdb/graphs/temp/unit rrdb/graphs/hum/unit
-#	mkdir -p rrdb/graphs/temp/sys rrdb/graphs/hum/sys
-	cd ../emerson_4
-	mkdir -p data/temp data/hum
-	mkdir -p rrdb/graphs/temp/curr rrdb/graphs/hum/curr
-#	mkdir -p rrdb/graphs/temp/unit rrdb/graphs/hum/unit
-#	mkdir -p rrdb/graphs/temp/sys rrdb/graphs/hum/sys
+	create_emerson_dir_structure 3
+	create_emerson_dir_structure 4
 }
 
 

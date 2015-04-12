@@ -26,6 +26,8 @@ create_website () {
 	./generate_css_file.sh >> /dev/null 2>&1
 	./generate_main_page.sh >> /dev/null 2>&1
 	./generate_rrdatabases.sh >> /dev/null 2>&1
+	./generate_graph_report_main_page.sh >> /dev/null 2>&1
+	./generate_graph_report_pages.sh >> /dev/null 2>&1
 	cp -rf ./generate_status_report.sh ${WEBSITEPATH}/scripts
 	cp -rf ./generate_rrd_graphs.sh ${WEBSITEPATH}/scripts
 	cp -rf ./generate_measurement_report.sh ${WEBSITEPATH}/scripts

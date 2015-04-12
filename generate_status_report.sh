@@ -40,7 +40,7 @@ append_body_stable_0 () {
 	else
 		OTHER_EMERSON=3
 	fi
-	echo -e "\n\t<!-- FIRST STABLE PART OF BODY SECTION -->\n\t<body>\n\t\t<img height=90 alt=\"uoi-cse.png\" src=\"../photos/uoi-cse.png\">\n\t\t<img class=\"banner\" height=90 alt=\"cse_banner_logo.jpg\" src=\"../photos/cse_banner_logo.jpg\">\n\t\t<br><br>\n\t\t<h4><a href=\"../emerson_main_page.html\">Main Page</a> | <a href=\"./status_report_${1}.html\">Emerson #${1} Status Report</a> | <a href=\"./measurement_report_${1}.html\">Emerson #${1} Measurement Report</a> | <a href=\"../emerson_${OTHER_EMERSON}/status_report_${OTHER_EMERSON}.html\">Emerson #${OTHER_EMERSON}</a></h4><br>\n\t\t<h2><u>Emerson #${1} Status Report</u></h2><br>" >> ${WEBSITEPATH}/emerson_${1}/status_report_${1}.html
+	echo -e "\n\t<!-- FIRST STABLE PART OF BODY SECTION -->\n\t<body>\n\t\t<img height=90 alt=\"uoi-cse.png\" src=\"../photos/uoi-cse.png\">\n\t\t<img class=\"banner\" height=90 alt=\"cse_banner_logo.jpg\" src=\"../photos/cse_banner_logo.jpg\">\n\t\t<br><br>\n\t\t<h4><a href=\"../emerson_main_page.html\">Main Page</a> &nbsp;|&nbsp; <a href=\"./status_report_${1}.html\">Emerson #${1} Status Report</a> &nbsp;|&nbsp; <a href=\"./measurement_report_${1}.html\">Emerson #${1} Measurement Report</a><br> <a href=\"./graph_report_${1}.html\">Emerson #${1} Graph Report</a>  &nbsp;|&nbsp; <a href=\"../emerson_${OTHER_EMERSON}/status_report_${OTHER_EMERSON}.html\">Emerson #${OTHER_EMERSON}</a></h4><br>\n\t\t<h2><u>Emerson #${1} Status Report</u></h2><br>" >> ${WEBSITEPATH}/emerson_${1}/status_report_${1}.html
 }
 
 
