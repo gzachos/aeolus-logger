@@ -31,7 +31,7 @@ main () {
 	${WEBSITEPATH}/scripts/generate_input_data.sh >> /dev/null 2>&1
 	updt_data 3
 	updt_data 4
-	${WEBSITEPATH}/scripts/generate_graph_report.sh >> /dev/null 2>&1	
+	${WEBSITEPATH}/scripts/generate_rrd_graphs.sh >> /dev/null 2>&1	
 }
 
 

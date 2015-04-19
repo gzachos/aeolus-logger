@@ -20,6 +20,7 @@
 # Email: gzzachos_at_gmail.com
 
 
+# Downloads and saves each photo inside photos/ directory
 retrieve_photos () {
 	wget https://raw.githubusercontent.com/support-uoi/emerson-logger/master/full_html_output_website/photos/cse-uoi.ico -O ${WEBSITEPATH}/photos/cse-uoi.ico
 	wget https://raw.githubusercontent.com/support-uoi/emerson-logger/master/full_html_output_website/photos/cse_banner_logo.jpg -O ${WEBSITEPATH}/photos/cse_banner_logo.jpg
@@ -27,10 +28,12 @@ retrieve_photos () {
 }
 
 
+# Retrieves the photos used in logger's website
 main () {
 	WEBSITEPATH="/var/www/html"
 	retrieve_photos
 }
 
 
+# Calling main
 main
