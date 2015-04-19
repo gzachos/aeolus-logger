@@ -22,7 +22,7 @@
 
 # The output .html file of this script for an Emerson unit, e.g. #3, will be saved as 'status_report_3.html'
 
-# Writes the <head> section to the output .html file
+# Appends the <head> section to the output .html file
 # (Parameter: Emerson unit No.)
 append_head () {
 

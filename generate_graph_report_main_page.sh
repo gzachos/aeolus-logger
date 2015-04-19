@@ -20,12 +20,18 @@
 # Email: gzzachos_at_gmail.com
 
 
+# The output .html file of this script for an Emerson unit, e.g. #3, will be saved as 'graph_report_3.html'
+
+# Appends the <head> section to the output .html file
+# (Parameter: Emerson unit No.)
 append_head () {
 
         echo -e "<!DOCTYPE html>\n<html>\n\t<!-- HEAD SECTION (includes the two lines above) -->\n\t<head>\n\t\t<title>Emerson Logger</title>\n\t\t<meta charset=\"utf-8\">\n\t\t<link rel=\"icon\" href=\"../photos/cse-uoi.ico\" type=\"image/x-icon\"/>\n\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/emerson_logger.css\">\n\t</head>\n" > ${WEBSITEPATH}/emerson_${1}/graph_report_${1}.html
 }
 
 
+# Appends the <body> section to the output .html file
+# (Parameter: Emerson unit No.)
 append_body () {
 
 	if [ ${1} -eq 3 ]
@@ -38,12 +44,15 @@ append_body () {
 }
 
 
+# Calls all functions that append data to the output .html file
+# (Parameter: Emerson unit No.)
 create_graph_report_main_page () {
 	append_head ${1}
 	append_body ${1}
 }
 
 
+# Creates the graph report main .html file
 main () {
 	WEBSITEPATH="/var/www/html"
 	create_graph_report_main_page 3
@@ -51,4 +60,5 @@ main () {
 }
 
 
+# Calling main
 main

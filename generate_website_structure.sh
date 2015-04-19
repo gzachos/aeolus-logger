@@ -20,6 +20,8 @@
 # Email: gzzachos_at_gmail.com
 
 
+# Creates the directory structure of an emerson unit
+# (Parameter: Emerson unit No.)
 create_emerson_dir_structure () {
 	mkdir -p emerson_${1}/data/temp 
 	mkdir -p emerson_${1}/data/hum
@@ -39,6 +41,7 @@ create_emerson_dir_structure () {
 }
 
 
+# Creates the main directories of the website and the directory structure of each unit
 create_website_structure () {
 	cd ${WEBSITEPATH}
         mkdir css photos emerson_3 emerson_4 scripts setup_scripts
@@ -47,10 +50,12 @@ create_website_structure () {
 }
 
 
+# Creates the website (directory) structure
 main () {
 	WEBSITEPATH="/var/www/html"
         create_website_structure
 }
 
 
+# Calling main
 main

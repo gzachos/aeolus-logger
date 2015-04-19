@@ -20,6 +20,8 @@
 # Email: gzzachos_at_gmail.com
 
 
+# Creates the website (directory) structure, CSS file, main page, Round Robin DBs,
+# graph report HTML pages and downloads the photos used in logger's website.
 create_website () {
 	./generate_website_structure.sh >> /dev/null 2>&1
 	./generate_website_photos.sh >> /dev/null 2>&1
@@ -41,10 +43,12 @@ create_website () {
 }
 
 
+# Calls all functions used to setup the website
 main () {
 	WEBSITEPATH="/var/www/html"
         create_website
 }
 
 
+# Calling main
 main
