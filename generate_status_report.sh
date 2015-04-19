@@ -106,7 +106,9 @@ init_values () {
 		# ${INDEX} is incremented by one '1'
                 INDEX=$((INDEX+1))
         done
+	# Stores the value of "Return Air Temperature" into "curr_temperature_${1}.rrd"
 	rrdtool update ${WEBSITEPATH}/emerson_${1}/rrdb/curr_temperature_${1}.rrd ${DATESTAMP}:${VALUES_ARRAY[1]}
+	# Stores the value of "Return Air Humidity" into "curr_humidity_${1}.rrd"
 	rrdtool update ${WEBSITEPATH}/emerson_${1}/rrdb/curr_humidity_${1}.rrd ${DATESTAMP}:${VALUES_ARRAY[2]}
 }
 
@@ -187,14 +189,9 @@ append_body_stable_1 () {
 }
 
 
-# Creates the status report .html file
+# Calls all functions that append data to the output .html file
 # (Parameter: Emerson unit No.)
 create_status_report () {
-	WEBSITEPATH="/var/www/html"
-	DATESTAMP=$(date +%s)
-	init_labels ${1}
-	init_values ${1}
-	init_units ${1}
 	append_head ${1}
 	append_body_stable_0 ${1}
 	append_table_stable_0 ${1}
@@ -204,6 +201,18 @@ create_status_report () {
 }
 
 
-# Calling create_status_report
+# Creates the status report .html file
 # (Parameter: Emerson unit No.)
-create_status_report ${1}
+main () {
+        WEBSITEPATH="/var/www/html"
+        DATESTAMP=$(date +%s)
+        init_labels ${1}
+        init_values ${1}
+        init_units ${1}
+        create_status_report ${1}
+}
+
+
+# Calling main
+# (Parameter: Emerson unit No.)
+main ${1}

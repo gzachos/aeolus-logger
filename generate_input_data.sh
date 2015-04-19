@@ -21,17 +21,28 @@
 
 
 retrieve_data () {
+	if [ ${ATTEMPTS} -eq 19 ]
+	then	
+		return
+	fi
 	wget http://192.168.254.${1}/index.html -O ${WEBSITEPATH}/emerson_${2}/data/main.txt
 	wget http://192.168.254.${1}/tmp/1102.xml -O ${WEBSITEPATH}/emerson_${2}/data/temp/temp_unit.txt
 	wget http://192.168.254.${1}/tmp/1103.xml -O ${WEBSITEPATH}/emerson_${2}/data/hum/hum_unit.txt
 	wget http://192.168.254.${1}/tmp/1104.xml -O ${WEBSITEPATH}/emerson_${2}/data/temp/temp_sys.txt
 	wget http://192.168.254.${1}/tmp/1105.xml -O ${WEBSITEPATH}/emerson_${2}/data/hum/hum_sys.txt
 	wget http://192.168.254.${1}/tmp/statusreport.xml -O ${WEBSITEPATH}/emerson_${2}/data/event_log.txt
+	MAIN_CONTENT=$(cat ${WEBSITEPATH}/emerson_${2}/data/main.txt)
+	if [ -z "${MAIN_CONTENT}" ]
+	then
+		ATTEMPTS=$((ATTEMPTS+1))
+		retrieve_data ${1} ${2}
+	fi
 }
 
 
 main () {
 	WEBSITEPATH="/var/www/html"
+	ATTEMPTS=0
 	retrieve_data 1 4
 	retrieve_data 2 3
 }

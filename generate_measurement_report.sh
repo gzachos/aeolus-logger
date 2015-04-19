@@ -25,7 +25,6 @@
 ################################
 
 append_head () {
-
 	echo -e "<!DOCTYPE html>\n<html>\n\t<!-- HEAD SECTION (includes the two lines above) -->\n\t<head>\n\t\t<title>Emerson Measurement Report</title>\n\t\t<meta charset=\"utf-8\">\n\t\t<link rel=\"icon\" href=\"../photos/cse-uoi.ico\" type=\"image/x-icon\"/>\n\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/emerson_logger.css\">\n\t</head>" > ${WEBSITEPATH}/emerson_${1}/measurement_report_${1}.html
 }
 
@@ -58,6 +57,7 @@ append_body_stable_1 () {
 
 
 append_variable_section () {
+
         ARRAY_LEN=${#DATES_TIMES_U_ARRAY[@]}
         STRING="\n\t\t\t<!-- VARIABLE PART OF TABLE SECTION -->\n"
         INDEX=0
@@ -76,6 +76,7 @@ append_variable_section () {
 ################################
 
 init_temp_unit_time () {
+
 	DATES_TIMES_U=$(grep -i time ${WEBSITEPATH}/emerson_${1}/data/temp/temp_unit.txt | tr -d "</time>" | tr -d "\r")
 	INDEX=0
 	for x in ${DATES_TIMES_U}
@@ -87,6 +88,7 @@ init_temp_unit_time () {
 
 
 init_temp_sys_time () {
+
 	DATES_TIMES_S=$(grep -i time ${WEBSITEPATH}/emerson_${1}/data/temp/temp_sys.txt | tr -d "</time>" | tr -d "\r")
 	INDEX=0
 	for x in ${DATES_TIMES_S}
@@ -98,6 +100,7 @@ init_temp_sys_time () {
 
 
 init_temp_unit_value () {
+
         VALUES_U=$(grep -i value ${WEBSITEPATH}/emerson_${1}/data/temp/temp_unit.txt | tr -d "</value>" | tr -d "\r")
         INDEX=0
         for x in ${VALUES_U}
@@ -110,6 +113,7 @@ init_temp_unit_value () {
 
 
 init_temp_sys_value () {
+
         VALUES_S=$(grep -i value ${WEBSITEPATH}/emerson_${1}/data/temp/temp_sys.txt | tr -d "</value>" | tr -d "\r")
         INDEX=0
         for x in ${VALUES_S}
@@ -126,6 +130,7 @@ init_temp_sys_value () {
 ######################################
 
 init_hum_unit_time () {
+
 	DATES_TIMES_HU=$(grep -i time ${WEBSITEPATH}/emerson_${1}/data/hum/hum_unit.txt | tr -d "</time>" | tr -d "\r")
 	INDEX=0
 	for x in ${DATES_TIMES_HU}
@@ -137,6 +142,7 @@ init_hum_unit_time () {
 
 
 init_hum_sys_time () {
+
 	DATES_TIMES_HS=$(grep -i time ${WEBSITEPATH}/emerson_${1}/data/hum/hum_sys.txt | tr -d "</time>" | tr -d "\r")
 	INDEX=0
 	for x in ${DATES_TIMES_HS}
@@ -149,6 +155,7 @@ init_hum_sys_time () {
 
 
 init_hum_unit_value () {
+
         VALUES_HU=$(grep -i value ${WEBSITEPATH}/emerson_${1}/data/hum/hum_unit.txt | tr -d "</value>" | tr -d "\r")
         INDEX=0
         for x in ${VALUES_HU}
@@ -161,6 +168,7 @@ init_hum_unit_value () {
 
 
 init_hum_sys_value () {
+
         VALUES_HS=$(grep -i value ${WEBSITEPATH}/emerson_${1}/data/hum/hum_sys.txt | tr -d "</value>" | tr -d "\r")
         INDEX=0
         for x in ${VALUES_HS}
@@ -178,6 +186,7 @@ init_hum_sys_value () {
 
 
 print_data () {
+
 	ARRAY_LEN=${#DATES_TIMES_U_ARRAY[@]}
 #       echo ${ARRAY_LEN}
 	INDEX=0
@@ -225,7 +234,7 @@ init_hum_sys () {
 }
 
 
-create_measurement_report() {
+create_measurement_report () {
 	append_head ${1}
 	append_body_stable_0 ${1}
 	append_table_stable_0 ${1}
@@ -233,6 +242,7 @@ create_measurement_report() {
 	append_table_stable_1 ${1}
 	append_body_stable_1 ${1}
 }
+
 
 main () {
 	WEBSITEPATH="/var/www/html"
