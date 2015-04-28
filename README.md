@@ -22,8 +22,14 @@ Screenshots
 <br>_Measurement Report_<br>
 ![Measurement Report](./images/emerson_measurement_report.png)
 
-<br>_Sample graph (1 Hour Log)_<br>
+<br>_Sample graph (1 Hour Temperature Log - Emerson 3)_<br>
 ![Sample Graph](./images/demo_temp_1hour.png)
+
+<br>_Sample graph (1 Hour Temperature Log - Emerson 3 & 4)_<br>
+![Sample Graph](./images/demo_temp_1hour_dual.png)
+
+<br>_Sample graph (1 Week Humidity Log - Emerson #3)_<br>
+![Sample Graph](./images/demo_hum_1week.png)
 
 <br>_Emerson Website Tree_<br>
 ![Emerson Webpage Tree](./images/emerson_website_tree.png)
