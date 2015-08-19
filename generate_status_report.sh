@@ -23,7 +23,7 @@
 # Appends the <head> section to the output .html file.
 # (Parameter: $1 -> Emerson unit No.)
 append_head () {
-	echo -e "<!DOCTYPE html>\n<html>\n\t<!-- HEAD SECTION (includes the two lines above) -->\n\t<head>\n\t\t<title>Emerson #${1} Status Report</title>\n\t\t<meta charset=\"utf-8\">\n\t\t<link rel=\"icon\" href=\"../photos/cse-uoi.ico\" type=\"image/x-icon\"/>\n\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/emerson_logger.css\">\n\t</head>" > ${WEBSITEPATH}/emerson_${1}/status_report_${1}.html
+	echo -e "<!DOCTYPE html>\n<html>\n\t<!-- HEAD SECTION (includes the two lines above) -->\n\t<head>\n\t\t<title>Emerson #${1} Status Report</title>\n\t\t<meta charset=\"utf-8\">\n\t\t<link rel=\"icon\" href=\"../photos/cse-uoi.ico\" type=\"image/x-icon\"/>\n\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/emerson_logger.css\">\n\t</head>" > ${WEBSITEPATH}/emerson_${1}/status_report.html
 }
 
 
@@ -36,14 +36,14 @@ append_body_stable_0 () {
 	else
 		OTHER_EMERSON=3
 	fi
-	echo -e "\n\t<!-- FIRST STABLE PART OF BODY SECTION -->\n\t<body>\n\t\t<img height=90 alt=\"uoi-cse.png\" src=\"../photos/uoi-cse.png\">\n\t\t<img class=\"banner\" height=90 alt=\"cse_banner_logo.jpg\" src=\"../photos/cse_banner_logo.jpg\">\n\t\t<br><br>\n\t\t<h4><a href=\"../emerson_main_page.html\">Main Page</a> &nbsp;|&nbsp; <a href=\"./status_report_${1}.html\">Emerson #${1} Status Report</a> &nbsp;|&nbsp; <a href=\"./measurement_report_${1}.html\">Emerson #${1} Measurement Report</a><br> <a href=\"./graph_report_${1}.html\">Emerson #${1} Graph Report</a>  &nbsp;|&nbsp; <a href=\"../emerson_${OTHER_EMERSON}/status_report_${OTHER_EMERSON}.html\">Emerson #${OTHER_EMERSON}</a></h4><br>\n\t\t<h2><u>Emerson #${1} Status Report</u></h2><br>" >> ${WEBSITEPATH}/emerson_${1}/status_report_${1}.html
+	echo -e "\n\t<!-- FIRST STABLE PART OF BODY SECTION -->\n\t<body>\n\t\t<img height=90 alt=\"uoi-cse.png\" src=\"../photos/uoi-cse.png\">\n\t\t<img class=\"banner\" height=90 alt=\"cse_banner_logo.jpg\" src=\"../photos/cse_banner_logo.jpg\">\n\t\t<br><br>\n\t\t<h4><a href=\"../emerson_main_page.html\">Main Page</a> &nbsp;|&nbsp; <a href=\"./status_report.html\">Emerson #${1} Status Report</a> &nbsp;|&nbsp; <a href=\"./measurement_report.html\">Emerson #${1} Measurement Report</a><br> <a href=\"./graph_report.html\">Emerson #${1} Graph Report</a>  &nbsp;|&nbsp; <a href=\"../emerson_${OTHER_EMERSON}/status_report.html\">Emerson #${OTHER_EMERSON}</a></h4><br>\n\t\t<h2><u>Emerson #${1} Status Report</u></h2><br>" >> ${WEBSITEPATH}/emerson_${1}/status_report.html
 }
 
 
 # Appends the first stable part of the <table> section to the output .html file.
 # (Parameter: $1 -> Emerson unit No.)
 append_table_stable_0 () {
-	echo -e "\n\t\t<!-- FIRST STABLE PART OF TABLE SECTION -->\n\t\t<!-- MAIN CONTENT -->\n\t\t<table style=\"width:80%\">\n\t\t\t<tr>\n\t\t\t\t<th>Label</th>\n\t\t\t\t<th>Value</th>\n\t\t\t\t<th>Unit</th>\n\t\t\t</tr>" >> ${WEBSITEPATH}/emerson_${1}/status_report_${1}.html
+	echo -e "\n\t\t<!-- FIRST STABLE PART OF TABLE SECTION -->\n\t\t<!-- MAIN CONTENT -->\n\t\t<table style=\"width:80%\">\n\t\t\t<tr>\n\t\t\t\t<th>Label</th>\n\t\t\t\t<th>Value</th>\n\t\t\t\t<th>Unit</th>\n\t\t\t</tr>" >> ${WEBSITEPATH}/emerson_${1}/status_report.html
 }
 
 
@@ -163,21 +163,21 @@ append_variable_section () {
 	# Adding the final line will not require "\n" at the end, so a different string is added in ${STRING}
         STRING="${STRING}\t\t\t<tr>\n\t\t\t\t<td>${LABELS_ARRAY[${INDEX}]}</td>\n\t\t\t\t<td>${VALUES_ARRAY[${INDEX}]}</td>\n\t\t\t\t<td>${UNITS_ARRAY[${INDEX}]}</td>\n\t\t\t</tr>"
 	# Finally, ${STRING} is appended to the output.html
-        echo -e "${STRING}" >> ${WEBSITEPATH}/emerson_${1}/status_report_${1}.html
+        echo -e "${STRING}" >> ${WEBSITEPATH}/emerson_${1}/status_report.html
 }
 
 
 # Appends the last stable part of the <table> section to the output .html file.
 # (Parameter: $1 -> Emerson unit No.)
 append_table_stable_1 () {
-	echo -e "\n\t\t<!-- LAST STABLE PART OF TABLE SECTION -->\n\t\t</table>\n\t\t<!-- END OF MAIN CONTENT -->\n\t\t" >> ${WEBSITEPATH}/emerson_${1}/status_report_${1}.html
+	echo -e "\n\t\t<!-- LAST STABLE PART OF TABLE SECTION -->\n\t\t</table>\n\t\t<!-- END OF MAIN CONTENT -->\n\t\t" >> ${WEBSITEPATH}/emerson_${1}/status_report.html
 }
 
 
 # Appends the last stable part of the <body> section to the output .html file.
 # (Parameter: $1 -> Emerson unit No.)
 append_body_stable_1 () {
-	echo -e "\t\t<!-- LAST STABLE PART OF BODY SECTION -->\n\t\t<br>\n\t\t<h4><i>A project by ~gzachos</i></h4>\n\t\t<h4>&copy; Systems Support Group 2015. All rights reserved.</h4>\n\t\t<h4>Computer Science and Engineering Department - University of Ioannina</h4>\n\t</body>\n</html>" >> ${WEBSITEPATH}/emerson_${1}/status_report_${1}.html
+	echo -e "\t\t<!-- LAST STABLE PART OF BODY SECTION -->\n\t\t<br>\n\t\t<h4><i>A project by ~gzachos</i></h4>\n\t\t<h4>&copy; Systems Support Group 2015. All rights reserved.</h4>\n\t\t<h4>Computer Science and Engineering Department - University of Ioannina</h4>\n\t</body>\n</html>" >> ${WEBSITEPATH}/emerson_${1}/status_report.html
 }
 
 
