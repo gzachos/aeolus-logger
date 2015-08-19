@@ -16,25 +16,21 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
 # Contact Information:
-# Name: George Zachos
-# Email: gzzachos_at_gmail.com
+# Name: George Z. Zachos
+# Email: gzzachos <at> gmail.com
 
 
-# The output .html file of this script for an Emerson unit, e.g. #3, will be saved as 'status_report_3.html'
-
-# Appends the <head> section to the output .html file
-# (Parameter: Emerson unit No.)
+# Appends the <head> section to the output .html file.
+# (Parameter: $1 -> Emerson unit No.)
 append_head () {
-
 	echo -e "<!DOCTYPE html>\n<html>\n\t<!-- HEAD SECTION (includes the two lines above) -->\n\t<head>\n\t\t<title>Emerson #${1} Status Report</title>\n\t\t<meta charset=\"utf-8\">\n\t\t<link rel=\"icon\" href=\"../photos/cse-uoi.ico\" type=\"image/x-icon\"/>\n\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/emerson_logger.css\">\n\t</head>" > ${WEBSITEPATH}/emerson_${1}/status_report_${1}.html
 }
 
 
-# Appends the first stable part of the <body> section to the output .html file
-# (Parameter: Emerson unit No.)
+# Appends the first stable part of the <body> section to the output .html file.
+# (Parameter: $1 -> Emerson unit No.)
 append_body_stable_0 () {
-
-	if [ ${1} -eq 3 ]
+	if [ "${1}" -eq "3" ]
 	then
 		OTHER_EMERSON=4
 	else
@@ -44,22 +40,21 @@ append_body_stable_0 () {
 }
 
 
-# Appends the first stable part of the <table> section to the output .html file
-# (Parameter: Emerson unit No.)
+# Appends the first stable part of the <table> section to the output .html file.
+# (Parameter: $1 -> Emerson unit No.)
 append_table_stable_0 () {
-
 	echo -e "\n\t\t<!-- FIRST STABLE PART OF TABLE SECTION -->\n\t\t<!-- MAIN CONTENT -->\n\t\t<table style=\"width:80%\">\n\t\t\t<tr>\n\t\t\t\t<th>Label</th>\n\t\t\t\t<th>Value</th>\n\t\t\t\t<th>Unit</th>\n\t\t\t</tr>" >> ${WEBSITEPATH}/emerson_${1}/status_report_${1}.html
 }
 
 
-# Creates an array that contains the content of each <Label> element
+# Creates an array that contains the content of each <Label> element.
+# (Parameter: $1 -> Emerson unit No.)
 init_labels () {
-
-	# ${LABELS} holds a string that contains all the <Label> elements of the main.txt
+	# ${LABELS} holds a string that contains all the <Label> elements of the curr_status.txt
 	# file, with the tags included (e.g. "<Label>Unit Status</Label>"), each one on a
 	# different line. Moreover, the white spaces in the text between the <Label> tags
 	# are replaced by underscores "_"
-        LABELS=$(grep -i Label ${WEBSITEPATH}/emerson_${1}/data/main.txt | tr " " "_")
+        LABELS=$(grep -i Label ${WEBSITEPATH}/emerson_${1}/data/curr_status.txt | tr " " "_")
         unset LABELS_ARRAY
 	# The value of ${INDEX} is initialized to zero '0'
         INDEX=0
@@ -80,14 +75,14 @@ init_labels () {
 }
 
 
-# Creates an array that contains the content of each <Value> element
+# Creates an array that contains the content of each <Value> element.
+# (Parameter: $1 -> Emerson unit No.)
 init_values () {
-
-        # ${VALUES} holds a string that contains all the <Value> elements of the main.txt
+        # ${VALUES} holds a string that contains all the <Value> elements of the curr_status.txt
         # file, with the tags included (e.g. "<Value>Warning On</Value>"), each one on a
         # different line. Moreover, the white spaces in the text between the <Value> tags
         # are replaced by underscores "_"
-	VALUES=$(grep -i Value ${WEBSITEPATH}/emerson_${1}/data/main.txt | tr " " "_")
+	VALUES=$(grep -i Value ${WEBSITEPATH}/emerson_${1}/data/curr_status.txt | tr " " "_")
         unset VALUES_ARRAY
 	# The value of ${INDEX} is initialized to zero '0'
         INDEX=0
@@ -113,14 +108,14 @@ init_values () {
 }
 
 
-# Creates an array that contains the content of each <Unit> element
+# Creates an array that contains the content of each <Unit> element.
+# (Parameter: $1 -> Emerson unit No.)
 init_units () {
-
-	# ${UNITS} holds a string that contains all the <Unit> elements of the main.txt
+	# ${UNITS} holds a string that contains all the <Unit> elements of the curr_status.txt
         # file, with the tags included (e.g. "<Unit></Unit>", "<Unit>%rH</Unit>" etc.),
 	# each one on a different line. Moreover, the white spaces in the text between
 	# the <Unit> tags are replaced by underscores "_"
-	UNITS=$(grep -i Unit ${WEBSITEPATH}/emerson_${1}/data/main.txt | grep -v Status | grep -v On | tr " " "_")
+	UNITS=$(grep -i Unit ${WEBSITEPATH}/emerson_${1}/data/curr_status.txt | grep -v Status | grep -v On | tr " " "_")
         unset UNITS_ARRAY
 	# The value of ${INDEX} is initialized to zero '0'
         INDEX=0
@@ -148,10 +143,9 @@ init_units () {
 }
 
 
-# Appends the variable part of the <table> section to the output .html file
-# (Parameter: Emerson unit No.)
+# Appends the variable part of the <table> section to the output .html file.
+# (Parameter: $1 -> Emerson unit No.)
 append_variable_section () {
-
 	# ${ARRAY_LEN} holds the length of ${LABELS_ARRAY}
         ARRAY_LEN=${#LABELS_ARRAY[@]}
 	# ${STRING} is initialized
@@ -173,24 +167,22 @@ append_variable_section () {
 }
 
 
-# Appends the last stable part of the <table> section to the output .html file
-# (Parameter: Emerson unit No.)
+# Appends the last stable part of the <table> section to the output .html file.
+# (Parameter: $1 -> Emerson unit No.)
 append_table_stable_1 () {
-	
 	echo -e "\n\t\t<!-- LAST STABLE PART OF TABLE SECTION -->\n\t\t</table>\n\t\t<!-- END OF MAIN CONTENT -->\n\t\t" >> ${WEBSITEPATH}/emerson_${1}/status_report_${1}.html
 }
 
 
-# Appends the last stable part of the <body> section to the output .html file
-# (Parameter: Emerson unit No.)
+# Appends the last stable part of the <body> section to the output .html file.
+# (Parameter: $1 -> Emerson unit No.)
 append_body_stable_1 () {
-
 	echo -e "\t\t<!-- LAST STABLE PART OF BODY SECTION -->\n\t\t<br>\n\t\t<h4><i>A project by ~gzachos</i></h4>\n\t\t<h4>&copy; Systems Support Group 2015. All rights reserved.</h4>\n\t\t<h4>Computer Science and Engineering Department - University of Ioannina</h4>\n\t</body>\n</html>" >> ${WEBSITEPATH}/emerson_${1}/status_report_${1}.html
 }
 
 
-# Calls all functions that append data to the output .html file
-# (Parameter: Emerson unit No.)
+# Calls all functions that append data to the output .html file.
+# (Parameter: $1 -> Emerson unit No.)
 create_status_report () {
 	append_head ${1}
 	append_body_stable_0 ${1}
@@ -201,8 +193,8 @@ create_status_report () {
 }
 
 
-# Creates the status report .html file
-# (Parameter: Emerson unit No.)
+# Calls the functions that create the status report .html file.
+# (Parameter: $1 -> Emerson unit No.)
 main () {
         WEBSITEPATH="/var/www/html"
         DATESTAMP=$(date +%s)
@@ -213,6 +205,6 @@ main () {
 }
 
 
-# Calling main
-# (Parameter: Emerson unit No.)
+# Calling main.
+# (Parameter: $1 -> Emerson unit No.)
 main ${1}

@@ -16,12 +16,13 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
 # Contact Information:
-# Name: George Zachos
-# Email: gzzachos_at_gmail.com
+# Name: George Z. Zachos
+# Email: gzzachos <at> gmail.com
 
 
+# Creates a RRD file.
+# (Parameters: $1 -> {curr, unit, sys}, $3 -> Emerson unit No., $4 -> {temp, hum})
 create_rrdb () {
-
 	rrdtool create 	${WEBSITEPATH}/emerson_${3}/rrdb/${1}_${2}_${3}.rrd \
 	--start 1428044400 \
 	--step 60 \
@@ -30,6 +31,8 @@ create_rrdb () {
 }
 
 
+# Creates the RRD files for an Emerson unit. 
+# (Parameter: $1 -> Emerson unit No.)
 create_emerson_rrdb () {
         create_rrdb curr temperature ${1} temp
         create_rrdb curr humidity ${1} hum
@@ -40,6 +43,7 @@ create_emerson_rrdb () {
 }
 
 
+# Calls the function that creates the RRD files for an Emerson unit.
 main () {
 	WEBSITEPATH="/var/www/html"
         create_emerson_rrdb 3
@@ -47,4 +51,5 @@ main () {
 }
 
 
+# Calling main.
 main

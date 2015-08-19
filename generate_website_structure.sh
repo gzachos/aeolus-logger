@@ -16,11 +16,11 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
 # Contact Information:
-# Name: George Zachos
-# Email: gzzachos_at_gmail.com
+# Name: George Z. Zachos
+# Email: gzzachos <at> gmail.com
 
 
-# Creates the directory structure of an emerson unit
+# Creates the directory structure of an Emerson unit.
 # (Parameter: Emerson unit No.)
 create_emerson_dir_structure () {
 	mkdir -p emerson_${1}/data/temp 
@@ -41,7 +41,8 @@ create_emerson_dir_structure () {
 }
 
 
-# Creates the main directories of the website and the directory structure of each unit
+# Creates the main directories of the website and calls the function that 
+# creates the directory structure for each Emerson unit.
 create_website_structure () {
 	cd ${WEBSITEPATH}
         mkdir css photos emerson_3 emerson_4 scripts setup_scripts
@@ -50,12 +51,12 @@ create_website_structure () {
 }
 
 
-# Creates the website (directory) structure
+# Calls the function that creates the whole website (directory) structure.
 main () {
 	WEBSITEPATH="/var/www/html"
         create_website_structure
 }
 
 
-# Calling main
+# Calling main.
 main

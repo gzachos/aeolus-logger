@@ -16,16 +16,18 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
 # Contact Information:
-# Name: George Zachos
-# Email: gzzachos_at_gmail.com
+# Name: George Z. Zachos
+# Email: gzzachos <at> gmail.com
 
 
+# Updates status and measurement report pages for an Emerson unit.
 updt_data () {
 	${WEBSITEPATH}/scripts/generate_status_report.sh ${1} >> /dev/null 2>&1
 	${WEBSITEPATH}/scripts/generate_measurement_report.sh ${1} >> /dev/null 2>&1
 }
 
 
+# Retrieves input data, updates status and measurement report pages and generates graphs. 
 main () {
 	WEBSITEPATH="/var/www/html"
 	${WEBSITEPATH}/scripts/generate_input_data.sh >> /dev/null 2>&1
@@ -35,4 +37,5 @@ main () {
 }
 
 
+# Calling main.
 main

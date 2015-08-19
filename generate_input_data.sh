@@ -16,36 +16,43 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
 # Contact Information:
-# Name: George Zachos
-# Email: gzzachos_at_gmail.com
+# Name: George Z. Zachos
+# Email: gzzachos <at> gmail.com
 
 
+# Retrieves the required data files to be processed for an Emerson unit.
+# If curr_status.txt is empty, the files are retrieved again,
+# until file is not empty or 50 attempts have been made to download them.
+# (Parameters: $1 -> IP address part, $2 -> Emerson unit No.) 
 retrieve_data () {
-	if [ ${ATTEMPTS} -eq 19 ]
+	if [ "${ATTEMPTS}" -eq "50" ]
 	then	
 		return
 	fi
-	wget http://192.168.254.${1}/index.html -O ${WEBSITEPATH}/emerson_${2}/data/main.txt
+	wget http://192.168.254.${1}/index.html -O ${WEBSITEPATH}/emerson_${2}/data/curr_status.txt
 	wget http://192.168.254.${1}/tmp/1102.xml -O ${WEBSITEPATH}/emerson_${2}/data/temp/temp_unit.txt
 	wget http://192.168.254.${1}/tmp/1103.xml -O ${WEBSITEPATH}/emerson_${2}/data/hum/hum_unit.txt
 	wget http://192.168.254.${1}/tmp/1104.xml -O ${WEBSITEPATH}/emerson_${2}/data/temp/temp_sys.txt
 	wget http://192.168.254.${1}/tmp/1105.xml -O ${WEBSITEPATH}/emerson_${2}/data/hum/hum_sys.txt
 	wget http://192.168.254.${1}/tmp/statusreport.xml -O ${WEBSITEPATH}/emerson_${2}/data/event_log.txt
-	MAIN_CONTENT=$(cat ${WEBSITEPATH}/emerson_${2}/data/main.txt)
+	MAIN_CONTENT=$(cat ${WEBSITEPATH}/emerson_${2}/data/curr_status.txt)
 	if [ -z "${MAIN_CONTENT}" ]
 	then
-		ATTEMPTS=$((ATTEMPTS+1))
+		ATTEMPTS=$((ATTEMPTS + 1))
 		retrieve_data ${1} ${2}
 	fi
 }
 
 
+# Calls the function that retrieves the required data for an Emerson units.
 main () {
 	WEBSITEPATH="/var/www/html"
 	ATTEMPTS=0
 	retrieve_data 1 4
+	ATTEMPTS=0
 	retrieve_data 2 3
 }
 
 
+# Calling main.
 main

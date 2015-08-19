@@ -16,22 +16,18 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
 # Contact Information:
-# Name: George Zachos
-# Email: gzzachos_at_gmail.com
+# Name: George Z. Zachos
+# Email: gzzachos <at> gmail.com
 
-
-# The output .html file of this script will be saved as 'emerson_main_page.html'
 
 # Appends the <head> section to the output .html file
 append_head () {
-
 echo -e "<!DOCTYPE html>\n<html>\n\t<!-- HEAD SECTION (includes the two lines above) -->\n\t<head>\n\t\t<title>Aeolus Logger</title>\n\t\t<meta charset=\"utf-8\">\n\t\t<link rel=\"icon\" href=\"./photos/cse-uoi.ico\" type=\"image/x-icon\"/>\n\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"./css/emerson_logger.css\">\n\t</head>\n" > ${WEBSITEPATH}/emerson_main_page.html
 }
 
 
 # Appends the the <body> section to the output .html file
 append_body () {
-
 echo -e "\t<!-- BODY SECTION (includes \"</html>\" line) -->\n\t<body>\n\t\t<img height=90 alt=\"uoi-cse.png\" src=\"./photos/uoi-cse.png\">\n\t\t<img class=\"banner\" height=90 alt=\"cse_banner_logo.jpg\" src=\"./photos/cse_banner_logo.jpg\">\n\t\t<br><br>\n\t\t<h4><a href=\"./emerson_3/status_report_3.html\">Emerson Unit #3</a> &nbsp;|&nbsp;  <a href=\"./emerson_4/status_report_4.html\">Emerson Unit #4</a> &nbsp;|&nbsp; <a href=\"http://support.cs.uoi.gr/\" target=\"_blank\">Systems Support Group</a><br><br>\n\t\t<a href=\"./emerson_3/graph_report_3.html\">Emerson #3 Graph Report</a> &nbsp;|&nbsp; <a href=\"./emerson_4/graph_report_4.html\">Emerson #4 Graph Report</a></h4><br>\n\t\t<h2><u>Aeolus Logger Main Page</u></h2>" >> ${WEBSITEPATH}/emerson_main_page.html
 
 echo -e "\t\t<h3><u>About</u></h3>\n\t\t<p>\n\t\t\tThe <strong>\"Aeolus Logger\"</strong> project is about the server that is used to monitor the environmental conditions of the cluster room inside the building of <a href=\"http://cs.uoi.gr/\" target=\"_blank\">Computer Science and Engineering Department</a>, <a href=\"http://uoi.gr/\" target=\"_blank\">University of Ioannina</a>. The <strong>temperature</strong> and <strong>humidity</strong> values are supplied by the two Emerson cooling units inside the cluster room. Moreover, the server monitors the <strong>status</strong> of those two units and <strong>alarms</strong> the faculty if any <strong>abnormal</strong> conditions are observed.\n\t\t</p>\n\t\t<br>\n\t\t<h3><u>Emerson Units</u></h3>\n\t\t<div id=\"emersons\">\n\t\t\tVisit one of the links below to see a detailed report of an Emerson unit.<br>\n\t\t\t<h4><a href=\"./emerson_3/status_report_3.html\" target=\"_blank\">Emerson Unit #3</a>&nbsp;-&nbsp;<a href=\"./emerson_4/status_report_4.html\" target=\"_blank\">Emerson Unit #4</a></h4>\n\t\t</div>\n\t\t<br>" >> ${WEBSITEPATH}/emerson_main_page.html
@@ -42,7 +38,7 @@ echo -e "\t\t<h3><u>Contact</u></h3>\n\t\t<table>\n\t\t\t<tr>\n\t\t\t\t<td id=\"
 }
 
 
-# Calls all functions that append data to the output .html file
+# Calls the functions that append data to the output .html file.
 main () {
 	WEBSITEPATH="/var/www/html"
         append_head
@@ -50,5 +46,5 @@ main () {
 }
 
 
-# Calling main
+# Calling main.
 main

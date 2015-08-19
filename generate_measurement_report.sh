@@ -16,22 +16,25 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
 # Contact Information:
-# Name: George Zachos
-# Email: gzzachos_at_gmail.com
+# Name: George Z. Zachos
+# Email: gzzachos <at> gmail.com
 
 
 ################################
 #            WEBSITE           #
 ################################
 
+# Appends <head> section to the output .html file.
+# (Parameter: $1 -> Emerson unit No.)
 append_head () {
 	echo -e "<!DOCTYPE html>\n<html>\n\t<!-- HEAD SECTION (includes the two lines above) -->\n\t<head>\n\t\t<title>Emerson Measurement Report</title>\n\t\t<meta charset=\"utf-8\">\n\t\t<link rel=\"icon\" href=\"../photos/cse-uoi.ico\" type=\"image/x-icon\"/>\n\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/emerson_logger.css\">\n\t</head>" > ${WEBSITEPATH}/emerson_${1}/measurement_report_${1}.html
 }
 
 
+# Appends the first stable part of the <body> section to the output .html file.
+# (Parameter: $1 -> Emerson unit No.)
 append_body_stable_0 () {
-
-	if [ ${1} -eq 3 ]
+	if [ "${1}" -eq "3" ]
 	then
 		OTHER_EMERSON=4
 	else
@@ -41,23 +44,30 @@ append_body_stable_0 () {
 }
 
 
+# Appends the first stable part of the <table> section to the output .html file.
+# (Parameter: $1 -> Emerson unit No.)
 append_table_stable_0 () {
 	echo -e "\n\t\t<!-- FIRST STABLE PART OF TABLE SECTION -->\n\t\t<!-- MAIN CONTENT -->\n\t\t<table style=\"width:80%\">\n\t\t\t<tr>\n\t\t\t\t<th>Date / Time</th>\n\t\t\t\t<th>Temp Unit</th>\n\t\t\t\t<th>Temp Sys</th>\n\t\t\t\t<th>Hum Unit</th>\n\t\t\t\t<th>Hum Sys</th>\n\t\t\t</tr>" >> ${WEBSITEPATH}/emerson_${1}/measurement_report_${1}.html
 }
 
 
+# Appends the second stable part of the <table> section to the output .html file.
+# (Parameter: $1 -> Emerson unit No.)
 append_table_stable_1 () {
 	echo -e "\n\t\t<!-- LAST STABLE PART OF TABLE SECTION -->\n\t\t</table>\n\t\t<!-- END OF MAIN CONTENT -->\n\t\t" >> ${WEBSITEPATH}/emerson_${1}/measurement_report_${1}.html
 }
 
 
+# Appends the second stable part of the <body> section to the output .html file.
+# (Parameter: $1 -> Emerson unit No.)
 append_body_stable_1 () {
 	echo -e "\t\t<!-- LAST STABLE PART OF BODY SECTION -->\n\t\t<br>\n\t\t<h4><i>A project by ~gzachos</i></h4>\n\t\t<h4>&copy; Systems Support Group 2015. All rights reserved.</h4>\n\t\t<h4>Computer Science and Engineering Department - University of Ioannina</h4>\n\t</body>\n</html>" >> ${WEBSITEPATH}/emerson_${1}/measurement_report_${1}.html
 }
 
 
+# Appends the variable part part of the <table> section to the output .html file.
+# (Parameter: $1 -> Emerson unit No.)
 append_variable_section () {
-
         ARRAY_LEN=${#DATES_TIMES_U_ARRAY[@]}
         STRING="\n\t\t\t<!-- VARIABLE PART OF TABLE SECTION -->\n"
         INDEX=0
@@ -75,8 +85,9 @@ append_variable_section () {
 #          TEMPERATURE         #
 ################################
 
-init_temp_unit_time () {
 
+# Initializes the values of DATES_TIMES_U.
+init_temp_unit_time () {
 	DATES_TIMES_U=$(grep -i time ${WEBSITEPATH}/emerson_${1}/data/temp/temp_unit.txt | tr -d "</time>" | tr -d "\r")
 	INDEX=0
 	for x in ${DATES_TIMES_U}
@@ -87,8 +98,8 @@ init_temp_unit_time () {
 }
 
 
+# Initializes the values of DATES_TIMES_S.
 init_temp_sys_time () {
-
 	DATES_TIMES_S=$(grep -i time ${WEBSITEPATH}/emerson_${1}/data/temp/temp_sys.txt | tr -d "</time>" | tr -d "\r")
 	INDEX=0
 	for x in ${DATES_TIMES_S}
@@ -99,8 +110,8 @@ init_temp_sys_time () {
 }
 
 
+# Initializes the values of VALUES_U.
 init_temp_unit_value () {
-
         VALUES_U=$(grep -i value ${WEBSITEPATH}/emerson_${1}/data/temp/temp_unit.txt | tr -d "</value>" | tr -d "\r")
         INDEX=0
         for x in ${VALUES_U}
@@ -112,8 +123,8 @@ init_temp_unit_value () {
 }
 
 
+# Initializes the values of VALUES_S.
 init_temp_sys_value () {
-
         VALUES_S=$(grep -i value ${WEBSITEPATH}/emerson_${1}/data/temp/temp_sys.txt | tr -d "</value>" | tr -d "\r")
         INDEX=0
         for x in ${VALUES_S}
@@ -129,8 +140,9 @@ init_temp_sys_value () {
 #             HUMIDITY               #
 ######################################
 
-init_hum_unit_time () {
 
+# Initializes the values of DATES_TIMES_HU.
+init_hum_unit_time () {
 	DATES_TIMES_HU=$(grep -i time ${WEBSITEPATH}/emerson_${1}/data/hum/hum_unit.txt | tr -d "</time>" | tr -d "\r")
 	INDEX=0
 	for x in ${DATES_TIMES_HU}
@@ -141,8 +153,8 @@ init_hum_unit_time () {
 }
 
 
+# Initializes the values of DATES_TIMES_HS.
 init_hum_sys_time () {
-
 	DATES_TIMES_HS=$(grep -i time ${WEBSITEPATH}/emerson_${1}/data/hum/hum_sys.txt | tr -d "</time>" | tr -d "\r")
 	INDEX=0
 	for x in ${DATES_TIMES_HS}
@@ -150,12 +162,11 @@ init_hum_sys_time () {
         	DATES_TIMES_HS_ARRAY[${INDEX}]=$(echo ${x} | tr "T" " ")
         	INDEX=$((INDEX+1))
 	done
-
 }
 
 
+# Initializes the values of VALUES_HU.
 init_hum_unit_value () {
-
         VALUES_HU=$(grep -i value ${WEBSITEPATH}/emerson_${1}/data/hum/hum_unit.txt | tr -d "</value>" | tr -d "\r")
         INDEX=0
         for x in ${VALUES_HU}
@@ -167,8 +178,8 @@ init_hum_unit_value () {
 }
 
 
+# Initializes the values of VALUES_HS.
 init_hum_sys_value () {
-
         VALUES_HS=$(grep -i value ${WEBSITEPATH}/emerson_${1}/data/hum/hum_sys.txt | tr -d "</value>" | tr -d "\r")
         INDEX=0
         for x in ${VALUES_HS}
@@ -185,12 +196,13 @@ init_hum_sys_value () {
 ################################
 
 
+# Prints the data held in ${DATES_TIMES_U_ARRAY}, ${VALUES_S_ARRAY}, 
+# ${VALUES_HU_ARRAY} and ${VALUES_HS_ARRAY}.
 print_data () {
-
 	ARRAY_LEN=${#DATES_TIMES_U_ARRAY[@]}
 #       echo ${ARRAY_LEN}
 	INDEX=0
-	while [ ${INDEX} -lt ${ARRAY_LEN} ]
+	while [ "${INDEX}" -lt "${ARRAY_LEN}" ]
 	do
 		echo "INDEX= ${INDEX}"
 		echo "${DATES_TIMES_U_ARRAY[${INDEX}]}"
@@ -209,6 +221,11 @@ print_data () {
 ################################
 #       FUNCTION CALLING       #
 ################################
+
+
+# Functions: init_temp_unit, init_temp_sys, init_hum_unit and init_hum_sys
+# call the functions that initialize data to BASH arrays.
+
 
 init_temp_unit () {
 	init_temp_unit_time ${1}
@@ -234,6 +251,8 @@ init_hum_sys () {
 }
 
 
+# Calls the functions that append data to the output .html file.
+# (Parameter: $1 -> Emerson unit No.)
 create_measurement_report () {
 	append_head ${1}
 	append_body_stable_0 ${1}
@@ -244,6 +263,8 @@ create_measurement_report () {
 }
 
 
+# Calls all the functions that create the measurement report file for an Emerson unit.
+# (Parameter: $1 -> Emerson unit No.)
 main () {
 	WEBSITEPATH="/var/www/html"
 	init_temp_unit ${1}
@@ -255,4 +276,6 @@ main () {
 }
 
 
+# Calling main.
+# (Parameter: $1 -> Emerson unit No.)
 main ${1}

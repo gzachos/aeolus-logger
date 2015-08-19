@@ -16,24 +16,41 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
 # Contact Information:
-# Name: George Zachos
-# Email: gzzachos_at_gmail.com
+# Name: George Z. Zachos
+# Email: gzzachos <at> gmail.com
 
 
-# Downloads and saves each photo inside photos/ directory
+# Downloads and saves each website photo inside photos/ directory.
+# If the exit code of all three 'wget' commands differs from '0' (zero),
+# they are executed again, until photos are downloaded successfully,
+# or 50 attemps to download them have taken place. 
 retrieve_photos () {
+	if [ "${ATTEMPTS}" -eq "50" ]
+	then
+		return
+	fi
 	wget https://raw.githubusercontent.com/support-uoi/emerson-logger/master/full_html_output_website/photos/cse-uoi.ico -O ${WEBSITEPATH}/photos/cse-uoi.ico
+	E1=$?
 	wget https://raw.githubusercontent.com/support-uoi/emerson-logger/master/full_html_output_website/photos/cse_banner_logo.jpg -O ${WEBSITEPATH}/photos/cse_banner_logo.jpg
+	E2=$?
 	wget https://raw.githubusercontent.com/support-uoi/emerson-logger/master/full_html_output_website/photos/uoi-cse.png -O ${WEBSITEPATH}/photos/uoi-cse.png
+	E3=$?
+	EC=$((E1 + E2 + E3))
+	if [ "${EC}" -ne "0" ]
+	then
+		ATTEMPTS=$((ATTEMPTS + 1))
+		retrieve_photos
+	fi
 }
 
 
-# Retrieves the photos used in logger's website
+# Calls the function that retrieves the photos used in logger's website.
 main () {
 	WEBSITEPATH="/var/www/html"
+	ATTEMPTS=0
 	retrieve_photos
 }
 
 
-# Calling main
+# Calling main.
 main

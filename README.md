@@ -1,14 +1,14 @@
 emerson-logger
 =============
-This repository contains the code developed during the "__Emerson Logger__" project.
+This repository contains the code developed during the "__Aeolus Logger__" project.
 
 About
 -----
-"__Emerson Logger__" project is about a server that monitors the environmental conditions of the
+"__Aeolus Logger__" project is about the server that monitors the environmental conditions of the
 _cluster room_ inside the building of [Computer Science and Engineering Department](http://cs.uoi.gr) -
 [University of Ioannina](http://uoi.gr). The __temperature__ and __humidity__ values are supplied by the two _Emerson
-cooling units_ inside the cluster room. Moreover, the project is about monitoring and the __status__ of the two
-Emerson units and __alarm__ the faculty if any __abnormal__ conditions are observed.
+cooling units_ inside the cluster room. Moreover, the server monitors and the __status__ of the two
+Emerson units and __alarms__ the faculty if any __abnormal__ conditions are observed.
 
 Screenshots
 -----------
@@ -51,7 +51,7 @@ Website Tree
 
 Demo
 ----
-[Demo Website](http://cs.uoi.gr/~gzachos/projects/emerson/) (hosted in cs.uoi.gr)<br>[Static - Obsolete data]
+[Demo Website](http://cse.uoi.gr/~gzachos/projects/emerson/) (hosted in cse.uoi.gr)<br>[Static - Obsolete data]
 
 Licence
 -------
@@ -59,4 +59,4 @@ Licence
 
 Assignee
 --------
-[George Z. Zachos](http://cs.uoi.gr/~gzachos)
+[George Z. Zachos](http://cse.uoi.gr/~gzachos)

@@ -16,19 +16,19 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
 # Contact Information:
-# Name: George Zachos
-# Email: gzzachos_at_gmail.com
+# Name: George Z. Zachos
+# Email: gzzachos <at> gmail.com
 
 
+# Appends the <head> section to the output .html file
 append_head () {
-
-        echo -e "<!DOCTYPE html>\n<html>\n\t<!-- HEAD SECTION (includes the two lines above) -->\n\t<head>\n\t\t<title>Emerson Logger</title>\n\t\t<meta charset=\"utf-8\">\n\t\t<link rel=\"icon\" href=\"../../../photos/cse-uoi.ico\" type=\"image/x-icon\"/>\n\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"../../../css/emerson_logger.css\">\n\t</head>\n" > ${WEBSITEPATH}/emerson_${1}/rrdb/graph_reports/${2}_${6}_graph_report_${1}.html
+        echo -e "<!DOCTYPE html>\n<html>\n\t<!-- HEAD SECTION (includes the two lines above) -->\n\t<head>\n\t\t<title>Aeolus Logger</title>\n\t\t<meta charset=\"utf-8\">\n\t\t<link rel=\"icon\" href=\"../../../photos/cse-uoi.ico\" type=\"image/x-icon\"/>\n\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"../../../css/emerson_logger.css\">\n\t</head>\n" > ${WEBSITEPATH}/emerson_${1}/rrdb/graph_reports/${2}_${6}_graph_report_${1}.html
 }
 
 
+# Appends the <body> section to the output .html file
 append_body () {
-
-	if [ ${1} -eq 3 ]
+	if [ "${1}" -eq "3" ]
 	then
 		OTHER_EMERSON=4
 	else
@@ -38,12 +38,14 @@ append_body () {
 }
 
 
+# Appends the <head> and <body> sections of a page to the corresponding file.
 create_page () {
 	append_head ${1} ${2} ${3} ${4} ${5} ${6}
 	append_body ${1} ${2} ${3} ${4} ${5} ${6}
 }
 
 
+# Creates the pages for graph reports of each Emerson unit.
 create_graph_report_pages () {
 	create_page ${1} curr temp Current Temperature temperature
 	create_page ${1} curr hum Current Humidity humidity
@@ -54,6 +56,7 @@ create_graph_report_pages () {
 }
 
 
+# Calls the function that creates graph report pages for an Emerson unit.
 main () {
 	WEBSITEPATH="/var/www/html"
 	create_graph_report_pages 3
@@ -61,4 +64,5 @@ main () {
 }
 
 
+# Calling main.
 main

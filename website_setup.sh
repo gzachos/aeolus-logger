@@ -16,8 +16,8 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
 # Contact Information:
-# Name: George Zachos
-# Email: gzzachos_at_gmail.com
+# Name: George Z. Zachos
+# Email: gzzachos <at> gmail.com
 
 
 # Creates the website (directory) structure, CSS file, main page, Round Robin DBs,
@@ -43,12 +43,18 @@ create_website () {
 }
 
 
-# Calls all functions used to setup the website
+# Checks is ${WEBSITEPATH} holds a valid directory and if it does, calls the function used to setup the website.
+# On the opposite case, feedback is given to user and script execution terminates with an exit code of '1'.
 main () {
 	WEBSITEPATH="/var/www/html"
-        create_website
+	if [ ! -d "${WEBSITEPATH}" ]
+	then
+		echo -e "\"${WEBSITEPATH}\": Invalid directory!\n\nScript will now exit!\n"
+		exit 1
+	fi
+	create_website
 }
 
 
-# Calling main
+# Calling main.
 main
