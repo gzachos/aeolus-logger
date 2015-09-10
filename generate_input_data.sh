@@ -38,19 +38,30 @@ retrieve_data () {
 	MAIN_CONTENT=$(cat ${WEBSITEPATH}/emerson_${2}/data/curr_status.txt)
 	if [ -z "${MAIN_CONTENT}" ]
 	then
-		ATTEMPTS=$((ATTEMPTS + 1))
+		ATTEMPTS=$((ATTEMPTS+1))
 		retrieve_data ${1} ${2}
 	fi
 }
 
 
 # Calls the function that retrieves the required data for an Emerson units.
+# If retrieval fails, the script exits with an exit code of 1.
 main () {
 	WEBSITEPATH="/var/www/html"
-	ATTEMPTS=0
-	retrieve_data 1 4
-	ATTEMPTS=0
-	retrieve_data 2 3
+	ping -c 3 192.168.254.1 >> /dev/null 2>&1
+	X1="$?"
+	ping -c 3 192.168.254.2 >> /dev/null 2>&1
+	X2="$?"
+	if [ "$((X1+X2))" -eq "0" ]
+	then
+		ATTEMPTS=0
+		retrieve_data 1 4
+		ATTEMPTS=0
+		retrieve_data 2 3
+	else
+		echo -e "\nCannot connect to host with IP: 192.168.254.{1,2}!\n"
+		exit 1
+	fi
 }
 
 

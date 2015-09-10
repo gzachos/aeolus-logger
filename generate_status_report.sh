@@ -101,10 +101,19 @@ init_values () {
 		# ${INDEX} is incremented by one '1'
                 INDEX=$((INDEX+1))
         done
-	# Stores the value of "Return Air Temperature" into "curr_temperature_${1}.rrd"
-	rrdtool update ${WEBSITEPATH}/emerson_${1}/rrdb/curr_temperature_${1}.rrd ${DATESTAMP}:${VALUES_ARRAY[1]}
-	# Stores the value of "Return Air Humidity" into "curr_humidity_${1}.rrd"
-	rrdtool update ${WEBSITEPATH}/emerson_${1}/rrdb/curr_humidity_${1}.rrd ${DATESTAMP}:${VALUES_ARRAY[2]}
+	if [ -n "${VALUES_ARRAY[1]}" ] 
+	then
+		# Stores the value of "Return Air Temperature" into "curr_temperature_${1}.rrd"
+		rrdtool update ${WEBSITEPATH}/emerson_${1}/rrdb/curr_temperature_${1}.rrd ${DATESTAMP}:${VALUES_ARRAY[1]}
+		# Stores the value of "Return Air Humidity" into "curr_humidity_${1}.rrd"
+		rrdtool update ${WEBSITEPATH}/emerson_${1}/rrdb/curr_humidity_${1}.rrd ${DATESTAMP}:${VALUES_ARRAY[2]}
+		FEED_VALUE=$( printf "%.0f" ${VALUES_ARRAY[1]} )
+		MINUTES=$(date "+%M")
+		if [ "${FEED_VALUE}" -gt "27" ] || [ "${MINUTES}" == "00" ]
+		then
+			${WEBSITEPATH}/scripts/generate_rss_feed.sh ${1} ${VALUES_ARRAY[1]} unit
+		fi
+	fi
 }
 
 

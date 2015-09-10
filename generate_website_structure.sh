@@ -21,7 +21,7 @@
 
 
 # Creates the directory structure of an Emerson unit.
-# (Parameter: Emerson unit No.)
+# (Parameter: $1 -> Emerson unit No.)
 create_emerson_dir_structure () {
 	mkdir -p emerson_${1}/data/temp 
 	mkdir -p emerson_${1}/data/hum
@@ -45,7 +45,7 @@ create_emerson_dir_structure () {
 # creates the directory structure for each Emerson unit.
 create_website_structure () {
 	cd ${WEBSITEPATH}
-        mkdir css photos emerson_3 emerson_4 scripts setup_scripts
+        mkdir css photos emerson_3 emerson_4 scripts setup_scripts feed
 	create_emerson_dir_structure 3
 	create_emerson_dir_structure 4
 }

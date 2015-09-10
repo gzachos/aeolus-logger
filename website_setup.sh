@@ -30,16 +30,22 @@ create_website () {
 	./generate_rrdatabases.sh >> /dev/null 2>&1
 	./generate_graph_report_main_page.sh >> /dev/null 2>&1
 	./generate_graph_report_pages.sh >> /dev/null 2>&1
-	cp -rf ./generate_status_report.sh ${WEBSITEPATH}/scripts
-	cp -rf ./generate_rrd_graphs.sh ${WEBSITEPATH}/scripts
-	cp -rf ./generate_measurement_report.sh ${WEBSITEPATH}/scripts
-	cp -rf ./generate_input_data.sh ${WEBSITEPATH}/scripts
-	cp -rf ./update_data.sh ${WEBSITEPATH}/scripts
-	cp -rf ./generate_css_file.sh ${WEBSITEPATH}/setup_scripts
-	cp -rf ./generate_main_page.sh ${WEBSITEPATH}/setup_scripts
-	cp -rf ./generate_rrdatabases.sh ${WEBSITEPATH}/setup_scripts
-	cp -rf ./generate_website_photos.sh ${WEBSITEPATH}/setup_scripts
-	cp -rf ./generate_website_structure.sh ${WEBSITEPATH}/setup_scripts
+	./generate_rrd_graphs.sh ${WEBSITEPATH}/scripts >> /dev/null 2>&1
+	./ntp_update.sh >> /dev/null 2>&1
+	cp -f ./generate_input_data.sh ${WEBSITEPATH}/scripts
+	cp -f ./generate_measurement_report.sh ${WEBSITEPATH}/scripts
+	cp -f ./generate_rrd_graphs.sh ${WEBSITEPATH}/scripts
+	cp -f ./generate_rss_feed.sh ${WEBSITEPATH}/scripts
+	cp -f ./generate_status_report.sh ${WEBSITEPATH}/scripts
+	cp -f ./ntp_update.sh ${WEBSITEPATH}/scripts
+	cp -f ./update_data.sh ${WEBSITEPATH}/scripts
+	cp -f ./generate_css_file.sh ${WEBSITEPATH}/setup_scripts
+	cp -f ./generate_graph_report_main_page.sh ${WEBSITEPATH}/setup_scripts
+	cp -f ./generate_graph_report_pages.sh ${WEBSITEPATH}/setup_scripts
+	cp -f ./generate_main_page.sh ${WEBSITEPATH}/setup_scripts
+	cp -f ./generate_rrdatabases.sh ${WEBSITEPATH}/setup_scripts
+	cp -f ./generate_website_photos.sh ${WEBSITEPATH}/setup_scripts
+	cp -f ./generate_website_structure.sh ${WEBSITEPATH}/setup_scripts
 }
 
 
