@@ -4,11 +4,8 @@ This repository contains the code developed during the "__Aeolus Logger__" proje
 
 About
 -----
-"__Aeolus Logger__" project is about the server that monitors the environmental conditions of the
-_cluster room_ inside the building of [Computer Science and Engineering Department](http://cs.uoi.gr) -
-[University of Ioannina](http://uoi.gr). The __temperature__ and __humidity__ values are supplied by the two _Emerson
-cooling units_ inside the cluster room. Moreover, the server monitors and the __status__ of the two
-Emerson units and __alarms__ the faculty if any __abnormal__ conditions are observed.
+The "__Aeolus Logger__" project is about the implementation of a __logging system__ and it's integration with _Emerson_ cooling units, so that it can be used to monitor the environmental conditions of the __data center__, inside the building of the [Computer Science and Engineering Department](http://cse.uoi.gr), [University of Ioannina](http://uoi.gr). The __Aeolus__ server monitors the __status__ of the _Emerson_ units and __alarms__ the faculty if any __abnormal__ conditions are observed.
+
 
 Screenshots
 -----------
@@ -40,18 +37,20 @@ Screenshots
 <br>_Sample graph (1 Month Humidity Log - Emerson #4)_<br>
 ![Sample Graph](./images/demo_hum_4week.png)
 
-Website Tree
-------------
 
-<br>_Emerson Website Tree_<br>
-![Emerson Webpage Tree](./images/emerson_website_tree.png)
+W3C valid website
+-----------------
+The whole website is HTML5 and CSS3 valid, while the RSS feed has been validated too by [W3C](http://www.w3.org/).<br>
 
-<br>_Emerson Website Tree - RRDB directory_<br>
-![Emerson Webpage Tree](./images/emerson_website_tree_rrdb_dir.png)
+__Validators Used__:
+ * [for HTML5](https://validator.w3.org/)
+ * [for CSS3](https://jigsaw.w3.org/css-validator/)
+ * [for RSS](https://validator.w3.org/feed/)
 
-Demo
-----
-[Demo Website](http://cse.uoi.gr/~gzachos/projects/emerson/) (hosted in cse.uoi.gr)<br>[Static - Obsolete data]
+<br>
+<img src="./images/badge-w3c-valid-html5.png" width="150">
+<img src="./images/badge-w3c-valid-css3.png" width="150">
+<img src="./images/badge-w3c-valid-rss2.png" width="150">
 
 Licence
 -------
