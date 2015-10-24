@@ -121,6 +121,8 @@ init_temp_unit_value () {
                 INDEX=$((INDEX+1))
         done
 	FEED_VALUE=$( printf "%.0f" ${VALUES_U_ARRAY[2]} )
+	# if unit temperature is equal to -30 degrees Celsius, there is a problem with the close-control air conditioning system.
+	# Maybe an email alert should be sent.
 	if [ "${FEED_VALUE}" == "-30" ]
 	then
 		${WEBSITEPATH}/scripts/generate_rss_feed.sh ${1} ${VALUES_U_ARRAY[2]} unit
@@ -138,11 +140,12 @@ init_temp_sys_value () {
                 VALUES_S_ARRAY[${INDEX}]=${x}
                 INDEX=$((INDEX+1))
         done
-	FEED_VALUE=$( printf "%.0f" ${VALUES_S_ARRAY[2]} )
-	if [ "${FEED_VALUE}" -gt "27" ]
-	then
-		${WEBSITEPATH}/scripts/generate_rss_feed.sh ${1} ${VALUES_S_ARRAY[2]} sys
-	fi
+	# System temperature is checked during the execution of generate_status_report.sh
+#	FEED_VALUE=$( printf "%.0f" ${VALUES_S_ARRAY[2]} )
+#	if [ "${FEED_VALUE}" -gt "26" ]
+#	then
+#		${WEBSITEPATH}/scripts/generate_rss_feed.sh ${1} ${VALUES_S_ARRAY[2]} sys
+#	fi
 }
 
 
