@@ -121,9 +121,12 @@ init_temp_unit_value () {
                 INDEX=$((INDEX+1))
         done
 	FEED_VALUE=$( printf "%.0f" ${VALUES_U_ARRAY[2]} )
-	# if unit temperature is equal to -30 degrees Celsius, there is a problem with the close-control air conditioning system.
+	# if unit temperature is equal to -30 degrees Celsius,
+	# there is a problem with the close-control air conditioning system,
+	# so the RSS feed is updated every hour.
 	# Maybe an email alert should be sent.
-	if [ "${FEED_VALUE}" == "-30" ]
+	MINUTES=$(date "+%M")
+	if [ "${FEED_VALUE}" == "-30" ] && [ "${MINUTES}" -eq "00" ]
 	then
 		${WEBSITEPATH}/scripts/generate_rss_feed.sh ${1} ${VALUES_U_ARRAY[2]} unit
 	fi
@@ -209,7 +212,7 @@ init_hum_sys_value () {
 ################################
 
 
-# Prints the data held in ${DATES_TIMES_U_ARRAY}, ${VALUES_S_ARRAY}, 
+# Prints the data held in ${DATES_TIMES_U_ARRAY}, ${VALUES_S_ARRAY},
 # ${VALUES_HU_ARRAY} and ${VALUES_HS_ARRAY}.
 print_data () {
 	ARRAY_LEN=${#DATES_TIMES_U_ARRAY[@]}

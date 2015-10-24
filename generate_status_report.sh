@@ -101,7 +101,7 @@ init_values () {
 		# ${INDEX} is incremented by one '1'
                 INDEX=$((INDEX+1))
         done
-	if [ -n "${VALUES_ARRAY[1]}" ] 
+	if [ -n "${VALUES_ARRAY[1]}" ]
 	then
 		# Stores the value of "Return Air Temperature" into "curr_temperature_${1}.rrd"
 		rrdtool update ${WEBSITEPATH}/emerson_${1}/rrdb/curr_temperature_${1}.rrd ${DATESTAMP}:${VALUES_ARRAY[1]}
