@@ -23,5 +23,5 @@
 # To be added seperately to cron jobs (daily execution).
 # e.g. 7 5 * * * /var/www/html/scripts/ntp_update.sh
 
-# Updates date/time using Gaia as an ntp server.
-ntpdate -u gaia.cs.uoi.gr
+# Updates date/time using 0.gr.pool.ntp.org as an ntp server.
+ntpdate -u 0.gr.pool.ntp.org
