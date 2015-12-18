@@ -23,29 +23,50 @@
 # Creates the website (directory) structure, CSS file, main page, Round Robin DBs,
 # graph report HTML pages and downloads the photos used in logger's website.
 create_website () {
-	./generate_website_structure.sh >> /dev/null 2>&1
-	./generate_website_photos.sh >> /dev/null 2>&1
-	./generate_css_file.sh >> /dev/null 2>&1
-	./generate_main_page.sh >> /dev/null 2>&1
-	./generate_rrdatabases.sh >> /dev/null 2>&1
-	./generate_graph_report_main_page.sh >> /dev/null 2>&1
-	./generate_graph_report_pages.sh >> /dev/null 2>&1
-	./generate_rrd_graphs.sh ${WEBSITEPATH}/scripts >> /dev/null 2>&1
-	./ntp_update.sh >> /dev/null 2>&1
+	./generate_website_structure.sh
+	((EC += $?))
+	./generate_website_photos.sh
+	((EC += $?))
+	./generate_css_file.sh
+	((EC += $?))
+	./generate_main_page.sh
+	((EC += $?))
+	./generate_rrdatabases.sh
+	((EC += $?))
+	./generate_graph_report_main_page.sh
+	((EC += $?))
+	./generate_graph_report_pages.sh
+	((EC += $?))
+#	./ntp_update.sh
+#	((EC += $?))
 	cp -f ./generate_input_data.sh ${WEBSITEPATH}/scripts
+	((EC += $?))
 	cp -f ./generate_measurement_report.sh ${WEBSITEPATH}/scripts
+	((EC += $?))
 	cp -f ./generate_rrd_graphs.sh ${WEBSITEPATH}/scripts
+	((EC += $?))
 	cp -f ./generate_rss_feed.sh ${WEBSITEPATH}/scripts
+	((EC += $?))
 	cp -f ./generate_status_report.sh ${WEBSITEPATH}/scripts
+	((EC += $?))
 	cp -f ./ntp_update.sh ${WEBSITEPATH}/scripts
+	((EC += $?))
 	cp -f ./update_data.sh ${WEBSITEPATH}/scripts
+	((EC += $?))
 	cp -f ./generate_css_file.sh ${WEBSITEPATH}/setup_scripts
+	((EC += $?))
 	cp -f ./generate_graph_report_main_page.sh ${WEBSITEPATH}/setup_scripts
+	((EC += $?))
 	cp -f ./generate_graph_report_pages.sh ${WEBSITEPATH}/setup_scripts
+	((EC += $?))
 	cp -f ./generate_main_page.sh ${WEBSITEPATH}/setup_scripts
+	((EC += $?))
 	cp -f ./generate_rrdatabases.sh ${WEBSITEPATH}/setup_scripts
+	((EC += $?))
 	cp -f ./generate_website_photos.sh ${WEBSITEPATH}/setup_scripts
+	((EC += $?))
 	cp -f ./generate_website_structure.sh ${WEBSITEPATH}/setup_scripts
+	((EC += $?))
 }
 
 
@@ -53,12 +74,24 @@ create_website () {
 # On the opposite case, feedback is given to user and script execution terminates with an exit code of '1'.
 main () {
 	WEBSITEPATH="/var/www/html"
+        GLB_LOGFILE="/var/log/aeolus/aeolus.log"
+        ERR_LOGFILE="/var/log/aeolus/error.log"
+        STD_LOGFILE="/var/log/aeolus/stdout.log"
 	if [ ! -d "${WEBSITEPATH}" ]
 	then
-		echo -e "\"${WEBSITEPATH}\": Invalid directory!\n\nScript will now exit!\n"
+		echo "[ $(date -R) ] \"${WEBSITEPATH}\": Invalid directory! \"website_setup.sh\" will now exit!" >> ${GLB_LOGFILE}
 		exit 1
 	fi
-	create_website
+	EC=0
+	mkdir /var/log/aeolus
+	((EC += $?))
+	create_website 2>> ${ERR_LOGFILE} 1>> ${STD_LOGFILE}
+	if [ "${EC}" -ne "0" ]
+	then
+		echo -e "\nWebsite setup has finished!\nScript exited with errors!\nCheck:\t1) ${GLB_LOGFILE} \n\t2) ${ERR_LOGFILE} and\n\t3) ${STD_LOGFILE} \nfor more information!\n\n"
+	else
+		echo -e "\nWebsite setup has finished!\nCheck:\t${GLB_LOGFILE} \nfor more information!\n\n"
+	fi
 }
 
 
