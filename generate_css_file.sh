@@ -38,14 +38,14 @@ main () {
 	if [ "$?" -eq "0" ]
 	then
 		cp -f ${TMP_FILE} ${DST_FILE}
-		if [ -e ${DST_FILE} ]
+		if [ "$?" -eq "0" ] && [ -e "${DST_FILE}" ] && [ -s "${DST_FILE}" ]
 		then
-			echo "[ $(date -R) ] CSS file successfully created" >> ${GLB_LOGFILE}
+			echo "[ $(date -R) ] CSS file was successfully created" >> ${GLB_LOGFILE}
 		else
-			echo "[ $(date -R) ] CSS file was NOT created" >> ${GLB_LOGFILE}
+			echo "[ $(date -R) ] CSS file was NOT created [FAIL]" >> ${GLB_LOGFILE}
 		fi
-		rm ${TMP_FILE}
 	fi
+	rm ${TMP_FILE}
 }
 
 

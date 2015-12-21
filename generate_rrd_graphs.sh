@@ -26,6 +26,7 @@
 #		$3 -> Emerson unit No.,
 #		$4 -> {temp, hum})
 create_temp_graph () {
+	EC=0
 	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_1hour.png \
 		--start -1h \
 		--end ${GRAPHEND} \
@@ -41,7 +42,7 @@ create_temp_graph () {
                 HRULE:22#BDBDB3 \
                 HRULE:21#BDBDB3 \
                 AREA:${4}#FF0000:"${1} ${2}"
-
+	((EC += $?))
 
 		
 	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_12hour.png \
@@ -59,6 +60,7 @@ create_temp_graph () {
                 HRULE:22#BDBDB3 \
                 HRULE:21#BDBDB3 \
                 AREA:${4}#FF0000:"${1} ${2}"
+	((EC += $?))
 
 
 	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_1day.png \
@@ -76,6 +78,7 @@ create_temp_graph () {
                 HRULE:22#BDBDB3 \
                 HRULE:21#BDBDB3 \
                 AREA:${4}#FF0000:"${1} ${2}"
+	((EC += $?))
 
 
 	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_1week.png \
@@ -93,6 +96,7 @@ create_temp_graph () {
                 HRULE:22#BDBDB3 \
                 HRULE:21#BDBDB3 \
                 AREA:${4}#FF0000:"${1} ${2}"
+	((EC += $?))
 
 
 	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_4week.png \
@@ -110,6 +114,7 @@ create_temp_graph () {
                 HRULE:22#BDBDB3 \
                 HRULE:21#BDBDB3 \
                 AREA:${4}#FF0000:"${1} ${2}"
+	((EC += $?))
 
 
 	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_8week.png \
@@ -127,6 +132,7 @@ create_temp_graph () {
                 HRULE:22#BDBDB3 \
                 HRULE:21#BDBDB3 \
                 AREA:${4}#FF0000:"${1} ${2}"
+	((EC += $?))
 
 
 	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_24week.png \
@@ -144,6 +150,7 @@ create_temp_graph () {
                 HRULE:22#BDBDB3 \
                 HRULE:21#BDBDB3 \
                 AREA:${4}#FF0000:"${1} ${2}"
+	((EC += $?))
 
 
 	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_1year.png \
@@ -161,6 +168,15 @@ create_temp_graph () {
                 HRULE:22#BDBDB3 \
                 HRULE:21#BDBDB3 \
                 AREA:${4}#FF0000:"${1} ${2}"
+	((EC += $?))
+	
+	if [ "${EC}" -eq "0" ]
+	then
+		echo "[ $(date -R) ] Temperature (${1}) graphs of Emerson unit #${3} were successfully created"  >> ${GLB_LOGFILE}
+	else
+		echo "[ $(date -R) ] Temperature (${1}) graph(s) of Emerson unit #${3} were NOT successfully created [FAIL]"  >> ${GLB_LOGFILE}
+	fi
+	((GEC += EC))
 }
 
 
@@ -170,6 +186,7 @@ create_temp_graph () {
 #		$3 -> Emerson unit No.,
 #		$4 -> {temp, hum})
 create_hum_graph () {
+	EC=0
 	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_1hour.png \
 		--start -1h \
 		--end ${GRAPHEND} \
@@ -195,7 +212,7 @@ create_hum_graph () {
                 HRULE:35#BDBDB3 \
                 HRULE:30#BDBDB3 \
                 AREA:${4}#FF0000:"${1} ${2}"
-
+	((EC += $?))
 
 		
 	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_12hour.png \
@@ -223,6 +240,7 @@ create_hum_graph () {
                 HRULE:35#BDBDB3 \
                 HRULE:30#BDBDB3 \
                 AREA:${4}#FF0000:"${1} ${2}"
+	((EC += $?))
 
 
 	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_1day.png \
@@ -250,6 +268,7 @@ create_hum_graph () {
                 HRULE:35#BDBDB3 \
                 HRULE:30#BDBDB3 \
                 AREA:${4}#FF0000:"${1} ${2}"
+	((EC += $?))
 
 
 	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_1week.png \
@@ -277,6 +296,7 @@ create_hum_graph () {
                 HRULE:35#BDBDB3 \
                 HRULE:30#BDBDB3 \
                 AREA:${4}#FF0000:"${1} ${2}"
+	((EC += $?))
 
 
 	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_4week.png \
@@ -304,6 +324,7 @@ create_hum_graph () {
                 HRULE:35#BDBDB3 \
                 HRULE:30#BDBDB3 \
                 AREA:${4}#FF0000:"${1} ${2}"
+	((EC += $?))
 
 
 	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_8week.png \
@@ -331,6 +352,7 @@ create_hum_graph () {
                 HRULE:35#BDBDB3 \
                 HRULE:30#BDBDB3 \
                 AREA:${4}#FF0000:"${1} ${2}"
+	((EC += $?))
 
 
 	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_24week.png \
@@ -358,6 +380,7 @@ create_hum_graph () {
                 HRULE:35#BDBDB3 \
                 HRULE:30#BDBDB3 \
                 AREA:${4}#FF0000:"${1} ${2}"
+	((EC += $?))
 
 
 	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_1year.png \
@@ -385,11 +408,21 @@ create_hum_graph () {
                 HRULE:35#BDBDB3 \
                 HRULE:30#BDBDB3 \
                 AREA:${4}#FF0000:"${1} ${2}"
+	((EC += $?))
+	
+	if [ "${EC}" -eq "0" ]
+	then
+		echo "[ $(date -R) ] Humidity (${1}) graphs of Emerson unit #${3} were successfully created"  >> ${GLB_LOGFILE}
+	else
+		echo "[ $(date -R) ] Humidity (${1}) graph(s) of Emerson unit #${3} were NOT successfully created [FAIL]"  >> ${GLB_LOGFILE}
+	fi
+	((GEC += EC))
 }
 
 
 # Creates the graphs for each Emerson unit.
 # (both temperature and humidity)
+# (Parameter: $1 -> Emerson unit No.)
 create_emerson_graph () {
 	create_temp_graph curr temperature ${1} temp
 	create_hum_graph curr humidity ${1} hum
@@ -403,10 +436,22 @@ create_emerson_graph () {
 # Calls the function that creates the graphs for an Emerson unit.
 main () {
 	WEBSITEPATH="/var/www/html"
+        GLB_LOGFILE="/var/log/aeolus/aeolus.log"
+        ERR_LOGFILE="/var/log/aeolus/error.log"         # not used
+        STD_LOGFILE="/var/log/aeolus/stdout.log"        # not used
 	DATESTAMP=$(date +%s)
 	GRAPHEND=$((DATESTAMP-60))
+	GEC=0
 	create_emerson_graph 3
 	create_emerson_graph 4
+	if [ "${GEC}" -eq "0" ]
+        then
+                echo "[ $(date -R) ] Graphs were successfully created" >> ${GLB_LOGFILE}
+        else
+                echo "[ $(date -R) ] Graphs were NOT successfully created [FAIL]" >> ${GLB_LOGFILE}
+		exit 1
+        fi
+
 }
 
 

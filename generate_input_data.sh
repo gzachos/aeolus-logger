@@ -25,21 +25,43 @@
 # until file is not empty or 50 attempts have been made to download them.
 # (Parameters: $1 -> IP address part, $2 -> Emerson unit No.) 
 retrieve_data () {
-	if [ "${ATTEMPTS}" -eq "50" ]
-	then	
-		return
+	ATTEMPTS=0
+	while [ "${ATTEMPTS}" -le "4" ]
+	do
+		EC=0
+		wget http://192.168.254.${1}/index.html --timeout=2 --tries=1 -O ${WEBSITEPATH}/emerson_${2}/data/curr_status.txt >> /dev/null 2>&1
+		((EC += $?))
+		wget http://192.168.254.${1}/tmp/1102.xml --timeout=2 --tries=1 -O ${WEBSITEPATH}/emerson_${2}/data/temp/temp_unit.txt >> /dev/null 2>&1
+		((EC += $?))
+		wget http://192.168.254.${1}/tmp/1103.xml --timeout=2 --tries=1 -O ${WEBSITEPATH}/emerson_${2}/data/hum/hum_unit.txt >> /dev/null 2>&1
+		((EC += $?))
+		wget http://192.168.254.${1}/tmp/1104.xml --timeout=2 --tries=1 -O ${WEBSITEPATH}/emerson_${2}/data/temp/temp_sys.txt >> /dev/null 2>&1
+		((EC += $?))
+		wget http://192.168.254.${1}/tmp/1105.xml --timeout=2 --tries=1 -O ${WEBSITEPATH}/emerson_${2}/data/hum/hum_sys.txt >> /dev/null 2>&1
+		((EC += $?))
+		wget http://192.168.254.${1}/tmp/statusreport.xml --timeout=2 --tries=1 -O ${WEBSITEPATH}/emerson_${2}/data/event_log.txt >> /dev/null 2>&1
+		((EC += $?))
+		MAIN_CONTENT=$(cat ${WEBSITEPATH}/emerson_${2}/data/curr_status.txt)
+		if [ "${EC}" -eq "0" ] || [ -n "${MAIN_CONTENT}" ]
+		then
+			break
+		fi
+		((ATTEMPTS += 1))
+	done
+	
+	if [ "${EC}" -ne "0" ]
+	then
+		echo "[ $(date -R) ] Input data for Emerson unit #${2} were NOT successfully retrieved [FAIL]" >> ${GLB_LOGFILE}
+		return 2
 	fi
-	wget http://192.168.254.${1}/index.html -O ${WEBSITEPATH}/emerson_${2}/data/curr_status.txt
-	wget http://192.168.254.${1}/tmp/1102.xml -O ${WEBSITEPATH}/emerson_${2}/data/temp/temp_unit.txt
-	wget http://192.168.254.${1}/tmp/1103.xml -O ${WEBSITEPATH}/emerson_${2}/data/hum/hum_unit.txt
-	wget http://192.168.254.${1}/tmp/1104.xml -O ${WEBSITEPATH}/emerson_${2}/data/temp/temp_sys.txt
-	wget http://192.168.254.${1}/tmp/1105.xml -O ${WEBSITEPATH}/emerson_${2}/data/hum/hum_sys.txt
-	wget http://192.168.254.${1}/tmp/statusreport.xml -O ${WEBSITEPATH}/emerson_${2}/data/event_log.txt
-	MAIN_CONTENT=$(cat ${WEBSITEPATH}/emerson_${2}/data/curr_status.txt)
+
 	if [ -z "${MAIN_CONTENT}" ]
 	then
-		ATTEMPTS=$((ATTEMPTS+1))
-		retrieve_data ${1} ${2}
+		echo "[ $(date -R) ] Input data for Emerson unit #${2} were successfully retrieved but one or more files are empty [FAIL]" >> ${GLB_LOGFILE}
+		return 3
+	else
+		echo "[ $(date -R) ] Input data for Emerson unit #${2} were successfully retrieved" >> ${GLB_LOGFILE}
+		return 0
 	fi
 }
 
@@ -48,18 +70,20 @@ retrieve_data () {
 # If retrieval fails, the script exits with an exit code of 1.
 main () {
 	WEBSITEPATH="/var/www/html"
+        GLB_LOGFILE="/var/log/aeolus/aeolus.log"
+        ERR_LOGFILE="/var/log/aeolus/error.log"         # not used
+        STD_LOGFILE="/var/log/aeolus/stdout.log"        # not used
+	EC=0
 	ping -c 3 192.168.254.1 >> /dev/null 2>&1
-	X1="$?"
+	((EC += $?))
 	ping -c 3 192.168.254.2 >> /dev/null 2>&1
-	X2="$?"
-	if [ "$((X1+X2))" -eq "0" ]
+	((EC += $?))
+	if [ "${EC}" -eq "0" ]
 	then
-		ATTEMPTS=0
 		retrieve_data 1 4
-		ATTEMPTS=0
 		retrieve_data 2 3
 	else
-		echo -e "\nCannot connect to host with IP: 192.168.254.{1,2}!\n"
+		echo "[ $(date -R) ] Cannot connect to host with IP: 192.168.254.{1,2} and retrieve input data [FAIL]" >> ${GLB_LOGFILE}
 		exit 1
 	fi
 }

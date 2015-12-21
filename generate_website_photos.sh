@@ -25,30 +25,39 @@
 # they are executed again, until photos are downloaded successfully,
 # or 50 attemps to download them have taken place. 
 retrieve_photos () {
-	if [ "${ATTEMPTS}" -eq "50" ]
-	then
-		return
-	fi
-	wget https://raw.githubusercontent.com/support-uoi/emerson-logger/master/full_html_output_website/photos/cse-uoi.ico -O ${WEBSITEPATH}/photos/cse-uoi.ico
-	E1=$?
-	wget https://raw.githubusercontent.com/support-uoi/emerson-logger/master/full_html_output_website/photos/cse_banner_logo.jpg -O ${WEBSITEPATH}/photos/cse_banner_logo.jpg
-	E2=$?
-	wget https://raw.githubusercontent.com/support-uoi/emerson-logger/master/full_html_output_website/photos/uoi-cse.png -O ${WEBSITEPATH}/photos/uoi-cse.png
-	E3=$?
-	EC=$((E1 + E2 + E3))
-	if [ "${EC}" -ne "0" ]
-	then
-		ATTEMPTS=$((ATTEMPTS + 1))
-		retrieve_photos
-	fi
+	while [ "${ATTEMPTS}" -le "20" ]
+	do
+	        EC=0
+		wget https://raw.githubusercontent.com/support-uoi/emerson-logger/master/full_html_output_website/photos/cse-uoi.ico --timeout=5 --trie=5 -O ${WEBSITEPATH}/photos/cse-uoi.ico
+		((EC += $?))
+		wget https://raw.githubusercontent.com/support-uoi/emerson-logger/master/full_html_output_website/photos/cse_banner_logo.jpg --timeout=5 --tries=5 -O ${WEBSITEPATH}/photos/cse_banner_logo.jpg
+		((EC += $?))
+		wget https://raw.githubusercontent.com/support-uoi/emerson-logger/master/full_html_output_website/photos/uoi-cse.png --timeout=5 --tries=5 -O ${WEBSITEPATH}/photos/uoi-cse.png
+		((EC += $?))
+		if [ "${EC}" -eq "0" ]
+		then
+			break
+		fi
+		((ATTEMPTS += 1))
+	done
 }
 
 
 # Calls the function that retrieves the photos used in logger's website.
 main () {
 	WEBSITEPATH="/var/www/html"
+	GLB_LOGFILE="/var/log/aeolus/aeolus.log"
+        ERR_LOGFILE="/var/log/aeolus/error.log"         # not used
+        STD_LOGFILE="/var/log/aeolus/stdout.log"        # not used
+	EC=0
 	ATTEMPTS=0
 	retrieve_photos
+        if [ "${EC}" -eq "0" ]
+        then
+                echo "[ $(date -R) ] Website photos were successfully fetched" >> ${GLB_LOGFILE}
+        else
+                echo "[ $(date -R) ] Website photos were NOT successfully fetched [FAIL]" >> ${GLB_LOGFILE}
+        fi
 }
 
 

@@ -22,18 +22,37 @@
 
 # Updates status and measurement report pages for an Emerson unit.
 updt_data () {
-	${WEBSITEPATH}/scripts/generate_status_report.sh ${1} >> /dev/null 2>&1
-	${WEBSITEPATH}/scripts/generate_measurement_report.sh ${1} >> /dev/null 2>&1
+	${WEBSITEPATH}/scripts/generate_status_report.sh ${1}
+	((EC += $?))
+	${WEBSITEPATH}/scripts/generate_measurement_report.sh ${1}
+	((EC += $?))
 }
 
 
 # Retrieves input data, updates status and measurement report pages and generates graphs. 
 main () {
 	WEBSITEPATH="/var/www/html"
-	${WEBSITEPATH}/scripts/generate_input_data.sh >> /dev/null 2>&1
-	updt_data 3
-	updt_data 4
-	${WEBSITEPATH}/scripts/generate_rrd_graphs.sh >> /dev/null 2>&1	
+        GLB_LOGFILE="/var/log/aeolus/aeolus.log"
+        ERR_LOGFILE="/var/log/aeolus/error.log"         # not used
+        STD_LOGFILE="/var/log/aeolus/stdout.log"        # not used
+	EC=0
+	${WEBSITEPATH}/scripts/generate_input_data.sh 2>> ${ERR_LOGFILE} 1>> ${STD_LOGFILE}
+	((EC += $?))
+	if [ "${EC}" -ne "0" ]
+	then
+		echo "[ $(date -R) ] Data were NOT successfully updated due to input error [FAIL]"  >> ${GLB_LOGFILE}
+		exit 1
+	fi
+	updt_data 3 2>> ${ERR_LOGFILE} 1>> ${STD_LOGFILE}
+	updt_data 4 2>> ${ERR_LOGFILE} 1>> ${STD_LOGFILE}
+	${WEBSITEPATH}/scripts/generate_rrd_graphs.sh 2>> ${ERR_LOGFILE} 1>> ${STD_LOGFILE}
+	((EC += $?))
+	if [ "${EC}" -eq "0" ]
+	then
+		echo "[ $(date -R) ] Data were successfully updated"  >> ${GLB_LOGFILE}
+	else
+		echo "[ $(date -R) ] Data were NOT successfully updated [FAIL]"  >> ${GLB_LOGFILE}
+	fi
 }
 
 

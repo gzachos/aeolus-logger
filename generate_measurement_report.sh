@@ -27,7 +27,7 @@
 # Appends <head> section to the output .html file.
 # (Parameter: $1 -> Emerson unit No.)
 append_head () {
-	echo -e "<!DOCTYPE html>\n<html>\n\t<!-- HEAD SECTION (includes the two lines above) -->\n\t<head>\n\t\t<title>Emerson Measurement Report</title>\n\t\t<meta charset=\"utf-8\">\n\t\t<link rel=\"icon\" href=\"../photos/cse-uoi.ico\" type=\"image/x-icon\"/>\n\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/emerson_logger.css\">\n\t</head>" > ${WEBSITEPATH}/emerson_${1}/measurement_report.html
+	echo -e "<!DOCTYPE html>\n<html>\n\t<!-- HEAD SECTION (includes the two lines above) -->\n\t<head>\n\t\t<title>Emerson Measurement Report</title>\n\t\t<meta charset=\"utf-8\">\n\t\t<link rel=\"icon\" href=\"../photos/cse-uoi.ico\" type=\"image/x-icon\"/>\n\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/emerson_logger.css\">\n\t</head>" > ${TMP_FILE}
 }
 
 
@@ -40,28 +40,28 @@ append_body_stable_0 () {
 	else
 		OTHER_EMERSON=3
 	fi
-	echo -e "\n\t<!-- FIRST STABLE PART OF BODY SECTION -->\n\t<body>\n\t\t<img height=90 alt=\"uoi-cse-png\" src=\"../photos/uoi-cse.png\">\n\t\t<img class=\"banner\" height=90 alt=\"cse_banner_logo.jpg\" src=\"../photos/cse_banner_logo.jpg\">\n\t\t<br><br>\n\t\t<h4><a href=\"../emerson_main_page.html\">Main Page</a> &nbsp;|&nbsp; <a href=\"./status_report.html\">Emerson #${1} Status Report</a> &nbsp;|&nbsp; <a href=\"./measurement_report.html\">Emerson #${1} Measurement Report</a><br> <a href=\"./graph_report.html\">Emerson #${1} Graph Report</a>  &nbsp;|&nbsp; <a href=\"../emerson_${OTHER_EMERSON}/status_report.html\">Emerson #${OTHER_EMERSON}</a></h4><br>\n\t\t<h2><u>Emerson #${1} Measurement Report</u></h2><br>" >> ${WEBSITEPATH}/emerson_${1}/measurement_report.html
+	echo -e "\n\t<!-- FIRST STABLE PART OF BODY SECTION -->\n\t<body>\n\t\t<img height=90 alt=\"uoi-cse-png\" src=\"../photos/uoi-cse.png\">\n\t\t<img class=\"banner\" height=90 alt=\"cse_banner_logo.jpg\" src=\"../photos/cse_banner_logo.jpg\">\n\t\t<br><br>\n\t\t<h4><a href=\"../emerson_main_page.html\">Main Page</a> &nbsp;|&nbsp; <a href=\"./status_report.html\">Emerson #${1} Status Report</a> &nbsp;|&nbsp; <a href=\"./measurement_report.html\">Emerson #${1} Measurement Report</a><br> <a href=\"./graph_report.html\">Emerson #${1} Graph Report</a>  &nbsp;|&nbsp; <a href=\"../emerson_${OTHER_EMERSON}/status_report.html\">Emerson #${OTHER_EMERSON}</a></h4><br>\n\t\t<h2><u>Emerson #${1} Measurement Report</u></h2><br>" >> ${TMP_FILE}
 }
 
 
 # Appends the first stable part of the <table> section to the output .html file.
 # (Parameter: $1 -> Emerson unit No.)
 append_table_stable_0 () {
-	echo -e "\n\t\t<!-- FIRST STABLE PART OF TABLE SECTION -->\n\t\t<!-- MAIN CONTENT -->\n\t\t<table style=\"width:80%\">\n\t\t\t<tr>\n\t\t\t\t<th>Date / Time</th>\n\t\t\t\t<th>Temp Unit</th>\n\t\t\t\t<th>Temp Sys</th>\n\t\t\t\t<th>Hum Unit</th>\n\t\t\t\t<th>Hum Sys</th>\n\t\t\t</tr>" >> ${WEBSITEPATH}/emerson_${1}/measurement_report.html
+	echo -e "\n\t\t<!-- FIRST STABLE PART OF TABLE SECTION -->\n\t\t<!-- MAIN CONTENT -->\n\t\t<table style=\"width:80%\">\n\t\t\t<tr>\n\t\t\t\t<th>Date / Time</th>\n\t\t\t\t<th>Temp Unit</th>\n\t\t\t\t<th>Temp Sys</th>\n\t\t\t\t<th>Hum Unit</th>\n\t\t\t\t<th>Hum Sys</th>\n\t\t\t</tr>" >> ${TMP_FILE}
 }
 
 
 # Appends the second stable part of the <table> section to the output .html file.
 # (Parameter: $1 -> Emerson unit No.)
 append_table_stable_1 () {
-	echo -e "\n\t\t<!-- LAST STABLE PART OF TABLE SECTION -->\n\t\t</table>\n\t\t<!-- END OF MAIN CONTENT -->\n\t\t" >> ${WEBSITEPATH}/emerson_${1}/measurement_report.html
+	echo -e "\n\t\t<!-- LAST STABLE PART OF TABLE SECTION -->\n\t\t</table>\n\t\t<!-- END OF MAIN CONTENT -->\n\t\t" >> ${TMP_FILE}
 }
 
 
 # Appends the second stable part of the <body> section to the output .html file.
 # (Parameter: $1 -> Emerson unit No.)
 append_body_stable_1 () {
-	echo -e "\t\t<!-- LAST STABLE PART OF BODY SECTION -->\n\t\t<br>\n\t\t<h4><i>A project by ~gzachos</i></h4>\n\t\t<h4>&copy; Systems Support Group 2015. All rights reserved.</h4>\n\t\t<h4>Computer Science and Engineering Department - University of Ioannina</h4>\n\t</body>\n</html>" >> ${WEBSITEPATH}/emerson_${1}/measurement_report.html
+	echo -e "\t\t<!-- LAST STABLE PART OF BODY SECTION -->\n\t\t<br>\n\t\t<h4><i>A project by ~gzachos</i></h4>\n\t\t<h4>&copy; Systems Support Group 2015. All rights reserved.</h4>\n\t\t<h4>Computer Science and Engineering Department - University of Ioannina</h4>\n\t</body>\n</html>" >> ${TMP_FILE}
 }
 
 
@@ -77,7 +77,7 @@ append_variable_section () {
                 INDEX=$((INDEX+1))
         done
         STRING="${STRING}\t\t\t<tr>\n\t\t\t\t<td>${DATES_TIMES_U_ARRAY[${INDEX}]}</td>\n\t\t\t\t<td>${VALUES_U_ARRAY[${INDEX}]}</td>\n\t\t\t\t<td>${VALUES_S_ARRAY[${INDEX}]}</td>\n\t\t\t\t<td>${VALUES_HU_ARRAY[${INDEX}]}</td>\n\t\t\t\t<td>${VALUES_HS_ARRAY[${INDEX}]}</td>\n\t\t\t</tr>\n"
-        echo -e "${STRING}" >> ${WEBSITEPATH}/emerson_${1}/measurement_report.html
+        echo -e "${STRING}" >> ${TMP_FILE}
 }
 
 
@@ -208,6 +208,38 @@ init_hum_sys_value () {
 
 
 ################################
+#        CHECKING DATA         #
+################################
+
+
+naive_check_data () {
+	DT_U_LEN=${#DATES_TIMES_U_ARRAY[@]}
+	DT_S_LEN=${#DATES_TIMES_S_ARRAY[@]}
+	DT_HU_LEN=${#DATES_TIMES_HU_ARRAY[@]}
+	DT_HS_LEN=${#DATES_TIMES_HS_ARRAY[@]}
+	VU_LEN=${#VALUES_U_ARRAY[@]}
+	VS_LEN=${#VALUES_S_ARRAY[@]}
+	VHU_LEN=${#VALUES_HU_ARRAY[@]}
+	VHS_LEN=${#VALUES_HS_ARRAY[@]}
+	if [ "${DT_U_LEN}" -ne "${DT_S_LEN}" ] || [ "${DT_S_LEN}" -ne "${DT_HU_LEN}" ] || [ "${DT_HU_LEN}" -ne "${DT_HS_LEN}" ] || [ "${DT_HS_LEN}" -ne "${VU_LEN}" ] || [ "${VU_LEN}" -ne "${VS_LEN}" ] || [ "${VS_LEN}" -ne "${VHU_LEN}" ] || [ "${VHU_LEN}" -ne "${VHS_LEN}" ]
+	then
+		echo "[ $(date -R) ] Arrays created by \"generate_measurement_report.sh\" executed for Emerson unit #${1} are of DIFFERENT size" >> ${GLB_LOGFILE}
+                return 1
+	fi
+	INDEX=0
+        while [ "${INDEX}" -lt "$((DT_U_LEN-1))" ]
+        do
+                if [ -z "${DATES_TIMES_U_ARRAY[${INDEX}]}" ] || [ -z "${VALUES_U_ARRAY[${INDEX}]}" ] ||	[ -z "${VALUES_S_ARRAY[${INDEX}]}" ] ||	[ -z "${VALUES_HU_ARRAY[${INDEX}]}" ] || [ -z "${DATES_TIMES_HS_ARRAY[${INDEX}]}" ]
+                then
+                        echo "[ $(date -R) ] Arrays created by \"generate_measurement_report.sh\" executed for Emerson unit #${1} have EMPTY elements" >> ${GLB_LOGFILE}
+                        return 2
+                fi
+                INDEX=$((INDEX+1))
+        done
+}
+
+
+################################
 #        PRINTING DATA         #
 ################################
 
@@ -271,11 +303,17 @@ init_hum_sys () {
 # (Parameter: $1 -> Emerson unit No.)
 create_measurement_report () {
 	append_head ${1}
+	((EC += $?))
 	append_body_stable_0 ${1}
+	((EC += $?))
 	append_table_stable_0 ${1}
+	((EC += $?))
 	append_variable_section ${1}
+	((EC += $?))
 	append_table_stable_1 ${1}
+	((EC += $?))
 	append_body_stable_1 ${1}
+	((EC += $?))
 }
 
 
@@ -283,12 +321,38 @@ create_measurement_report () {
 # (Parameter: $1 -> Emerson unit No.)
 main () {
 	WEBSITEPATH="/var/www/html"
+	GLB_LOGFILE="/var/log/aeolus/aeolus.log"
+        ERR_LOGFILE="/var/log/aeolus/error.log"         # not used
+        STD_LOGFILE="/var/log/aeolus/stdout.log"        # not used
+        TMP_FILE=$(mktemp /tmp/aeolus.XXXXXX)
+        DST_FILE=${WEBSITEPATH}/emerson_${1}/measurement_report.html
+        EC=0
 	init_temp_unit ${1}
 	init_temp_sys ${1}
 	init_hum_unit ${1}
 	init_hum_sys ${1}
+	naive_check_data
+        if [ "$?" -ne "0" ]
+        then
+                echo "[ $(date -R) ] Measurement report of Emerson unit #${1} was NOT created [FAIL]" >> ${GLB_LOGFILE}
+                rm ${TMP_FILE}
+                exit 1
+        fi
 #       print_data
 	create_measurement_report ${1}
+        if [ "${EC}" -eq "0" ]
+        then
+                cp -f ${TMP_FILE} ${DST_FILE}
+                if [ "$?" -eq "0" ] && [ -e "${DST_FILE}" ] && [ -s "${DST_FILE}" ]
+                then
+                        echo "[ $(date -R) ] Measurement report of Emerson unit #${1} was successfully created" >> ${GLB_LOGFILE}
+                else
+                        echo "[ $(date -R) ] Measurement report of Emerson unit #${1} was NOT successfully created [FAIL]" >> ${GLB_LOGFILE}
+        		rm ${TMP_FILE}
+			exit 2
+                fi
+        fi
+        rm ${TMP_FILE}
 }
 
 

@@ -23,21 +23,36 @@
 # Creates the directory structure of an Emerson unit.
 # (Parameter: $1 -> Emerson unit No.)
 create_emerson_dir_structure () {
-	mkdir -p emerson_${1}/data/temp 
+	mkdir -p emerson_${1}/data/temp
+	((EC += $?))
 	mkdir -p emerson_${1}/data/hum
-	mkdir -p emerson_${1}/rrdb/graph_reports 
-	mkdir -p emerson_${1}/rrdb/graphs/temp/curr 
+	((EC += $?))
+	mkdir -p emerson_${1}/rrdb/graph_reports
+	((EC += $?))
+	mkdir -p emerson_${1}/rrdb/graphs/temp/curr
+	((EC += $?))
 	mkdir -p emerson_${1}/rrdb/graphs/temp/curr_dual
-	mkdir -p emerson_${1}/rrdb/graphs/hum/curr 
+	((EC += $?))
+	mkdir -p emerson_${1}/rrdb/graphs/hum/curr
+	((EC += $?))
 	mkdir -p emerson_${1}/rrdb/graphs/hum/curr_dual
-#	mkdir -p emerson_${1}/rrdb/graphs/temp/unit 
+	((EC += $?))
+#	mkdir -p emerson_${1}/rrdb/graphs/temp/unit
+#	((EC += $?))
 #	mkdir -p emerson_${1}/rrdb/graphs/temp/unit_dual
+#	((EC += $?))
 #	mkdir -p emerson_${1}/rrdb/graphs/temp/sys
+#	((EC += $?))
 #	mkdir -p emerson_${1}/rrdb/graphs/temp/sys_dual
-#	mkdir -p emerson_${1}/rrdb/graphs/hum/unit 
-#	mkdir -p emerson_${1}/rrdb/graphs/hum/unit_dual 
+#	((EC += $?))
+#	mkdir -p emerson_${1}/rrdb/graphs/hum/unit
+#	((EC += $?))
+#	mkdir -p emerson_${1}/rrdb/graphs/hum/unit_dual
+#	((EC += $?))
 #	mkdir -p emerson_${1}/rrdb/graphs/hum/sys
+#	((EC += $?))
 #	mkdir -p emerson_${1}/rrdb/graphs/hum/sys_dual
+#	((EC += $?))
 }
 
 
@@ -46,6 +61,7 @@ create_emerson_dir_structure () {
 create_website_structure () {
 	cd ${WEBSITEPATH}
         mkdir css photos emerson_3 emerson_4 scripts setup_scripts feed
+	((EC += $?))
 	create_emerson_dir_structure 3
 	create_emerson_dir_structure 4
 }
@@ -54,7 +70,17 @@ create_website_structure () {
 # Calls the function that creates the whole website (directory) structure.
 main () {
 	WEBSITEPATH="/var/www/html"
+        GLB_LOGFILE="/var/log/aeolus/aeolus.log"
+        ERR_LOGFILE="/var/log/aeolus/error.log"         # not used
+        STD_LOGFILE="/var/log/aeolus/stdout.log"        # not used
+        EC=0
         create_website_structure
+        if [ "${EC}" -eq "0" ]
+        then
+                echo "[ $(date -R) ] Website directory structure successfully created" >> ${GLB_LOGFILE}
+        else
+                echo "[ $(date -R) ] Website directory structure was NOT successfully created [FAIL]" >> ${GLB_LOGFILE}
+        fi
 }
 
 

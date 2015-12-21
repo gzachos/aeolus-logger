@@ -77,20 +77,22 @@ main () {
         GLB_LOGFILE="/var/log/aeolus/aeolus.log"
         ERR_LOGFILE="/var/log/aeolus/error.log"
         STD_LOGFILE="/var/log/aeolus/stdout.log"
-	if [ ! -d "${WEBSITEPATH}" ]
-	then
-		echo "[ $(date -R) ] \"${WEBSITEPATH}\": Invalid directory! \"website_setup.sh\" will now exit!" >> ${GLB_LOGFILE}
-		exit 1
-	fi
 	EC=0
 	mkdir /var/log/aeolus
 	((EC += $?))
+	if [ ! -d "${WEBSITEPATH}" ]
+	then
+		echo "[ $(date -R) ] \"${WEBSITEPATH}\": Invalid directory! \"website_setup.sh\" will now exit!	 [FAIL]" >> ${GLB_LOGFILE}
+		exit 1
+	fi
 	create_website 2>> ${ERR_LOGFILE} 1>> ${STD_LOGFILE}
 	if [ "${EC}" -ne "0" ]
 	then
 		echo -e "\nWebsite setup has finished!\nScript exited with errors!\nCheck:\t1) ${GLB_LOGFILE} \n\t2) ${ERR_LOGFILE} and\n\t3) ${STD_LOGFILE} \nfor more information!\n\n"
+		echo "[ $(date -R) ] Website setup has finished with errors [FAIL]" >> ${GLB_LOGFILE}
 	else
 		echo -e "\nWebsite setup has finished!\nCheck:\t${GLB_LOGFILE} \nfor more information!\n\n"
+		echo "[ $(date -R) ] Website setup has finished successfully" >> ${GLB_LOGFILE}
 	fi
 }
 
