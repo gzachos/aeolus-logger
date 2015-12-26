@@ -45,7 +45,7 @@ main () {
 	fi
 	updt_data 3 2>> ${ERR_LOGFILE} 1>> ${STD_LOGFILE}
 	updt_data 4 2>> ${ERR_LOGFILE} 1>> ${STD_LOGFILE}
-	${WEBSITEPATH}/scripts/generate_rrd_graphs.sh 2>> ${ERR_LOGFILE} 1>> ${STD_LOGFILE}
+	${WEBSITEPATH}/scripts/generate_rrd_graphs.sh 2>> ${ERR_LOGFILE} 1>> /dev/null
 	((EC += $?))
 	if [ "${EC}" -eq "0" ]
 	then

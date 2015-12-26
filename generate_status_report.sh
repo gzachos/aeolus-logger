@@ -110,7 +110,9 @@ init_values () {
 		FEED_VALUE=$( printf "%.0f" ${VALUES_ARRAY[1]} )
 		HOUR=$(date "+%H")
 		MINUTES=$(date "+%M")
-		LEAP_HOUR=$((HOUR % 2))
+		# "10#" was added so that bash interprets the content of variable $HOUR as a base-10 number,
+		# even when $HOUR holds a number with a leading zero (interpreted as a base-8 number)
+		LEAP_HOUR=$((10#$HOUR % 2))
 		# If temperature exceeds 26 degrees Celsius
 		if [ "${FEED_VALUE}" -gt "26" ]
 		then
