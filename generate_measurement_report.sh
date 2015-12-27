@@ -331,7 +331,7 @@ main () {
 	init_temp_sys ${1}
 	init_hum_unit ${1}
 	init_hum_sys ${1}
-	naive_check_data
+	naive_check_data ${1}
         if [ "$?" -ne "0" ]
         then
                 echo "[ $(date -R) ] Measurement report of Emerson unit #${1} was NOT created [FAIL]" >> ${GLB_LOGFILE}
