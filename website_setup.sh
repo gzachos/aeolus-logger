@@ -70,6 +70,22 @@ create_website () {
 }
 
 
+# Configures logrotate for the /var/log/aeolus directory
+conf_logrotate () {
+	local EC=0
+	echo -e "/var/log/aeolus/*.log\n{\n\trotate 30\n\tdaily\n\tmissingok\n\tnotifempty\n\tcreate\n\tcompress\n}" > /etc/logrotate.d/aeolus
+	((EC += $?))
+	logrotate /etc/logrotate.d/aeolus
+	((EC += $?))
+	if [ "${EC}" -eq "0" ]
+	then
+		echo "[ $(date -R) ] logrotate was successfully configured for /var/log/aeolus/ directory" >> ${GLB_LOGFILE}
+	else
+		echo "[ $(date -R) ] logrotate was NOT successfully configured for /var/log/aeolus/ directory [FAIL]" >> ${GLB_LOGFILE}
+	fi
+}
+
+
 # Checks is ${WEBSITEPATH} holds a valid directory and if it does, calls the function used to setup the website.
 # On the opposite case, feedback is given to user and script execution terminates with an exit code of '1'.
 main () {
@@ -79,11 +95,16 @@ main () {
         STD_LOGFILE="/var/log/aeolus/stdout.log"
 	EC=0
 	mkdir /var/log/aeolus
-	((EC += $?))
+	if [ ! -d "/var/log/aeolus" ]
+	then
+		echo "[ $(date -R) ] \"/var/log/aeolus\": Invalid directory! \"website_setup.sh\" will now exit! [FAIL]" >> ${GLB_LOGFILE}
+		exit 1
+	fi
+	conf_logrotate
 	if [ ! -d "${WEBSITEPATH}" ]
 	then
-		echo "[ $(date -R) ] \"${WEBSITEPATH}\": Invalid directory! \"website_setup.sh\" will now exit!	 [FAIL]" >> ${GLB_LOGFILE}
-		exit 1
+		echo "[ $(date -R) ] \"${WEBSITEPATH}\": Invalid directory! \"website_setup.sh\" will now exit!	[FAIL]" >> ${GLB_LOGFILE}
+		exit 2
 	fi
 	create_website 2>> ${ERR_LOGFILE} 1>> ${STD_LOGFILE}
 	if [ "${EC}" -ne "0" ]
