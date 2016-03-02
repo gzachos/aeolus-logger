@@ -72,7 +72,7 @@ create_website () {
 
 # Configures logrotate for the /var/log/aeolus directory
 conf_logrotate () {
-	local EC=0
+#	local EC=0
 	echo -e "/var/log/aeolus/*.log\n{\n\trotate 30\n\tdaily\n\tmissingok\n\tnotifempty\n\tcreate\n\tcompress\n}" > /etc/logrotate.d/aeolus
 	((EC += $?))
 	logrotate /etc/logrotate.d/aeolus
@@ -97,24 +97,21 @@ main () {
 	mkdir /var/log/aeolus
 	if [ ! -d "/var/log/aeolus" ]
 	then
-		echo "\"/var/log/aeolus\": Invalid directory! \"website_setup.sh\" will now exit!"
-		echo "Check:\t1) ${GLB_LOGFILE} \n\t2) ${ERR_LOGFILE} and\n\t3) ${STD_LOGFILE} \nfor more information!\n\n"
-		echo "[ $(date -R) ] \"/var/log/aeolus\": Invalid directory! \"website_setup.sh\" will now exit! [FAIL]" >> ${GLB_LOGFILE}
+		echo -e "\n\"/var/log/aeolus\": Invalid directory! \"website_setup.sh\" will now exit!"
 		exit 1
 	fi
 	conf_logrotate
 	if [ ! -d "${WEBSITEPATH}" ]
 	then
-		echo "\"${WEBSITEPATH}\": Invalid directory! \"website_setup.sh\" will now exit!"
-		echo "Check:\t1) ${GLB_LOGFILE} \n\t2) ${ERR_LOGFILE} and\n\t3) ${STD_LOGFILE} \nfor more information!\n\n"
+		echo -e "\n\"${WEBSITEPATH}\": Invalid directory! \"website_setup.sh\" will now exit!"
+		echo -e "\nCheck:\t1) ${GLB_LOGFILE} \n\t2) ${ERR_LOGFILE} and\n\t3) ${STD_LOGFILE} \nfor more information!\n\n"
 		echo "[ $(date -R) ] \"${WEBSITEPATH}\": Invalid directory! \"website_setup.sh\" will now exit!	[FAIL]" >> ${GLB_LOGFILE}
 		exit 2
 	fi
 	./install_packages.sh 2>> ${ERR_LOGFILE} 1>> ${STD_LOGFILE}
 	if [ "${?}" -ne "0" ]
 	then
-		echo -e "\nWebsite setup has finished!\nScript exited with errors!\nCheck:\t1) ${GLB_LOGFILE} \n\t2) ${ERR_LOGFILE} and\n\t3) ${STD_LOGFILE} \nfor more information!\n\n"
-		echo "[ $(date -R) ] Errors occured during package installation [FAIL]" >> ${GLB_LOGFILE}
+		echo -e "\nScript exited with errors!\nCheck:\t1) ${GLB_LOGFILE} \n\t2) ${ERR_LOGFILE} and\n\t3) ${STD_LOGFILE} \nfor more information!\n\n"
 		exit 3
 	fi
 	create_website 2>> ${ERR_LOGFILE} 1>> ${STD_LOGFILE}

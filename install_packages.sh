@@ -38,7 +38,7 @@ main () {
 
 	if [ "${EC}" -ne "0" ]
 	then
-		echo "[ $(date -R) ] Package installation was NOT successful [FAIL]" >> ${GLB_LOGFILE}
+		echo "[ $(date -R) ] Errors occured during package installation [FAIL]" >> ${GLB_LOGFILE}
 		exit 1
 	else
 		echo "[ $(date -R) ] Package installation was successful" >> ${GLB_LOGFILE}
