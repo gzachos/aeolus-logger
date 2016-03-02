@@ -22,7 +22,7 @@
 
 # Creates ${DST_FILE}.
 function create_rss_index_html () {
-	echo -e "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<rss version=\"2.0\">\n\t<channel>\n\t\t<title>Aeolus Logger RSS Feed</title>\n\t\t<link>http://aeolus.cs.uoi.gr</link>\n\t\t<description>Department of Computer Science &#38; Engineering, University of Ioannina</description>\n\t\t<language>en-US</language>\n\t\t<copyright>(c) 2015</copyright>\n\t</channel>\n</rss>" > ${TMP_FILE}
+	echo -e "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<rss version=\"2.0\">\n\t<channel>\n\t\t<title>Aeolus Logger v2 RSS Feed</title>\n\t\t<link>http://aeolus.cs.uoi.gr</link>\n\t\t<description>Department of Computer Science &#38; Engineering, University of Ioannina</description>\n\t\t<language>en-US</language>\n\t\t<copyright>(c) 2015</copyright>\n\t</channel>\n</rss>" > ${TMP_FILE}
 }
 
 
@@ -73,10 +73,10 @@ function main() {
 	if [ ! -e "${DST_FILE}" ] || [ ! -s "${DST_FILE}" ]
 	then
 		create_rss_index_html
-		if [ "${$?}" -eq "0" ]
+		if [ "${?}" -eq "0" ]
 		then
 			cp -f ${TMP_FILE} ${DST_FILE}
-			if [ "${$?}" -eq "0" ]
+			if [ "${?}" -eq "0" ]
 			then
 				echo "[ $(date -R) ] RSS feed was successfully created" >> ${GLB_LOGFILE}
 			else
@@ -86,6 +86,10 @@ function main() {
 			fi
 			rm ${TMP_FILE}
 		fi
+	fi
+	if [ -z "${1}" ] && [ -z "${2}" ] && [ -z "${3}" ]
+	then
+		exit 0
 	fi
         TMP_FILE=$(mktemp /tmp/aeolusrss.XXXXXX)
 	if [ "${3}" == "sys" ]
@@ -97,7 +101,7 @@ function main() {
 	if [ "${EC}" -eq "0" ]
 	then
 		cp -f ${TMP_FILE} ${DST_FILE}
-		if [ "${$?}" -eq "0" ]
+		if [ "${?}" -eq "0" ]
 		then
 			echo "[ $(date -R) ] RSS feed was successfully updated" >> ${GLB_LOGFILE}
 		else

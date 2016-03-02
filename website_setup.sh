@@ -37,8 +37,8 @@ create_website () {
 	((EC += $?))
 	./generate_graph_report_pages.sh
 	((EC += $?))
-#	./ntp_update.sh
-#	((EC += $?))
+	./generate_rss_feed.sh
+	((EC += $?))
 	cp -f ./generate_input_data.sh ${WEBSITEPATH}/scripts
 	((EC += $?))
 	cp -f ./generate_measurement_report.sh ${WEBSITEPATH}/scripts
@@ -48,8 +48,6 @@ create_website () {
 	cp -f ./generate_rss_feed.sh ${WEBSITEPATH}/scripts
 	((EC += $?))
 	cp -f ./generate_status_report.sh ${WEBSITEPATH}/scripts
-	((EC += $?))
-	cp -f ./ntp_update.sh ${WEBSITEPATH}/scripts
 	((EC += $?))
 	cp -f ./update_data.sh ${WEBSITEPATH}/scripts
 	((EC += $?))
