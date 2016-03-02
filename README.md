@@ -1,4 +1,4 @@
-emerson-logger
+aeolus-logger
 =============
 This repository contains the code developed during the "__Aeolus Logger__" project.
 
@@ -36,6 +36,9 @@ Screenshots
 
 <br>_Sample graph (1 Month Humidity Log - Emerson #4)_<br>
 ![Sample Graph](./images/demo_hum_4week.png)
+
+<br>_Email Alert_<br>
+![Email Alert example](./images/aeolus_email_alert.png)
 
 
 W3C valid website

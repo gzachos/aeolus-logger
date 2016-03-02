@@ -67,6 +67,8 @@ create_website () {
 	((EC += $?))
 	cp -f ./generate_website_structure.sh ${WEBSITEPATH}/setup_scripts
 	((EC += $?))
+	chmod -R 755 ${WEBSITEPATH}
+	((EC += $?))
 }
 
 
