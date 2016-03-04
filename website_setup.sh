@@ -29,6 +29,8 @@ create_website () {
 	((EC += $?))
 	./generate_css_file.sh
 	((EC += $?))
+	./generate_index_file.sh
+	((EC += $?))
 	./generate_main_page.sh
 	((EC += $?))
 	./generate_rrdatabases.sh
@@ -52,6 +54,8 @@ create_website () {
 	cp -f ./update_data.sh ${WEBSITEPATH}/scripts
 	((EC += $?))
 	cp -f ./generate_css_file.sh ${WEBSITEPATH}/setup_scripts
+	((EC += $?))
+	cp -f ./generate_index_file.sh ${WEBSITEPATH}/setup_scripts
 	((EC += $?))
 	cp -f ./generate_graph_report_main_page.sh ${WEBSITEPATH}/setup_scripts
 	((EC += $?))
