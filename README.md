@@ -19,26 +19,29 @@ Screenshots
 <br>_Measurement Report_<br>
 ![Measurement Report](./images/emerson_measurement_report.png)
 
+<br>_Graph Report_<br>
+![Graph Report](./images/emerson_graph_report.png)
+
 <br>_Sample graph (1 Hour Temperature Log - Emerson #3)_<br>
 ![Sample Graph](./images/demo_temp_1hour.png)
 
-<br>_Sample graph (1 Hour Temperature Log 2 - Emerson #4)_<br>
-![Sample Graph](./images/demo_temp_1hour_2.png)
-
 <br>_Sample graph (1 Hour Temperature Log - Emerson #3 & #4)_<br>
 ![Sample Graph](./images/demo_temp_1hour_dual.png)
-
-<br>_Sample graph (1 Day Humidity Log - Emerson #4)_<br>
-![Sample Graph](./images/demo_hum_1day.png)
-
-<br>_Sample graph (1 Week Humidity Log - Emerson #4)_<br>
-![Sample Graph](./images/demo_hum_1week.png)
 
 <br>_Sample graph (1 Month Humidity Log - Emerson #4)_<br>
 ![Sample Graph](./images/demo_hum_4week.png)
 
 <br>_Email Alert_<br>
 ![Email Alert example](./images/aeolus_email_alert.png)
+
+<br>_Website setup has finished message_<br>
+![Website setup has finished message](./images/aeolus_setup.png)
+
+<br>_Website setup has finished with errors message_<br>
+![Website setup has finished with errors message](./images/aeolus_setup_errors.png)
+
+<br>Contents of aeolus.log after installation<br>
+![Contents of aeolus.log after installation](./images/aeolus_log.png)
 
 
 W3C valid website

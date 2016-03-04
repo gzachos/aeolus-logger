@@ -53,6 +53,7 @@ main () {
 	else
 		echo "[ $(date -R) ] Data were NOT successfully updated [FAIL]"  >> ${GLB_LOGFILE}
 	fi
+	chmod -R 755 ${WEBSITEPATH}
 }
 
 

@@ -97,9 +97,9 @@ main () {
 		echo "[ $(date -R) ] Cannot connect to host with IP: 192.168.254.{1,2} and retrieve input data [FAIL]" >> ${GLB_LOGFILE}
 		exit 1
 	fi
-	retrieve_data 1 4
-	((EC += $?))
 	retrieve_data 2 3
+	((EC += $?))
+	retrieve_data 1 4
 	((EC += $?))
 	if [ "${EC}" -ne "0" ]
 	then

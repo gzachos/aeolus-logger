@@ -28,11 +28,11 @@ retrieve_photos () {
 	while [ "${ATTEMPTS}" -le "20" ]
 	do
 	        EC=0
-		wget https://raw.githubusercontent.com/support-uoi/emerson-logger/master/full_html_output_website/photos/cse-uoi.ico --timeout=5 --trie=5 -O ${WEBSITEPATH}/photos/cse-uoi.ico
+		wget https://raw.githubusercontent.com/gzachos/aeolus-logger/master/images/website_photos/cse-uoi.ico --timeout=5 --trie=5 -O ${WEBSITEPATH}/photos/cse-uoi.ico
 		((EC += $?))
-		wget https://raw.githubusercontent.com/support-uoi/emerson-logger/master/full_html_output_website/photos/cse_banner_logo.jpg --timeout=5 --tries=5 -O ${WEBSITEPATH}/photos/cse_banner_logo.jpg
+		wget https://raw.githubusercontent.com/gzachos/aeolus-logger/master/images/website_photos/cse_banner_logo.jpg --timeout=5 --tries=5 -O ${WEBSITEPATH}/photos/cse_banner_logo.jpg
 		((EC += $?))
-		wget https://raw.githubusercontent.com/support-uoi/emerson-logger/master/full_html_output_website/photos/uoi-cse.png --timeout=5 --tries=5 -O ${WEBSITEPATH}/photos/uoi-cse.png
+		wget https://raw.githubusercontent.com/gzachos/aeolus-logger/master/images/website_photos/uoi-cse.png --timeout=5 --tries=5 -O ${WEBSITEPATH}/photos/uoi-cse.png
 		((EC += $?))
 		if [ "${EC}" -eq "0" ]
 		then
