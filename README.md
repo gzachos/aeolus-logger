@@ -1,14 +1,11 @@
-emerson-logger
+aeolus-logger
 =============
-This repository contains the code developed during the "__Emerson Logger__" project.
+This repository contains the code developed during the "__Aeolus Logger__" project.
 
 About
 -----
-"__Emerson Logger__" project is about a server that monitors the environmental conditions of the
-_cluster room_ inside the building of [Computer Science and Engineering Department](http://cs.uoi.gr) -
-[University of Ioannina](http://uoi.gr). The __temperature__ and __humidity__ values are supplied by the two _Emerson
-cooling units_ inside the cluster room. Moreover, the project is about monitoring and the __status__ of the two
-Emerson units and __alarm__ the faculty if any __abnormal__ conditions are observed.
+The "__Aeolus Logger__" project is about the implementation of a __logging system__ and it's integration with _Emerson_ cooling units, so that it can be used to monitor the environmental conditions of the __data center__, inside the building of the [Computer Science and Engineering Department](http://cse.uoi.gr), [University of Ioannina](http://uoi.gr). The __Aeolus__ server monitors the __status__ of the _Emerson_ units and __alarms__ the faculty if any __abnormal__ conditions are observed.
+
 
 Screenshots
 -----------
@@ -22,36 +19,44 @@ Screenshots
 <br>_Measurement Report_<br>
 ![Measurement Report](./images/emerson_measurement_report.png)
 
+<br>_Graph Report_<br>
+![Graph Report](./images/emerson_graph_report.png)
+
 <br>_Sample graph (1 Hour Temperature Log - Emerson #3)_<br>
 ![Sample Graph](./images/demo_temp_1hour.png)
-
-<br>_Sample graph (1 Hour Temperature Log 2 - Emerson #4)_<br>
-![Sample Graph](./images/demo_temp_1hour_2.png)
 
 <br>_Sample graph (1 Hour Temperature Log - Emerson #3 & #4)_<br>
 ![Sample Graph](./images/demo_temp_1hour_dual.png)
 
-<br>_Sample graph (1 Day Humidity Log - Emerson #4)_<br>
-![Sample Graph](./images/demo_hum_1day.png)
-
-<br>_Sample graph (1 Week Humidity Log - Emerson #4)_<br>
-![Sample Graph](./images/demo_hum_1week.png)
-
 <br>_Sample graph (1 Month Humidity Log - Emerson #4)_<br>
 ![Sample Graph](./images/demo_hum_4week.png)
 
-Website Tree
-------------
+<br>_Email Alert_<br>
+![Email Alert example](./images/aeolus_email_alert.png)
 
-<br>_Emerson Website Tree_<br>
-![Emerson Webpage Tree](./images/emerson_website_tree.png)
+<br>_Website setup has finished message_<br>
+![Website setup has finished message](./images/aeolus_setup.png)
 
-<br>_Emerson Website Tree - RRDB directory_<br>
-![Emerson Webpage Tree](./images/emerson_website_tree_rrdb_dir.png)
+<br>_Website setup has finished with errors message_<br>
+![Website setup has finished with errors message](./images/aeolus_setup_errors.png)
 
-Demo
-----
-[Demo Website](http://cs.uoi.gr/~gzachos/projects/emerson/) (hosted in cs.uoi.gr)<br>[Static - Obsolete data]
+<br>Contents of aeolus.log after installation<br>
+![Contents of aeolus.log after installation](./images/aeolus_log.png)
+
+
+W3C valid website
+-----------------
+The whole website is HTML5 and CSS3 valid, while the RSS feed has been validated too by [W3C](http://www.w3.org/).<br>
+
+__Validators Used__:
+ * [for HTML5](https://validator.w3.org/)
+ * [for CSS3](https://jigsaw.w3.org/css-validator/)
+ * [for RSS](https://validator.w3.org/feed/)
+
+<br>
+<img src="./images/badge-w3c-valid-html5.png" width="150">
+<img src="./images/badge-w3c-valid-css3.png" width="150">
+<img src="./images/badge-w3c-valid-rss2.png" width="150">
 
 Licence
 -------
@@ -59,4 +64,4 @@ Licence
 
 Assignee
 --------
-[George Z. Zachos](http://cs.uoi.gr/~gzachos)
+[George Z. Zachos](http://cse.uoi.gr/~gzachos)

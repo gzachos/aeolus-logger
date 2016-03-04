@@ -20,40 +20,29 @@
 # Email: gzzachos <at> gmail.com
 
 
-# Updates status and measurement report pages for an Emerson unit.
-updt_data () {
-	${WEBSITEPATH}/scripts/generate_status_report.sh ${1}
-	((EC += $?))
-	${WEBSITEPATH}/scripts/generate_measurement_report.sh ${1}
-	((EC += $?))
-}
-
-
-# Retrieves input data, updates status and measurement report pages and generates graphs. 
+# Installs the packages needed for the Aeolus Logger software to run.
 main () {
 	WEBSITEPATH="/var/www/html"
         GLB_LOGFILE="/var/log/aeolus/aeolus.log"
-        ERR_LOGFILE="/var/log/aeolus/error.log"         # not used
-        STD_LOGFILE="/var/log/aeolus/stdout.log"        # not used
+        ERR_LOGFILE="/var/log/aeolus/error.log"
+        STD_LOGFILE="/var/log/aeolus/stdout.log"
 	EC=0
-	${WEBSITEPATH}/scripts/generate_input_data.sh 2>> ${ERR_LOGFILE} 1>> ${STD_LOGFILE}
-	((EC += $?))
+
+	# Needed
+	apt-get install -y rrdtool 2>> ${ERR_LOGFILE} 1>> ${STD_LOGFILE}
+	((EC += ${?}))
+	# Suggested
+	apt-get install -y ntp 2>> ${ERR_LOGFILE} 1>> ${STD_LOGFILE}
+	# Optional
+	apt-get install -y vim 2>> ${ERR_LOGFILE} 1>> ${STD_LOGFILE}
+
 	if [ "${EC}" -ne "0" ]
 	then
-		echo "[ $(date -R) ] Data were NOT successfully updated due to input error [FAIL]"  >> ${GLB_LOGFILE}
+		echo "[ $(date -R) ] Errors occured during package installation [FAIL]" >> ${GLB_LOGFILE}
 		exit 1
-	fi
-	updt_data 3 2>> ${ERR_LOGFILE} 1>> ${STD_LOGFILE}
-	updt_data 4 2>> ${ERR_LOGFILE} 1>> ${STD_LOGFILE}
-	${WEBSITEPATH}/scripts/generate_rrd_graphs.sh 2>> ${ERR_LOGFILE} 1>> /dev/null
-	((EC += $?))
-	if [ "${EC}" -eq "0" ]
-	then
-		echo "[ $(date -R) ] Data were successfully updated"  >> ${GLB_LOGFILE}
 	else
-		echo "[ $(date -R) ] Data were NOT successfully updated [FAIL]"  >> ${GLB_LOGFILE}
+		echo "[ $(date -R) ] Package installation was successful" >> ${GLB_LOGFILE}
 	fi
-	chmod -R 755 ${WEBSITEPATH}
 }
 
 

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #+-----------------------------------------------------------------------+
-#|                 Copyright (C) 2015 George Z. Zachos                   |
+#|              Copyright (C) 2015-2016 George Z. Zachos                 |
 #+-----------------------------------------------------------------------+
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,46 +16,73 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
 # Contact Information:
-# Name: George Zachos
-# Email: gzzachos_at_gmail.com
+# Name: George Z. Zachos
+# Email: gzzachos <at> gmail.com
 
 
-# Creates the directory structure of an emerson unit
-# (Parameter: Emerson unit No.)
+# Creates the directory structure of an Emerson unit.
+# (Parameter: $1 -> Emerson unit No.)
 create_emerson_dir_structure () {
-	mkdir -p emerson_${1}/data/temp 
+	mkdir -p emerson_${1}/data/temp
+	((EC += $?))
 	mkdir -p emerson_${1}/data/hum
-	mkdir -p emerson_${1}/rrdb/graph_reports 
-	mkdir -p emerson_${1}/rrdb/graphs/temp/curr 
+	((EC += $?))
+	mkdir -p emerson_${1}/rrdb/graph_reports
+	((EC += $?))
+	mkdir -p emerson_${1}/rrdb/graphs/temp/curr
+	((EC += $?))
 	mkdir -p emerson_${1}/rrdb/graphs/temp/curr_dual
-	mkdir -p emerson_${1}/rrdb/graphs/hum/curr 
+	((EC += $?))
+	mkdir -p emerson_${1}/rrdb/graphs/hum/curr
+	((EC += $?))
 	mkdir -p emerson_${1}/rrdb/graphs/hum/curr_dual
-#	mkdir -p emerson_${1}/rrdb/graphs/temp/unit 
+	((EC += $?))
+#	mkdir -p emerson_${1}/rrdb/graphs/temp/unit
+#	((EC += $?))
 #	mkdir -p emerson_${1}/rrdb/graphs/temp/unit_dual
+#	((EC += $?))
 #	mkdir -p emerson_${1}/rrdb/graphs/temp/sys
+#	((EC += $?))
 #	mkdir -p emerson_${1}/rrdb/graphs/temp/sys_dual
-#	mkdir -p emerson_${1}/rrdb/graphs/hum/unit 
-#	mkdir -p emerson_${1}/rrdb/graphs/hum/unit_dual 
+#	((EC += $?))
+#	mkdir -p emerson_${1}/rrdb/graphs/hum/unit
+#	((EC += $?))
+#	mkdir -p emerson_${1}/rrdb/graphs/hum/unit_dual
+#	((EC += $?))
 #	mkdir -p emerson_${1}/rrdb/graphs/hum/sys
+#	((EC += $?))
 #	mkdir -p emerson_${1}/rrdb/graphs/hum/sys_dual
+#	((EC += $?))
 }
 
 
-# Creates the main directories of the website and the directory structure of each unit
+# Creates the main directories of the website and calls the function that 
+# creates the directory structure for each Emerson unit.
 create_website_structure () {
 	cd ${WEBSITEPATH}
-        mkdir css photos emerson_3 emerson_4 scripts setup_scripts
+        mkdir css photos emerson_3 emerson_4 scripts setup_scripts feed
+	((EC += $?))
 	create_emerson_dir_structure 3
 	create_emerson_dir_structure 4
 }
 
 
-# Creates the website (directory) structure
+# Calls the function that creates the whole website (directory) structure.
 main () {
 	WEBSITEPATH="/var/www/html"
+        GLB_LOGFILE="/var/log/aeolus/aeolus.log"
+        ERR_LOGFILE="/var/log/aeolus/error.log"         # not used
+        STD_LOGFILE="/var/log/aeolus/stdout.log"        # not used
+        EC=0
         create_website_structure
+        if [ "${EC}" -eq "0" ]
+        then
+                echo "[ $(date -R) ] Website directory structure successfully created" >> ${GLB_LOGFILE}
+        else
+                echo "[ $(date -R) ] Website directory structure was NOT successfully created [FAIL]" >> ${GLB_LOGFILE}
+        fi
 }
 
 
-# Calling main
+# Calling main.
 main

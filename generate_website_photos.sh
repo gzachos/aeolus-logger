@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #+-----------------------------------------------------------------------+
-#|                 Copyright (C) 2015 George Z. Zachos                   |
+#|              Copyright (C) 2015-2016 George Z. Zachos                 |
 #+-----------------------------------------------------------------------+
 # This program is free software; you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,24 +16,50 @@
 # 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 #
 # Contact Information:
-# Name: George Zachos
-# Email: gzzachos_at_gmail.com
+# Name: George Z. Zachos
+# Email: gzzachos <at> gmail.com
 
 
-# Downloads and saves each photo inside photos/ directory
+# Downloads and saves each website photo inside photos/ directory.
+# If the exit code of all three 'wget' commands differs from '0' (zero),
+# they are executed again, until photos are downloaded successfully,
+# or 50 attemps to download them have taken place. 
 retrieve_photos () {
-	wget https://raw.githubusercontent.com/support-uoi/emerson-logger/master/full_html_output_website/photos/cse-uoi.ico -O ${WEBSITEPATH}/photos/cse-uoi.ico
-	wget https://raw.githubusercontent.com/support-uoi/emerson-logger/master/full_html_output_website/photos/cse_banner_logo.jpg -O ${WEBSITEPATH}/photos/cse_banner_logo.jpg
-	wget https://raw.githubusercontent.com/support-uoi/emerson-logger/master/full_html_output_website/photos/uoi-cse.png -O ${WEBSITEPATH}/photos/uoi-cse.png
+	while [ "${ATTEMPTS}" -le "20" ]
+	do
+	        EC=0
+		wget https://raw.githubusercontent.com/gzachos/aeolus-logger/master/images/website_photos/cse-uoi.ico --timeout=5 --trie=5 -O ${WEBSITEPATH}/photos/cse-uoi.ico
+		((EC += $?))
+		wget https://raw.githubusercontent.com/gzachos/aeolus-logger/master/images/website_photos/cse_banner_logo.jpg --timeout=5 --tries=5 -O ${WEBSITEPATH}/photos/cse_banner_logo.jpg
+		((EC += $?))
+		wget https://raw.githubusercontent.com/gzachos/aeolus-logger/master/images/website_photos/uoi-cse.png --timeout=5 --tries=5 -O ${WEBSITEPATH}/photos/uoi-cse.png
+		((EC += $?))
+		if [ "${EC}" -eq "0" ]
+		then
+			break
+		fi
+		((ATTEMPTS += 1))
+	done
 }
 
 
-# Retrieves the photos used in logger's website
+# Calls the function that retrieves the photos used in logger's website.
 main () {
 	WEBSITEPATH="/var/www/html"
+	GLB_LOGFILE="/var/log/aeolus/aeolus.log"
+        ERR_LOGFILE="/var/log/aeolus/error.log"         # not used
+        STD_LOGFILE="/var/log/aeolus/stdout.log"        # not used
+	EC=0
+	ATTEMPTS=0
 	retrieve_photos
+        if [ "${EC}" -eq "0" ]
+        then
+                echo "[ $(date -R) ] Website photos were successfully fetched" >> ${GLB_LOGFILE}
+        else
+                echo "[ $(date -R) ] Website photos were NOT successfully fetched [FAIL]" >> ${GLB_LOGFILE}
+        fi
 }
 
 
-# Calling main
+# Calling main.
 main
