@@ -60,7 +60,7 @@ main () {
         ERR_LOGFILE="/var/log/aeolus/error.log"         # not used
         STD_LOGFILE="/var/log/aeolus/stdout.log"        # not used
         TMP_FILE=$(mktemp /tmp/aeolus.XXXXXX)
-        DST_FILE=${WEBSITEPATH}/emerson_main_page.html
+        DST_FILE=${WEBSITEPATH}/main_page.html
 	EC=0
         append_head
         append_body
