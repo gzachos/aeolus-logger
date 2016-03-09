@@ -30,9 +30,7 @@ retrieve_photos () {
 	        EC=0
 		wget https://raw.githubusercontent.com/gzachos/aeolus-logger/master/images/website_photos/cse-uoi.ico --timeout=5 --trie=5 -O ${WEBSITEPATH}/photos/cse-uoi.ico
 		((EC += $?))
-		wget https://raw.githubusercontent.com/gzachos/aeolus-logger/master/images/website_photos/cse_banner_logo.jpg --timeout=5 --tries=5 -O ${WEBSITEPATH}/photos/cse_banner_logo.jpg
-		((EC += $?))
-		wget https://raw.githubusercontent.com/gzachos/aeolus-logger/master/images/website_photos/uoi-cse.png --timeout=5 --tries=5 -O ${WEBSITEPATH}/photos/uoi-cse.png
+		wget https://raw.githubusercontent.com/gzachos/aeolus-logger/v2.1.0/images/website_photos/aeolus-banner.png --timeout=5 --tries=5 -O ${WEBSITEPATH}/photos/aeolus-banner.png
 		((EC += $?))
 		if [ "${EC}" -eq "0" ]
 		then
