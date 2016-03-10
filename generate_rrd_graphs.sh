@@ -24,7 +24,8 @@
 # (Parameters: 	$1 -> {curr, unit, sys}, 
 #		$2 -> {temperature, humidity}, 
 #		$3 -> Emerson unit No.,
-#		$4 -> {temp, hum})
+#		$4 -> {temp, hum},
+#		$5 -> {Current, Unit, System})
 create_temp_graph () {
 	EC=0
 	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_1hour.png \
@@ -41,7 +42,7 @@ create_temp_graph () {
                 HRULE:23#BDBDB3 \
                 HRULE:22#BDBDB3 \
                 HRULE:21#BDBDB3 \
-                AREA:${4}#FF0000:"${1} ${2}"
+                AREA:${4}#FF0000:"${5} ${2}"
 	((EC += $?))
 
 		
@@ -59,7 +60,7 @@ create_temp_graph () {
                 HRULE:23#BDBDB3 \
                 HRULE:22#BDBDB3 \
                 HRULE:21#BDBDB3 \
-                AREA:${4}#FF0000:"${1} ${2}"
+                AREA:${4}#FF0000:"${5} ${2}"
 	((EC += $?))
 
 
@@ -77,7 +78,7 @@ create_temp_graph () {
                 HRULE:23#BDBDB3 \
                 HRULE:22#BDBDB3 \
                 HRULE:21#BDBDB3 \
-                AREA:${4}#FF0000:"${1} ${2}"
+                AREA:${4}#FF0000:"${5} ${2}"
 	((EC += $?))
 
 
@@ -95,7 +96,7 @@ create_temp_graph () {
                 HRULE:23#BDBDB3 \
                 HRULE:22#BDBDB3 \
                 HRULE:21#BDBDB3 \
-                AREA:${4}#FF0000:"${1} ${2}"
+                AREA:${4}#FF0000:"${5} ${2}"
 	((EC += $?))
 
 
@@ -113,7 +114,7 @@ create_temp_graph () {
                 HRULE:23#BDBDB3 \
                 HRULE:22#BDBDB3 \
                 HRULE:21#BDBDB3 \
-                AREA:${4}#FF0000:"${1} ${2}"
+                AREA:${4}#FF0000:"${5} ${2}"
 	((EC += $?))
 
 
@@ -131,7 +132,7 @@ create_temp_graph () {
                 HRULE:23#BDBDB3 \
                 HRULE:22#BDBDB3 \
                 HRULE:21#BDBDB3 \
-                AREA:${4}#FF0000:"${1} ${2}"
+                AREA:${4}#FF0000:"${5} ${2}"
 	((EC += $?))
 
 
@@ -149,7 +150,7 @@ create_temp_graph () {
                 HRULE:23#BDBDB3 \
                 HRULE:22#BDBDB3 \
                 HRULE:21#BDBDB3 \
-                AREA:${4}#FF0000:"${1} ${2}"
+                AREA:${4}#FF0000:"${5} ${2}"
 	((EC += $?))
 
 
@@ -167,7 +168,7 @@ create_temp_graph () {
                 HRULE:23#BDBDB3 \
                 HRULE:22#BDBDB3 \
                 HRULE:21#BDBDB3 \
-                AREA:${4}#FF0000:"${1} ${2}"
+                AREA:${4}#FF0000:"${5} ${2}"
 	((EC += $?))
 	
 	if [ "${EC}" -eq "0" ]
@@ -184,7 +185,8 @@ create_temp_graph () {
 # (Parameters: 	$1 -> {curr, unit, sys}, 
 #		$2 -> {temperature, humidity}, 
 #		$3 -> Emerson unit No.,
-#		$4 -> {temp, hum})
+#		$4 -> {temp, hum},
+#		$5 -> {Current, Unit, System})
 create_hum_graph () {
 	EC=0
 	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_1hour.png \
@@ -211,7 +213,7 @@ create_hum_graph () {
                 HRULE:40#BDBDB3 \
                 HRULE:35#BDBDB3 \
                 HRULE:30#BDBDB3 \
-                AREA:${4}#FF0000:"${1} ${2}"
+                AREA:${4}#FF0000:"${5} ${2}"
 	((EC += $?))
 
 		
@@ -239,7 +241,7 @@ create_hum_graph () {
                 HRULE:40#BDBDB3 \
                 HRULE:35#BDBDB3 \
                 HRULE:30#BDBDB3 \
-                AREA:${4}#FF0000:"${1} ${2}"
+                AREA:${4}#FF0000:"${5} ${2}"
 	((EC += $?))
 
 
@@ -267,7 +269,7 @@ create_hum_graph () {
                 HRULE:40#BDBDB3 \
                 HRULE:35#BDBDB3 \
                 HRULE:30#BDBDB3 \
-                AREA:${4}#FF0000:"${1} ${2}"
+                AREA:${4}#FF0000:"${5} ${2}"
 	((EC += $?))
 
 
@@ -295,7 +297,7 @@ create_hum_graph () {
                 HRULE:40#BDBDB3 \
                 HRULE:35#BDBDB3 \
                 HRULE:30#BDBDB3 \
-                AREA:${4}#FF0000:"${1} ${2}"
+                AREA:${4}#FF0000:"${5} ${2}"
 	((EC += $?))
 
 
@@ -323,7 +325,7 @@ create_hum_graph () {
                 HRULE:40#BDBDB3 \
                 HRULE:35#BDBDB3 \
                 HRULE:30#BDBDB3 \
-                AREA:${4}#FF0000:"${1} ${2}"
+                AREA:${4}#FF0000:"${5} ${2}"
 	((EC += $?))
 
 
@@ -351,7 +353,7 @@ create_hum_graph () {
                 HRULE:40#BDBDB3 \
                 HRULE:35#BDBDB3 \
                 HRULE:30#BDBDB3 \
-                AREA:${4}#FF0000:"${1} ${2}"
+                AREA:${4}#FF0000:"${5} ${2}"
 	((EC += $?))
 
 
@@ -379,7 +381,7 @@ create_hum_graph () {
                 HRULE:40#BDBDB3 \
                 HRULE:35#BDBDB3 \
                 HRULE:30#BDBDB3 \
-                AREA:${4}#FF0000:"${1} ${2}"
+                AREA:${4}#FF0000:"${5} ${2}"
 	((EC += $?))
 
 
@@ -407,7 +409,7 @@ create_hum_graph () {
                 HRULE:40#BDBDB3 \
                 HRULE:35#BDBDB3 \
                 HRULE:30#BDBDB3 \
-                AREA:${4}#FF0000:"${1} ${2}"
+                AREA:${4}#FF0000:"${5} ${2}"
 	((EC += $?))
 	
 	if [ "${EC}" -eq "0" ]
@@ -424,12 +426,12 @@ create_hum_graph () {
 # (both temperature and humidity)
 # (Parameter: $1 -> Emerson unit No.)
 create_emerson_graph () {
-	create_temp_graph curr temperature ${1} temp
-	create_hum_graph curr humidity ${1} hum
-#	create_temp_graph unit temperature ${1} temp
-#	create_hum_graph unit humidity ${1} hum
-#	create_temp_graph sys temperature ${1} temp
-#	create_hum_graph sys humidity ${1} hum
+	create_temp_graph curr temperature ${1} temp Current
+	create_hum_graph curr humidity ${1} hum Current
+#	create_temp_graph unit temperature ${1} temp # Unit
+#	create_hum_graph unit humidity ${1} hum # Unit
+#	create_temp_graph sys temperature ${1} temp # System 
+#	create_hum_graph sys humidity ${1} hum # System
 }
 
 
