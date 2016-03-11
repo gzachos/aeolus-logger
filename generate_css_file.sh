@@ -22,7 +22,7 @@
 
 # Appends the required text to the .css file.
 create_stylesheet_file () {
-        echo -e "html {\n\ttext-align: center;\n\tbackground: radial-gradient(circle, white, #6676BD);\n\tmargin-top: 5px;\n\tmargin-left: 5px;\n\tmargin-right: 5px;\n}\n\n\n#contact {\n\ttext-align: left;\n\tpadding: 15px;\n}\n\n\n#emersons {\n\ttext-align: center;\n}\n\n\np {\n\ttext-align: justify;\n\ttext-justify: inter-word;\n\tmargin-left: 40px;\n\tmargin-right: 40px;\n}\n\n\nh2,h3,h4,h5 {\n\ttext-align: center;\n}\n\n\nbody {\n\ttext-align: center;\n\tborder: 2px solid;\n\twidth: 910px;\n\tmargin: auto;\n}\n\n\ntable, th, td {\n\tmargin-left: auto;\n\tmargin-right: auto;\n\tborder: 1px solid black;\n\ttext-align: center;\n}\n" > ${TMP_FILE}
+        echo -e "html {\n\ttext-align: center;\n\tbackground: radial-gradient(circle, #DCDFEF, #7886C4);\n\tmargin-top: 5px;\n\tmargin-left: 5px;\n\tmargin-right: 5px;\n}\n\n\nhtml.status {\n\tbackground: radial-gradient(circle, #B8BFE0, #7886C4);\n}\n\n\nhtml.measurement {\n\tbackground: radial-gradient(circle, #CACFE8, #95A0D0);\n}\n\n\nhtml.graph {\n\tbackground: radial-gradient(circle, #B8BFE0, #8390C9);\n}\n\n\nhtml.gpages {\n\tbackground: radial-gradient(circle, #B8BFE0, #95A0D0);\n}\n\n\n#contact {\n\ttext-align: left;\n\tpadding: 15px;\n}\n\n\n#emersons {\n\ttext-align: center;\n}\n\n\np {\n\ttext-align: justify;\n\ttext-justify: inter-word;\n\tmargin-left: 40px;\n\tmargin-right: 40px;\n}\n\n\nh2,h3,h4,h5 {\n\ttext-align: center;\n}\n\n\nbody {\n\ttext-align: center;\n\tborder: 2px solid;\n\twidth: 910px;\n\tmargin: auto;\n}\n\n\ntable, th, td {\n\tmargin-left: auto;\n\tmargin-right: auto;\n\tborder: 1px solid black;\n\ttext-align: center;\n}\n" > ${TMP_FILE}
 }
 
 

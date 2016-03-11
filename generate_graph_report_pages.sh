@@ -28,7 +28,7 @@
 #		$5 -> {Temperature, Humidity},
 #		$6 -> {temperature, humidity})
 append_head () {
-        echo -e "<!DOCTYPE html>\n<html>\n\t<!-- HEAD SECTION (includes the two lines above) -->\n\t<head>\n\t\t<title>Emerson #${1} ${5} Graph</title>\n\t\t<meta charset=\"UTF-8\">\n\t\t<link rel=\"icon\" href=\"../../../photos/cse-uoi.ico\" type=\"image/x-icon\"/>\n\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"../../../css/emerson_logger.css\">\n\t</head>\n" > ${TMP_FILE}
+        echo -e "<!DOCTYPE html>\n<html class=\"gpages\">\n\t<!-- HEAD SECTION (includes the two lines above) -->\n\t<head>\n\t\t<title>Emerson #${1} ${5} Graph</title>\n\t\t<meta charset=\"UTF-8\">\n\t\t<link rel=\"icon\" href=\"../../../photos/cse-uoi.ico\" type=\"image/x-icon\"/>\n\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"../../../css/emerson_logger.css\">\n\t</head>\n" > ${TMP_FILE}
 }
 
 

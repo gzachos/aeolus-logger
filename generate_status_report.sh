@@ -23,7 +23,7 @@
 # Appends the <head> section to the output .html file.
 # (Parameter: $1 -> Emerson unit No.)
 append_head () {
-	echo -e "<!DOCTYPE html>\n<html>\n\t<!-- HEAD SECTION (includes the two lines above) -->\n\t<head>\n\t\t<title>Emerson #${1} Status Report</title>\n\t\t<meta charset=\"UTF-8\">\n\t\t<link rel=\"icon\" href=\"../photos/cse-uoi.ico\" type=\"image/x-icon\"/>\n\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/emerson_logger.css\">\n\t</head>" > ${TMP_FILE}
+	echo -e "<!DOCTYPE html>\n<html class=\"status\">\n\t<!-- HEAD SECTION (includes the two lines above) -->\n\t<head>\n\t\t<title>Emerson #${1} Status Report</title>\n\t\t<meta charset=\"UTF-8\">\n\t\t<link rel=\"icon\" href=\"../photos/cse-uoi.ico\" type=\"image/x-icon\"/>\n\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/emerson_logger.css\">\n\t</head>" > ${TMP_FILE}
 }
 
 
