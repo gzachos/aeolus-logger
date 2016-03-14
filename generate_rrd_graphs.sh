@@ -40,7 +40,7 @@ rrdgraph_temp () {
 		--width 600 \
 		--height 200 \
 		--color GRID#C2C2D6 \
-		--color MGRID#C2C2D6 \
+		--color MGRID#E2E2E6 \
 		--grid-dash 1:1 \
 		--dynamic-labels \
 		--font TITLE:10 \
@@ -93,8 +93,8 @@ rrdgraph_hum () {
 		--vertical-label "Humidity %rH" \
 		--width 600 \
 		--height 200 \
-		--color GRID#A3A3C2 \
-		--color MGRID#A3A3C2 \
+		--color GRID#A3A3B2 \
+		--color MGRID#B3B3C2 \
 		--grid-dash 1:1 \
 		--dynamic-labels \
 		--font TITLE:10 \
@@ -164,6 +164,7 @@ main () {
                 echo "[ $(date -R) ] Graphs were NOT successfully created [FAIL]" >> ${GLB_LOGFILE}
 		exit 1
         fi
+
 }
 
 
