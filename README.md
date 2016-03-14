@@ -28,6 +28,9 @@ Screenshots
 <br>_Sample graph (1 Hour Temperature Log - Emerson #3 & #4)_<br>
 ![Sample Graph](./images/demo_temp_1hour_dual.png)
 
+<br>_Sample graph (1 Month Temperature Log - Emerson #3 & #4)_<br>
+![Sample Graph](./images/demo_temp_4week_dual.png)
+
 <br>_Sample graph (1 Month Humidity Log - Emerson #4)_<br>
 ![Sample Graph](./images/demo_hum_4week.png)
 

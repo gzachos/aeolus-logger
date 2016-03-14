@@ -28,7 +28,7 @@
 #		$5 -> {Temperature, Humidity},
 #		$6 -> {temperature, humidity})
 append_head () {
-        echo -e "<!DOCTYPE html>\n<html class=\"gpages\">\n\t<!-- HEAD SECTION (includes the two lines above) -->\n\t<head>\n\t\t<title>Emerson #${1} ${5} Graph</title>\n\t\t<meta charset=\"UTF-8\">\n\t\t<link rel=\"icon\" href=\"../../../photos/cse-uoi.ico\" type=\"image/x-icon\"/>\n\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"../../../css/emerson_logger.css\">\n\t</head>\n" > ${TMP_FILE}
+        echo -e "<!DOCTYPE html>\n<html class=\"gpages\">\n\t<!-- HEAD SECTION (includes the two lines above) -->\n\t<head>\n\t\t<title>Emerson #${1} ${5} Graphs</title>\n\t\t<meta charset=\"UTF-8\">\n\t\t<link rel=\"icon\" href=\"../../../photos/cse-uoi.ico\" type=\"image/x-icon\"/>\n\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"../../../css/emerson_logger.css\">\n\t</head>\n" > ${TMP_FILE}
 }
 
 
@@ -46,7 +46,13 @@ append_body () {
 	else
 		OTHER_EMERSON=3
 	fi
-	echo -e "\t<!-- BODY SECTION (includes \"</html>\" line) -->\n\t<body>\n\t\t<img alt=\"aeolus-banner.png\" src=\"../../../photos/aeolus-banner.png\">\n\t\t<br><br>\n\t\t<h4><a href=\"../../../main_page.html\">Main Page</a> &nbsp;|&nbsp; <a href=\"../../../emerson_3/status_report.html\">Emerson Unit #3</a> &nbsp;|&nbsp;  <a href=\"../../../emerson_4/status_report.html\">Emerson Unit #4</a> &nbsp;|&nbsp; <a href=\"../../../emerson_${OTHER_EMERSON}/graph_report.html\">Emerson Unit #${OTHER_EMERSON} Graph Report</a></h4><br>\n\t\t<h2><u>Emerson #${1} ${4} ${5} Graphs</u></h2>\n\t\t<br>\n\t\t<img alt=\"${3}_1h.png\" src=\"../graphs/${3}/${2}/${3}_1h.png\">\n\t\t<img alt=\"${3}_12h.png\" src=\"../graphs/${3}/${2}/${3}_12h.png\">\n\t\t<img alt=\"${3}_24h.png\" src=\"../graphs/${3}/${2}/${3}_24h.png\">\n\t\t<img alt=\"${3}_1w.png\" src=\"../graphs/${3}/${2}/${3}_1w.png\">\n\t\t<img alt=\"${3}_4w.png\" src=\"../graphs/${3}/${2}/${3}_4w.png\">\n\t\t<img alt=\"${3}_24w.png\" src=\"../graphs/${3}/${2}/${3}_24w.png\">\n\t\t<img alt=\"${3}_1y.png\" src=\"../graphs/${3}/${2}/${3}_1y.png\">\n\t\t\n\t\t<br><br><br><br><br>\n\t\t<h4><i>A project by ~gzachos</i></h4>\n\t\t<h4>&copy; George Z. Zachos 2015-2016. All rights reserved.</h4>\n\t\t<h4>Department of Computer Science &amp; Engineering, University of Ioannina</h4>\n\t</body>\n</html>" >> ${TMP_FILE}
+	if [ "${2}" == "curr_dual" ]
+	then
+		PAGE_TITLE="Comparative ${4} ${5} Graphs"
+	else
+		PAGE_TITLE="Emerson #${1} ${4} ${5} Graphs"
+	fi
+	echo -e "\t<!-- BODY SECTION (includes \"</html>\" line) -->\n\t<body>\n\t\t<img alt=\"aeolus-banner.png\" src=\"../../../photos/aeolus-banner.png\">\n\t\t<br><br>\n\t\t<h4><a href=\"../../../main_page.html\">Main Page</a> &nbsp;|&nbsp; <a href=\"../../../emerson_3/status_report.html\">Emerson Unit #3</a> &nbsp;|&nbsp;  <a href=\"../../../emerson_4/status_report.html\">Emerson Unit #4</a> &nbsp;|&nbsp; <a href=\"../../../emerson_${OTHER_EMERSON}/graph_report.html\">Emerson Unit #${OTHER_EMERSON} Graph Report</a></h4><br>\n\t\t<h2><u>${PAGE_TITLE}</u></h2>\n\t\t<br>\n\t\t<img alt=\"${3}_1h.png\" src=\"../graphs/${3}/${2}/${3}_1h.png\">\n\t\t<img alt=\"${3}_12h.png\" src=\"../graphs/${3}/${2}/${3}_12h.png\">\n\t\t<img alt=\"${3}_24h.png\" src=\"../graphs/${3}/${2}/${3}_24h.png\">\n\t\t<img alt=\"${3}_1w.png\" src=\"../graphs/${3}/${2}/${3}_1w.png\">\n\t\t<img alt=\"${3}_4w.png\" src=\"../graphs/${3}/${2}/${3}_4w.png\">\n\t\t<img alt=\"${3}_24w.png\" src=\"../graphs/${3}/${2}/${3}_24w.png\">\n\t\t<img alt=\"${3}_1y.png\" src=\"../graphs/${3}/${2}/${3}_1y.png\">\n\t\t\n\t\t<br><br><br><br><br>\n\t\t<h4><i>A project by ~gzachos</i></h4>\n\t\t<h4>&copy; George Z. Zachos 2015-2016. All rights reserved.</h4>\n\t\t<h4>Department of Computer Science &amp; Engineering, University of Ioannina</h4>\n\t</body>\n</html>" >> ${TMP_FILE}
 }
 
 
@@ -84,6 +90,7 @@ create_page () {
 create_graph_report_pages () {
 	create_page ${1} curr temp Current Temperature temperature
 	create_page ${1} curr hum Current Humidity humidity
+	create_page ${1} curr_dual temp Current Temperature temperature
 #	create_page ${1} unit temp Unit Temperature temperature
 #	create_page ${1} sys temp System Temperature temperature
 #	create_page ${1} unit hum Unit Humidity humidity
