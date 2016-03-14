@@ -20,403 +20,113 @@
 # Email: gzzachos <at> gmail.com
 
 
-# Creates temperature graphs.
-# (Parameters: 	$1 -> {curr, unit, sys}, 
-#		$2 -> {temperature, humidity}, 
-#		$3 -> Emerson unit No.,
-#		$4 -> {temp, hum},
-#		$5 -> {Current, Unit, System})
-create_temp_graph () {
+# Creates a specific temperature graph.
+# (Parameters: 	$1 -> Emerson unit No.
+#		$2 -> {curr, unit, sys},
+#		$3 -> {1h, 12h, 24h, 1w, 4w, 24w, 1y},
+#		$4 -> {1 Hour Log, 12 Hour Log, 24 Hour Log, 1 Week Log, 1 Month Log, 6 Month Log, 1 Year Log})
+rrdgraph_temp () {
+	if [ "${1}" -eq "3" ]
+	then
+		SETPOINT=23
+	else
+		SETPOINT=21
+	fi
+	rrdtool graph ${WEBSITEPATH}/emerson_${1}/rrdb/graphs/temp/${2}/temp_${3}.png \
+		--start -${3} \
+		--end ${GRAPHEND} \
+		--title "${4}" \
+		--vertical-label "Temperature ºC" \
+		--width 600 \
+		--height 200 \
+		--color GRID#C2C2D6 \
+		--color MGRID#C2C2D6 \
+		--grid-dash 1:1 \
+		--dynamic-labels \
+		--font TITLE:10 \
+		--font UNIT:9 \
+		--font LEGEND:8 \
+		--font AXIS:8 \
+		--font WATERMARK:8 \
+		--watermark "Aeolus Logger v2.1  //  ${WTM_DATE}  //  George Z. Zachos" \
+		DEF:temp=${WEBSITEPATH}/emerson_${1}/rrdb/${2}_temperature_${1}.rrd:${2}_temp_${1}:AVERAGE \
+                AREA:temp#FF0000:"Emerson #${1} (return air temperature)" \
+		LINE${5}:${SETPOINT}#000000:"Emerson #${1} (return air temperature setpoint)"
+	((EC += $?))
+}
+
+
+# Creates all temperature graphs of an Emerson unit.
+# (Parameters: 	$1 -> Emerson unit No.,
+#		$2 -> {curr, unit, sys})
+create_temp_graphs () {
 	EC=0
-	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_1hour.png \
-		--start -1h \
-		--end ${GRAPHEND} \
-		--title "1 Hour Log" \
-		--vertical-label "Temperature ºC" \
-		--width 600 \
-		--height 200 \
-		DEF:${4}=${WEBSITEPATH}/emerson_${3}/rrdb/${1}_${2}_${3}.rrd:${1}_${4}_${3}:AVERAGE \
-		LINE2:${4}#FF0000 \
-                HRULE:27#660066 \
-                HRULE:24#00FF00 \
-                HRULE:23#BDBDB3 \
-                HRULE:22#BDBDB3 \
-                HRULE:21#BDBDB3 \
-                AREA:${4}#FF0000:"${5} ${2}"
-	((EC += $?))
+	rrdgraph_temp ${1} ${2} 1h  "1 Hour Log"  2
+	rrdgraph_temp ${1} ${2} 12h "12 Hour Log" 2
+	rrdgraph_temp ${1} ${2} 24h "24 Hour Log" 2
+	rrdgraph_temp ${1} ${2} 1w  "1 Week Log"  1
+	rrdgraph_temp ${1} ${2} 4w  "1 Month Log" 1
+	rrdgraph_temp ${1} ${2} 24w "6 Month Log" 1
+	rrdgraph_temp ${1} ${2} 1y  "1 Year Log"  1
 
-		
-	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_12hour.png \
-		--start -12h \
-		--end ${GRAPHEND} \
-		--title "12 Hour Log" \
-		--vertical-label "Temperature ºC" \
-		--width 600 \
-		--height 200 \
-		DEF:${4}=${WEBSITEPATH}/emerson_${3}/rrdb/${1}_${2}_${3}.rrd:${1}_${4}_${3}:AVERAGE \
-		LINE2:${4}#FF0000 \
-                HRULE:27#660066 \
-                HRULE:24#00FF00 \
-                HRULE:23#BDBDB3 \
-                HRULE:22#BDBDB3 \
-                HRULE:21#BDBDB3 \
-                AREA:${4}#FF0000:"${5} ${2}"
-	((EC += $?))
-
-
-	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_1day.png \
-		--start -1d \
-		--end ${GRAPHEND} \
-		--title "24 Hour Log" \
-		--vertical-label "Temperature ºC" \
-		--width 600 \
-		--height 200 \
-		DEF:${4}=${WEBSITEPATH}/emerson_${3}/rrdb/${1}_${2}_${3}.rrd:${1}_${4}_${3}:AVERAGE \
-		LINE2:${4}#FF0000 \
-                HRULE:27#660066 \
-                HRULE:24#00FF00 \
-                HRULE:23#BDBDB3 \
-                HRULE:22#BDBDB3 \
-                HRULE:21#BDBDB3 \
-                AREA:${4}#FF0000:"${5} ${2}"
-	((EC += $?))
-
-
-	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_1week.png \
-		--start -1w \
-		--end ${GRAPHEND} \
-		--title "1 Week Log" \
-		--vertical-label "Temperature ºC" \
-		--width 600 \
-		--height 200 \
-		DEF:${4}=${WEBSITEPATH}/emerson_${3}/rrdb/${1}_${2}_${3}.rrd:${1}_${4}_${3}:AVERAGE \
-		LINE2:${4}#FF0000 \
-                HRULE:27#660066 \
-                HRULE:24#00FF00 \
-                HRULE:23#BDBDB3 \
-                HRULE:22#BDBDB3 \
-                HRULE:21#BDBDB3 \
-                AREA:${4}#FF0000:"${5} ${2}"
-	((EC += $?))
-
-
-	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_4week.png \
-		--start -4w \
-		--end ${GRAPHEND} \
-		--title "1 Month Log" \
-		--vertical-label "Temperature ºC" \
-		--width 600 \
-		--height 200 \
-		DEF:${4}=${WEBSITEPATH}/emerson_${3}/rrdb/${1}_${2}_${3}.rrd:${1}_${4}_${3}:AVERAGE \
-		LINE2:${4}#FF0000 \
-                HRULE:27#660066 \
-                HRULE:24#00FF00 \
-                HRULE:23#BDBDB3 \
-                HRULE:22#BDBDB3 \
-                HRULE:21#BDBDB3 \
-                AREA:${4}#FF0000:"${5} ${2}"
-	((EC += $?))
-
-
-	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_8week.png \
-		--start -8w \
-		--end ${GRAPHEND} \
-		--title "2 Month Log" \
-		--vertical-label "Temperature ºC" \
-		--width 600 \
-		--height 200 \
-		DEF:${4}=${WEBSITEPATH}/emerson_${3}/rrdb/${1}_${2}_${3}.rrd:${1}_${4}_${3}:AVERAGE \
-		LINE2:${4}#FF0000 \
-                HRULE:27#660066 \
-                HRULE:24#00FF00 \
-                HRULE:23#BDBDB3 \
-                HRULE:22#BDBDB3 \
-                HRULE:21#BDBDB3 \
-                AREA:${4}#FF0000:"${5} ${2}"
-	((EC += $?))
-
-
-	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_24week.png \
-		--start -24w \
-		--end ${GRAPHEND} \
-		--title "6 Month Log" \
-		--vertical-label "Temperature ºC" \
-		--width 600 \
-		--height 200 \
-		DEF:${4}=${WEBSITEPATH}/emerson_${3}/rrdb/${1}_${2}_${3}.rrd:${1}_${4}_${3}:AVERAGE \
-		LINE2:${4}#FF0000 \
-                HRULE:27#660066 \
-                HRULE:24#00FF00 \
-                HRULE:23#BDBDB3 \
-                HRULE:22#BDBDB3 \
-                HRULE:21#BDBDB3 \
-                AREA:${4}#FF0000:"${5} ${2}"
-	((EC += $?))
-
-
-	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_1year.png \
-		--start -1y \
-		--end ${GRAPHEND} \
-		--title "1 Year Log" \
-		--vertical-label "Temperature ºC" \
-		--width 600 \
-		--height 200 \
-		DEF:${4}=${WEBSITEPATH}/emerson_${3}/rrdb/${1}_${2}_${3}.rrd:${1}_${4}_${3}:AVERAGE \
-		LINE2:${4}#FF0000 \
-                HRULE:27#660066 \
-                HRULE:24#00FF00 \
-                HRULE:23#BDBDB3 \
-                HRULE:22#BDBDB3 \
-                HRULE:21#BDBDB3 \
-                AREA:${4}#FF0000:"${5} ${2}"
-	((EC += $?))
-	
 	if [ "${EC}" -eq "0" ]
 	then
-		echo "[ $(date -R) ] Temperature (${1}) graphs of Emerson unit #${3} were successfully created"  >> ${GLB_LOGFILE}
+		echo "[ $(date -R) ] Temperature (${2}) graphs of Emerson unit #${1} were successfully created"  >> ${GLB_LOGFILE}
 	else
-		echo "[ $(date -R) ] Temperature (${1}) graph(s) of Emerson unit #${3} were NOT successfully created [FAIL]"  >> ${GLB_LOGFILE}
+		echo "[ $(date -R) ] Temperature (${2}) graph(s) of Emerson unit #${1} were NOT successfully created [FAIL]"  >> ${GLB_LOGFILE}
 	fi
 	((GEC += EC))
 }
 
 
-# Creates humidity graphs.
-# (Parameters: 	$1 -> {curr, unit, sys}, 
-#		$2 -> {temperature, humidity}, 
-#		$3 -> Emerson unit No.,
-#		$4 -> {temp, hum},
-#		$5 -> {Current, Unit, System})
-create_hum_graph () {
+# Creates a specific humidity graph.
+# (Parameters: 	$1 -> Emerson unit No.
+#		$2 -> {curr, unit, sys},
+#		$3 -> {1h, 12h, 24h, 1w, 4w, 24w, 1y},
+#		$4 -> {1 Hour Log, 12 Hour Log, 24 Hour Log, 1 Week Log, 1 Month Log, 6 Month Log, 1 Year Log})
+rrdgraph_hum () {
 	EC=0
-	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_1hour.png \
-		--start -1h \
+	rrdtool graph ${WEBSITEPATH}/emerson_${1}/rrdb/graphs/hum/${2}/hum_${3}.png \
+		--start -${3} \
 		--end ${GRAPHEND} \
-		--title "1 Hour Log" \
+		--title "${4}" \
 		--vertical-label "Humidity %rH" \
 		--width 600 \
 		--height 200 \
-		DEF:${4}=${WEBSITEPATH}/emerson_${3}/rrdb/${1}_${2}_${3}.rrd:${1}_${4}_${3}:AVERAGE \
-		LINE2:${4}#FF0000 \
-                HRULE:100#BDBDB3 \
-                HRULE:95#BDBDB3 \
-                HRULE:90#BDBDB3 \
-                HRULE:85#BDBDB3 \
-                HRULE:80#BDBDB3 \
-                HRULE:75#BDBDB3 \
-                HRULE:70#BDBDB3 \
-                HRULE:65#BDBDB3 \
-                HRULE:60#BDBDB3 \
-                HRULE:55#BDBDB3 \
-                HRULE:50#BDBDB3 \
-                HRULE:45#BDBDB3 \
-                HRULE:40#BDBDB3 \
-                HRULE:35#BDBDB3 \
-                HRULE:30#BDBDB3 \
-                AREA:${4}#FF0000:"${5} ${2}"
+		--color GRID#A3A3C2 \
+		--color MGRID#A3A3C2 \
+		--grid-dash 1:1 \
+		--dynamic-labels \
+		--font TITLE:10 \
+		--font UNIT:9 \
+		--font LEGEND:8 \
+		--font AXIS:8 \
+		--font WATERMARK:8 \
+		--watermark "Aeolus Logger v2.1  //  ${WTM_DATE}  //  George Z. Zachos" \
+		DEF:hum=${WEBSITEPATH}/emerson_${1}/rrdb/${2}_humidity_${1}.rrd:${2}_hum_${1}:AVERAGE \
+                AREA:hum#0000FF:"Emerson #${1} (return air humidity)"
 	((EC += $?))
-
-		
-	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_12hour.png \
-		--start -12h \
-		--end ${GRAPHEND} \
-		--title "12 Hour Log" \
-		--vertical-label "Humidity %rH" \
-		--width 600 \
-		--height 200 \
-		DEF:${4}=${WEBSITEPATH}/emerson_${3}/rrdb/${1}_${2}_${3}.rrd:${1}_${4}_${3}:AVERAGE \
-		LINE2:${4}#FF0000 \
-                HRULE:100#BDBDB3 \
-                HRULE:95#BDBDB3 \
-                HRULE:90#BDBDB3 \
-                HRULE:85#BDBDB3 \
-                HRULE:80#BDBDB3 \
-                HRULE:75#BDBDB3 \
-                HRULE:70#BDBDB3 \
-                HRULE:65#BDBDB3 \
-                HRULE:60#BDBDB3 \
-                HRULE:55#BDBDB3 \
-                HRULE:50#BDBDB3 \
-                HRULE:45#BDBDB3 \
-                HRULE:40#BDBDB3 \
-                HRULE:35#BDBDB3 \
-                HRULE:30#BDBDB3 \
-                AREA:${4}#FF0000:"${5} ${2}"
-	((EC += $?))
+}
 
 
-	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_1day.png \
-		--start -1d \
-		--end ${GRAPHEND} \
-		--title "24 Hour Log" \
-		--vertical-label "Humidity %rH" \
-		--width 600 \
-		--height 200 \
-		DEF:${4}=${WEBSITEPATH}/emerson_${3}/rrdb/${1}_${2}_${3}.rrd:${1}_${4}_${3}:AVERAGE \
-		LINE2:${4}#FF0000 \
-                HRULE:100#BDBDB3 \
-                HRULE:95#BDBDB3 \
-                HRULE:90#BDBDB3 \
-                HRULE:85#BDBDB3 \
-                HRULE:80#BDBDB3 \
-                HRULE:75#BDBDB3 \
-                HRULE:70#BDBDB3 \
-                HRULE:65#BDBDB3 \
-                HRULE:60#BDBDB3 \
-                HRULE:55#BDBDB3 \
-                HRULE:50#BDBDB3 \
-                HRULE:45#BDBDB3 \
-                HRULE:40#BDBDB3 \
-                HRULE:35#BDBDB3 \
-                HRULE:30#BDBDB3 \
-                AREA:${4}#FF0000:"${5} ${2}"
-	((EC += $?))
+# Creates all humidity graphs of an Emerson unit.
+# (Parameters: 	$1 -> Emerson unit No.,
+#		$2 -> {curr, unit, sys})
+create_hum_graphs () {
+	EC=0
+	rrdgraph_hum ${1} ${2} 1h  "1 Hour Log"
+	rrdgraph_hum ${1} ${2} 12h "12 Hour Log"
+	rrdgraph_hum ${1} ${2} 24h "24 Hour Log"
+	rrdgraph_hum ${1} ${2} 1w  "1 Week Log"
+	rrdgraph_hum ${1} ${2} 4w  "1 Month Log"
+	rrdgraph_hum ${1} ${2} 24w "6 Month Log"
+	rrdgraph_hum ${1} ${2} 1y  "1 Year Log"
 
-
-	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_1week.png \
-		--start -1w \
-		--end ${GRAPHEND} \
-		--title "1 Week Log" \
-		--vertical-label "Humidity %rH" \
-		--width 600 \
-		--height 200 \
-		DEF:${4}=${WEBSITEPATH}/emerson_${3}/rrdb/${1}_${2}_${3}.rrd:${1}_${4}_${3}:AVERAGE \
-		LINE2:${4}#FF0000 \
-                HRULE:100#BDBDB3 \
-                HRULE:95#BDBDB3 \
-                HRULE:90#BDBDB3 \
-                HRULE:85#BDBDB3 \
-                HRULE:80#BDBDB3 \
-                HRULE:75#BDBDB3 \
-                HRULE:70#BDBDB3 \
-                HRULE:65#BDBDB3 \
-                HRULE:60#BDBDB3 \
-                HRULE:55#BDBDB3 \
-                HRULE:50#BDBDB3 \
-                HRULE:45#BDBDB3 \
-                HRULE:40#BDBDB3 \
-                HRULE:35#BDBDB3 \
-                HRULE:30#BDBDB3 \
-                AREA:${4}#FF0000:"${5} ${2}"
-	((EC += $?))
-
-
-	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_4week.png \
-		--start -4w \
-		--end ${GRAPHEND} \
-		--title "1 Month Log" \
-		--vertical-label "Humidity %rH" \
-		--width 600 \
-		--height 200 \
-		DEF:${4}=${WEBSITEPATH}/emerson_${3}/rrdb/${1}_${2}_${3}.rrd:${1}_${4}_${3}:AVERAGE \
-		LINE2:${4}#FF0000 \
-                HRULE:100#BDBDB3 \
-                HRULE:95#BDBDB3 \
-                HRULE:90#BDBDB3 \
-                HRULE:85#BDBDB3 \
-                HRULE:80#BDBDB3 \
-                HRULE:75#BDBDB3 \
-                HRULE:70#BDBDB3 \
-                HRULE:65#BDBDB3 \
-                HRULE:60#BDBDB3 \
-                HRULE:55#BDBDB3 \
-                HRULE:50#BDBDB3 \
-                HRULE:45#BDBDB3 \
-                HRULE:40#BDBDB3 \
-                HRULE:35#BDBDB3 \
-                HRULE:30#BDBDB3 \
-                AREA:${4}#FF0000:"${5} ${2}"
-	((EC += $?))
-
-
-	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_8week.png \
-		--start -8w \
-		--end ${GRAPHEND} \
-		--title "2 Month Log" \
-		--vertical-label "Humidity %rH" \
-		--width 600 \
-		--height 200 \
-		DEF:${4}=${WEBSITEPATH}/emerson_${3}/rrdb/${1}_${2}_${3}.rrd:${1}_${4}_${3}:AVERAGE \
-		LINE2:${4}#FF0000 \
-                HRULE:100#BDBDB3 \
-                HRULE:95#BDBDB3 \
-                HRULE:90#BDBDB3 \
-                HRULE:85#BDBDB3 \
-                HRULE:80#BDBDB3 \
-                HRULE:75#BDBDB3 \
-                HRULE:70#BDBDB3 \
-                HRULE:65#BDBDB3 \
-                HRULE:60#BDBDB3 \
-                HRULE:55#BDBDB3 \
-                HRULE:50#BDBDB3 \
-                HRULE:45#BDBDB3 \
-                HRULE:40#BDBDB3 \
-                HRULE:35#BDBDB3 \
-                HRULE:30#BDBDB3 \
-                AREA:${4}#FF0000:"${5} ${2}"
-	((EC += $?))
-
-
-	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_24week.png \
-		--start -24w \
-		--end ${GRAPHEND} \
-		--title "6 Month Log" \
-		--vertical-label "Humidity %rH" \
-		--width 600 \
-		--height 200 \
-		DEF:${4}=${WEBSITEPATH}/emerson_${3}/rrdb/${1}_${2}_${3}.rrd:${1}_${4}_${3}:AVERAGE \
-		LINE2:${4}#FF0000 \
-                HRULE:100#BDBDB3 \
-                HRULE:95#BDBDB3 \
-                HRULE:90#BDBDB3 \
-                HRULE:85#BDBDB3 \
-                HRULE:80#BDBDB3 \
-                HRULE:75#BDBDB3 \
-                HRULE:70#BDBDB3 \
-                HRULE:65#BDBDB3 \
-                HRULE:60#BDBDB3 \
-                HRULE:55#BDBDB3 \
-                HRULE:50#BDBDB3 \
-                HRULE:45#BDBDB3 \
-                HRULE:40#BDBDB3 \
-                HRULE:35#BDBDB3 \
-                HRULE:30#BDBDB3 \
-                AREA:${4}#FF0000:"${5} ${2}"
-	((EC += $?))
-
-
-	rrdtool graph ${WEBSITEPATH}/emerson_${3}/rrdb/graphs/${4}/${1}/${4}_1year.png \
-		--start -1y \
-		--end ${GRAPHEND} \
-		--title "1 Year Log" \
-		--vertical-label "Humidity %rH" \
-		--width 600 \
-		--height 200 \
-		DEF:${4}=${WEBSITEPATH}/emerson_${3}/rrdb/${1}_${2}_${3}.rrd:${1}_${4}_${3}:AVERAGE \
-		LINE2:${4}#FF0000 \
-                HRULE:100#BDBDB3 \
-                HRULE:95#BDBDB3 \
-                HRULE:90#BDBDB3 \
-                HRULE:85#BDBDB3 \
-                HRULE:80#BDBDB3 \
-                HRULE:75#BDBDB3 \
-                HRULE:70#BDBDB3 \
-                HRULE:65#BDBDB3 \
-                HRULE:60#BDBDB3 \
-                HRULE:55#BDBDB3 \
-                HRULE:50#BDBDB3 \
-                HRULE:45#BDBDB3 \
-                HRULE:40#BDBDB3 \
-                HRULE:35#BDBDB3 \
-                HRULE:30#BDBDB3 \
-                AREA:${4}#FF0000:"${5} ${2}"
-	((EC += $?))
-	
 	if [ "${EC}" -eq "0" ]
 	then
-		echo "[ $(date -R) ] Humidity (${1}) graphs of Emerson unit #${3} were successfully created"  >> ${GLB_LOGFILE}
+		echo "[ $(date -R) ] Humidity (${2}) graphs of Emerson unit #${1} were successfully created"  >> ${GLB_LOGFILE}
 	else
-		echo "[ $(date -R) ] Humidity (${1}) graph(s) of Emerson unit #${3} were NOT successfully created [FAIL]"  >> ${GLB_LOGFILE}
+		echo "[ $(date -R) ] Humidity (${2}) graph(s) of Emerson unit #${1} were NOT successfully created [FAIL]"  >> ${GLB_LOGFILE}
 	fi
 	((GEC += EC))
 }
@@ -425,12 +135,12 @@ create_hum_graph () {
 # Creates the graphs for each Emerson unit.
 # (both temperature and humidity)
 # (Parameter: $1 -> Emerson unit No.)
-create_emerson_graph () {
-	create_temp_graph curr temperature ${1} temp Current
-	create_hum_graph curr humidity ${1} hum Current
+create_emerson_graphs () {
+	create_temp_graphs ${1} curr
+	create_hum_graphs  ${1} curr
 #	create_temp_graph unit temperature ${1} temp # Unit
 #	create_hum_graph unit humidity ${1} hum # Unit
-#	create_temp_graph sys temperature ${1} temp # System 
+#	create_temp_graph sys temperature ${1} temp # System
 #	create_hum_graph sys humidity ${1} hum # System
 }
 
@@ -442,10 +152,11 @@ main () {
         ERR_LOGFILE="/var/log/aeolus/error.log"         # not used
         STD_LOGFILE="/var/log/aeolus/stdout.log"        # not used
 	DATESTAMP=$(date +%s)
+	WTM_DATE=$(date -R)
 	GRAPHEND=$((DATESTAMP-60))
 	GEC=0
-	create_emerson_graph 3
-	create_emerson_graph 4
+	create_emerson_graphs 3
+	create_emerson_graphs 4
 	if [ "${GEC}" -eq "0" ]
         then
                 echo "[ $(date -R) ] Graphs were successfully created" >> ${GLB_LOGFILE}
@@ -453,7 +164,6 @@ main () {
                 echo "[ $(date -R) ] Graphs were NOT successfully created [FAIL]" >> ${GLB_LOGFILE}
 		exit 1
         fi
-
 }
 
 
