@@ -58,6 +58,10 @@ __Validators Used__:
 <img src="./images/badge-w3c-valid-css3.png" width="150">
 <img src="./images/badge-w3c-valid-rss2.png" width="150">
 
+Demo Website
+------------
+[Static website](http://cse.uoi.gr/~gzachos/aeolus-logger) (Hosted in [cse.uoi.gr](http://cse.uoi.gr/en/index.php?menu=m1))
+
 Licence
 -------
 [GNU GENERAL PUBLIC LICENSE // Version 2, June 1991](LICENSE)
