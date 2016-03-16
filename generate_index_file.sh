@@ -33,6 +33,7 @@ cat > ${TMP_FILE} << __EOF__
 <html>
         <head>
                 <title>Aeolus Logger v2</title>
+                <meta charset="UTF-8">
                 <meta HTTP-EQUIV="REFRESH" content="0; url=/main_page.html">
         </head>
         <body>

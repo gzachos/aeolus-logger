@@ -27,7 +27,7 @@
 # Appends <head> section to the output .html file.
 # (Parameter: $1 -> Emerson unit No.)
 append_head () {
-	echo -e "<!DOCTYPE html>\n<html>\n\t<!-- HEAD SECTION (includes the two lines above) -->\n\t<head>\n\t\t<title>Emerson #${1} Measurement Report</title>\n\t\t<meta charset=\"utf-8\">\n\t\t<link rel=\"icon\" href=\"../photos/cse-uoi.ico\" type=\"image/x-icon\"/>\n\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/emerson_logger.css\">\n\t</head>" > ${TMP_FILE}
+	echo -e "<!DOCTYPE html>\n<html class=\"measurement\">\n\t<!-- HEAD SECTION (includes the two lines above) -->\n\t<head>\n\t\t<title>Emerson #${1} Measurement Report</title>\n\t\t<meta charset=\"UTF-8\">\n\t\t<link rel=\"icon\" href=\"../photos/cse-uoi.ico\" type=\"image/x-icon\"/>\n\t\t<link rel=\"stylesheet\" type=\"text/css\" href=\"../css/emerson_logger.css\">\n\t</head>" > ${TMP_FILE}
 }
 
 
@@ -40,7 +40,7 @@ append_body_stable_0 () {
 	else
 		OTHER_EMERSON=3
 	fi
-	echo -e "\n\t<!-- FIRST STABLE PART OF BODY SECTION -->\n\t<body>\n\t\t<img height=90 alt=\"uoi-cse-png\" src=\"../photos/uoi-cse.png\">\n\t\t<img class=\"banner\" height=90 alt=\"cse_banner_logo.jpg\" src=\"../photos/cse_banner_logo.jpg\">\n\t\t<br><br>\n\t\t<h4><a href=\"../main_page.html\">Main Page</a> &nbsp;|&nbsp; <a href=\"./status_report.html\">Emerson #${1} Status Report</a> &nbsp;|&nbsp; <a href=\"./measurement_report.html\">Emerson #${1} Measurement Report</a><br> <a href=\"./graph_report.html\">Emerson #${1} Graph Report</a>  &nbsp;|&nbsp; <a href=\"../emerson_${OTHER_EMERSON}/status_report.html\">Emerson #${OTHER_EMERSON}</a></h4><br>\n\t\t<h2><u>Emerson #${1} Measurement Report</u></h2><br>" >> ${TMP_FILE}
+	echo -e "\n\t<!-- FIRST STABLE PART OF BODY SECTION -->\n\t<body>\n\t\t<img alt=\"aeolus-banner.png\" src=\"../photos/aeolus-banner.png\">\n\t\t<br><br>\n\t\t<h4><a href=\"../main_page.html\">Main Page</a> &nbsp;|&nbsp; <a href=\"./status_report.html\">Emerson #${1} Status Report</a> &nbsp;|&nbsp; <a href=\"./measurement_report.html\">Emerson #${1} Measurement Report</a><br> <a href=\"./graph_report.html\">Emerson #${1} Graph Report</a>  &nbsp;|&nbsp; <a href=\"../emerson_${OTHER_EMERSON}/status_report.html\">Emerson #${OTHER_EMERSON}</a></h4><br>\n\t\t<h2><u>Emerson #${1} Measurement Report</u></h2><br>" >> ${TMP_FILE}
 }
 
 
@@ -61,7 +61,7 @@ append_table_stable_1 () {
 # Appends the second stable part of the <body> section to the output .html file.
 # (Parameter: $1 -> Emerson unit No.)
 append_body_stable_1 () {
-	echo -e "\t\t<!-- LAST STABLE PART OF BODY SECTION -->\n\t\t<br>\n\t\t<h4><i>A project by ~gzachos</i></h4>\n\t\t<h4>Computer Systems Support Group</h4>\n\t\t<h4>&copy; George Z. Zachos 2015-2016. All rights reserved.</h4>\n\t\t<h4>Computer Science and Engineering Department - University of Ioannina</h4>\n\t</body>\n</html>" >> ${TMP_FILE}
+	echo -e "\t\t<!-- LAST STABLE PART OF BODY SECTION -->\n\t\t<br><br><br><br><br>\n\t\t<h4><i>A project by ~gzachos</i></h4>\n\t\t<h4>&copy; George Z. Zachos 2015-2016. All rights reserved.</h4>\n\t\t<h4>Department of Computer Science &amp; Engineering, University of Ioannina</h4>\n\t</body>\n</html>" >> ${TMP_FILE}
 }
 
 
